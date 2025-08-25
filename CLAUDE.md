@@ -4,7 +4,96 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Nature
 
-This is a **PRP (Product Requirement Prompt) Framework** repository for React frontend development. The core concept: **"PRP = PRD + curated codebase intelligence + agent/runbook"** - designed to enable AI agents to ship production-ready React code on the first pass using Claude Sonnet 3.5 and RAG-enhanced development practices.
+This i### Component Best Practices
+
+1. **General Guidelines**
+
+   - Maximum 200 lines per component
+   - Single responsibility principle
+   - Comprehensive JSDoc documentation
+   - Strict TypeScript typing
+   - Proper error boundaries
+   - Handle all states (loading, error, empty, success)
+
+2. **MUI Implementation**
+
+   ```typescript
+   /**
+    * Custom button component with MUI implementation
+    */
+   import { Button, styled } from "@mui/material";
+
+   const StyledButton = styled(Button)(({ theme }) => ({
+     borderRadius: theme.shape.borderRadius,
+     padding: theme.spacing(1, 3),
+   }));
+
+   interface CustomButtonProps {
+     // props definition
+   }
+
+   export const CustomButton: React.FC<CustomButtonProps> = (props) => {
+     return <StyledButton {...props} />;
+   };
+   ```
+
+3. **AG Grid Implementation**
+
+   ```typescript
+   /**
+    * Data grid component with AG Grid implementation
+    */
+   import { AgGridReact } from "ag-grid-react";
+   import "ag-grid-enterprise";
+   import "ag-grid-community/styles/ag-grid.css";
+   import "ag-grid-community/styles/ag-theme-material.css";
+
+   interface DataGridProps<T> {
+     data: T[];
+     columnDefs: ColDef[];
+   }
+
+   export const DataGrid = <T>({ data, columnDefs }: DataGridProps<T>) => {
+     return (
+       <div className="ag-theme-material">
+         <AgGridReact
+           rowData={data}
+           columnDefs={columnDefs}
+           pagination={true}
+           defaultColDef={{
+             sortable: true,
+             filter: true,
+             resizable: true,
+           }}
+         />
+       </div>
+     );
+   };
+   ```
+
+4. **AG Charts Implementation**
+
+   ```typescript
+   /**
+    * Chart component with AG Charts implementation
+    */
+   import { AgChartsReact } from 'ag-charts-react';
+
+   interface ChartProps {
+     data: ChartData[];
+     options?: AgChartOptions;
+   }
+
+   export const Chart: React.FC<ChartProps> = ({ data, options }) => {
+     const chartOptions: AgChartOptions = {
+       data,
+       theme: 'material',
+       ...options,
+     };
+
+     return <AgChartsReact options={chartOptions} />;
+   };RP (Product Requirement Prompt) Framework** repository for React frontend development. The core concept: **"PRP = PRD + curated codebase intelligence + agent/runbook"** - designed to enable AI agents to ship production-ready React code on the first pass using Claude Sonnet 3.5 and RAG-enhanced development practices.
+   ```
 
 ## Workspace Configuration
 
@@ -51,7 +140,16 @@ PRPs-agentic-eng/
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-query": "^5.0.0",
-    "zod": "^3.22.0"
+    "zod": "^3.22.0",
+    "@mui/material": "^5.14.0",
+    "@mui/icons-material": "^5.14.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "ag-grid-react": "^31.0.0",
+    "ag-grid-community": "^31.0.0",
+    "ag-grid-enterprise": "^31.0.0",
+    "ag-charts-react": "^9.0.0",
+    "ag-charts-community": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
@@ -108,9 +206,33 @@ All development commands must be run through npm scripts:
    │       └── types/        # TypeScript types
    ├── shared/
    │   ├── components/       # Shared UI components
+   │   │   ├── mui/         # MUI component wrappers
+   │   │   ├── grids/       # AG Grid components
+   │   │   └── charts/      # AG Charts components
    │   ├── hooks/           # Shared hooks
    │   └── utils/           # Helper functions
+   ├── theme/
+   │   ├── mui/             # MUI theme customization
+   │   └── ag-grid/         # AG Grid theme settings
    └── styles/              # Global styles
+
+2. **UI Component Standards**
+   - Use Material-UI (MUI) for all base components
+   - Maintain consistent theming through MUI theme provider
+   - Create reusable MUI component wrappers
+   - Follow MUI's styling patterns using styled components
+
+3. **Data Grid Standards**
+   - Use AG Grid for all table/grid implementations
+   - Implement server-side sorting and filtering
+   - Use AG Grid's built-in TypeScript interfaces
+   - Maintain consistent grid styling across features
+
+4. **Charting Standards**
+   - Use AG Charts for all data visualizations
+   - Implement responsive chart layouts
+   - Follow consistent color schemes
+   - Use TypeScript for chart configurations
    ```
 
 2. **Component Best Practices**
