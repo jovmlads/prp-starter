@@ -181,9 +181,15 @@ export function use{Domain}Action(): {Domain}ActionResult {
 }
 ```
 
-### Integration Points
+### Project Setup & Integration Points
 
 ```yaml
+SETUP:
+  - follow: /PRPs/templates/project_setup.md for standardized setup
+  - critical: Use PowerShell commands in VS Code
+  - versions: Use specified Tailwind CSS versions (3.3.3)
+  - pattern: Follow standard project structure
+
 DATABASE:
   - migration: "Add table 'feature_data' with proper indexes"
   - client: "@/lib/database/client"
