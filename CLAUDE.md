@@ -85,13 +85,48 @@ All development commands must be run through npm scripts:
   }
 }
 
-### React Development Methodology
+### React Development Philosophy
 
-- **Component-First Approach**: Build with reusable, composable components following React best practices
-- **Decoupled Styling**: Each component has its own CSS module file (e.g., `Component.module.css`)
-- **Responsive Design**: Use media queries and mobile-first approach for all components
-- **Context-Rich RAG**: Leverage RAG for enhancing development with curated knowledge base
-- **Validation-First Design**: Each component has comprehensive tests and validation
+- **KISS (Keep It Simple, Stupid)**: Choose straightforward solutions over complex ones
+- **YAGNI (You Aren't Gonna Need It)**: Implement features only when needed
+- **Component-First Architecture**: Build reusable, composable components with single responsibilities
+- **Performance by Default**: Let React 19's compiler handle optimizations
+- **Validation-First Design**: Validate all inputs with Zod, fail fast
+
+### Component Architecture
+
+1. **Structure and Organization**
+   ```text
+   src/
+   ├── features/              # Feature-based modules
+   │   └── [feature]/
+   │       ├── __tests__/     # Co-located tests
+   │       ├── components/    # Feature components
+   │       ├── hooks/         # Feature-specific hooks
+   │       ├── api/          # API integration
+   │       ├── schemas/      # Zod validation
+   │       └── types/        # TypeScript types
+   ├── shared/
+   │   ├── components/       # Shared UI components
+   │   ├── hooks/           # Shared hooks
+   │   └── utils/           # Helper functions
+   └── styles/              # Global styles
+   ```
+
+2. **Component Best Practices**
+   - Maximum 200 lines per component
+   - Single responsibility principle
+   - Comprehensive JSDoc documentation
+   - Strict TypeScript typing
+   - Proper error boundaries
+   - Handle all states (loading, error, empty, success)
+
+3. **Styling Architecture**
+   - Use CSS modules for component styles
+   - Implement responsive design with media queries
+   - Follow mobile-first approach
+   - Maintain global theme variables
+   - Use CSS Grid and Flexbox effectively
 
 ### CSS Architecture
 
@@ -258,9 +293,33 @@ npm run test:rag
    - Document feature implementation
    - Update relevant documentation
 
-### Continuous Quality Assurance
+### Quality Assurance Requirements
 
-1. **E2E Testing Protocol**
+1. **TypeScript Configuration**
+   ```json
+   {
+     "compilerOptions": {
+       "strict": true,
+       "noImplicitAny": true,
+       "strictNullChecks": true,
+       "noUncheckedIndexedAccess": true,
+       "exactOptionalPropertyTypes": true,
+       "noUnusedLocals": true,
+       "noUnusedParameters": true,
+       "noImplicitReturns": true,
+       "allowJs": false
+     }
+   }
+   ```
+
+2. **Testing Requirements**
+   - Minimum 80% code coverage
+   - Co-located tests in `__tests__` folders
+   - Use React Testing Library
+   - Test behavior, not implementation
+   - Mock external dependencies properly
+
+3. **E2E Testing Protocol**
    ```powershell
    # After feature completion
    cd app
@@ -273,6 +332,13 @@ npm run test:rag
    # Run E2E tests
    npm run test:e2e
    ```
+
+4. **SonarQube Quality Gates**
+   - Maximum cognitive complexity: 15
+   - Maximum cyclomatic complexity: 10
+   - Maximum duplicated lines: 3%
+   - Maximum technical debt ratio: 5%
+   - Zero critical/blocker issues
 
 2. **Code Review Process**
    - Review feature implementation against requirements
@@ -362,6 +428,39 @@ curl -X POST http://localhost:8000/endpoint -H "Content-Type: application/json" 
    - Documentation review
    - Performance verification
    - Merge approval
+
+### Security and Performance Guidelines
+
+1. **Security Requirements**
+   - Sanitize all user inputs with Zod
+   - Validate file uploads (type, size, content)
+   - Implement proper XSS prevention
+   - Use CSP headers in production
+   - Handle sensitive data securely
+   - Validate all API responses
+
+2. **Performance Optimization**
+   - Use React 19's built-in compiler optimizations
+   - Implement code splitting at route level
+   - Lazy load heavy components
+   - Use proper Suspense boundaries
+   - Optimize bundle size with manual chunks
+   ```typescript
+   // vite.config.ts
+   export default defineConfig({
+     build: {
+       rollupOptions: {
+         output: {
+           manualChunks: {
+             "react-vendor": ["react", "react-dom"],
+             "query-vendor": ["@tanstack/react-query"],
+             "form-vendor": ["react-hook-form", "zod"],
+           },
+         },
+       },
+     },
+   });
+   ```
 
 ### Command Usage
 
