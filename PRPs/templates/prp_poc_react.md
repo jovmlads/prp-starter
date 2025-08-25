@@ -145,10 +145,19 @@ package_manager: [npm]
 build_tool: [Vite]
 dev_server: [3212]
 
+# MANDATORY File Structure Convention
+app_directory: [PRPs-agentic-eng/app]  # MUST create React apps in this directory
+component_pattern: [PascalCase]  # MUST use PascalCase for component names
 
-# File Structure Convention
-poc_directory: [/poc-{name}/src/poc-{name}//demos/{name}]
-component_pattern: [PascalCase/kebab-case/existing project convention]
+# Repository Structure
+workspace_root:
+  PRPs-agentic-eng/
+  ├── app/                # React application root (MANDATORY)
+  │   ├── src/           # Source code
+  │   ├── public/        # Static assets
+  │   ├── tests/         # Test files
+  │   └── package.json   # Project dependencies
+  └── ... other repo files
 ```
 
 ## Implementation Blueprint
@@ -178,13 +187,18 @@ component_pattern: [PascalCase/kebab-case/existing project convention]
 
 ### Implementation Tasks
 
-**Task 1: CREATE poc-{name} foundation**
+**Task 1: CREATE React application foundation**
 
-- SETUP: React project structure in designated directory
+- SETUP: Create React project in PRPs-agentic-eng/app directory
+  ```bash
+  cd PRPs-agentic-eng
+  npm create vite@latest app -- --template react-ts
+  cd app
+  ```
 - CONFIGURE: TypeScript config, linting rules, basic dependencies
 - INSTALL: Required packages (MSW, faker.js, UI library, etc.)
 - MOCK: Initial data structure and MSW setup
-- PLACEMENT: Follow project directory conventions
+- PLACEMENT: Follow project directory conventions (all code in src/)
 - DOCUMENT: POC scope and setup instructions
 
 **Task 2: CREATE mock data system**

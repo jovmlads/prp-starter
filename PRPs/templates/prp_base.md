@@ -59,6 +59,29 @@ _Before writing this PRP, validate: "If someone knew nothing about this codebase
   section: [Specific section if document is large]
 ```
 
+### Repository Structure Requirements
+
+```yaml
+# MANDATORY Directory Structure
+root_directory: PRPs-agentic-eng/  # Repository root
+app_directory: app/                # MANDATORY directory for all React applications
+
+# Standard Repository Layout
+PRPs-agentic-eng/
+├── app/                # React application root (MANDATORY for React projects)
+│   ├── src/           # Source code
+│   ├── public/        # Static assets
+│   ├── tests/         # Test files
+│   └── package.json   # Project dependencies
+└── ... other repo files
+
+# For Python/MCP Projects
+PRPs-agentic-eng/
+├── src/               # Python source code
+├── tests/             # Test files
+└── ... other files
+```
+
 ### Current Codebase tree (run `tree` in the root of the project) to get an overview of the codebase
 
 ```bash
