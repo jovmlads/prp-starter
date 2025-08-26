@@ -113,6 +113,8 @@ PRPs-agentic-eng/
 
 ### Workspace Usage
 
+- **CRITICAL:** Always use the current folder (`PRPs-agentic-eng`) as the workspace
+- **CRITICAL:** Never create or ask for a new folder - all React applications must be created in `PRPs-agentic-eng/app`
 - **Use this workspace** for all development activities
 - **Maintain existing workspace** structure and configuration
 - **Develop within** the established repository structure
