@@ -331,30 +331,21 @@ src/
 
 ## Development Commands
 
-### React Project Setup (Using Vite)
+### React Project Setup
 
-```powershell
-# Create new React project with Vite in the app directory
-npm create vite@latest app -- --template react-ts
+For detailed React project setup instructions, refer to these guides:
+- `REACT-SETUP.md` in the repository root
+- `PRPs/templates/react_setup.md` for the authoritative version
 
-# Install dependencies (always use clean installs)
-cd app
-npm install
+These guides contain comprehensive instructions for:
+- Project initialization with Vite
+- Full directory structure following vertical slice architecture
+- Complete configuration files (TypeScript, ESLint, etc.)
+- Testing setup with Vitest
+- Quality standards and coding guidelines
+- Component templates and examples
 
-# Start development server from app directory
-npm run dev
-
-# Build for production (with type checking)
-npm run build
-
-# Run tests
-npm run test
-
-# Return to repository root (for git operations)
-cd ..
-```
-
-> **Important**: Always work within the `app` directory for React development while maintaining access to the repository's PRP framework and documentation.`
+> **CRITICAL**: Always follow these setup guides when creating new React projects to ensure consistency and best practices across the codebase.`
 
 ### PRP Execution with RAG
 

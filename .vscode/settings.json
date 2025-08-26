@@ -1,0 +1,22 @@
+{
+  // Set Claude Sonnet 3.5 as default LLM
+  "anthropic.claude.defaultModel": "claude-3-sonnet-20240229",
+
+  // Additional recommended settings for Claude integration
+  "anthropic.claude.contextStrategy": "auto",
+  "anthropic.claude.temperature": 0.7,
+  "anthropic.claude.enableAutoCompletion": true,
+
+  // Optional: Enable Claude Code commands integration
+  "anthropic.claude.enableSlashCommands": true,
+
+  // Optional: Enable context loading on startup (works with /prime-core)
+  "anthropic.claude.autoLoadContext": true,
+
+  // Editor settings recommended for PRP workflow
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  }
+}

@@ -189,17 +189,12 @@ workspace_root:
 
 **Task 1: CREATE React application foundation**
 
-- SETUP: Create React project in PRPs-agentic-eng/app directory
-  ```bash
-  cd PRPs-agentic-eng
-  npm create vite@latest app -- --template react-ts
-  cd app
-  ```
-- CONFIGURE: TypeScript config, linting rules, basic dependencies
-- INSTALL: Required packages (MSW, faker.js, UI library, etc.)
-- MOCK: Initial data structure and MSW setup
-- PLACEMENT: Follow project directory conventions (all code in src/)
-- DOCUMENT: POC scope and setup instructions
+- SETUP: Follow the detailed React setup guide in `PRPs/templates/react_setup.md`
+- CONFIGURE: All configuration files will be automatically set up by following the guide
+- INSTALL: Required packages as listed in the setup guide
+- MOCK: Set up MSW and faker.js following the guide
+- PLACEMENT: Follow the vertical slice architecture from the guide
+- DOCUMENT: Add JSDoc documentation following the standards
 
 **Task 2: CREATE mock data system**
 
