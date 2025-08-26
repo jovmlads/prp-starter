@@ -28,6 +28,31 @@ npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
 # Initialize Playwright
 npx playwright install
 
+# Install and configure Tailwind CSS
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+# Create src/styles/globals.css with Tailwind directives
+$null = New-Item -ItemType File -Path "src/styles/globals.css" -Force
+@"
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+"@ | Out-File -FilePath "src/styles/globals.css"
+
+# Make sure to import the CSS file in your src/main.tsx
+if (!(Test-Path "src/main.tsx")) {
+    Write-Error "src/main.tsx not found"
+} else {
+    $content = Get-Content "src/main.tsx"
+    if (!($content -match "import './styles/globals.css'")) {
+        @"
+import './styles/globals.css'
+$($content -join "`n")
+"@ | Out-File -FilePath "src/main.tsx"
+    }
+}
+
 # Install additional required dependencies
 npm install @tanstack/react-query @hookform/resolvers zod react-hook-form @testing-library/react @testing-library/user-event vitest @vitejs/plugin-react eslint prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-sonarjs husky lint-staged msw shadcn-ui
 ```
@@ -55,6 +80,46 @@ src/
 ```
 
 ## Configuration Files
+
+### Generated Configuration Files
+
+After running `npx tailwindcss init -p`, you'll have two new files:
+
+#### tailwind.config.js
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+#### postcss.config.js
+
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+```
+
+The setup will also create:
+
+#### src/styles/globals.css
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+This CSS file needs to be imported in your entry file (src/main.tsx). The setup script will add this import automatically:
 
 ### TypeScript Configuration (tsconfig.json)
 

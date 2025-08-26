@@ -164,6 +164,27 @@ PRPs-agentic-eng/
 }
 ```
 
+### Windows PowerShell Command Guidelines
+
+When running commands in Windows PowerShell, use the following patterns:
+
+```powershell
+# Change directory with Set-Location (handles spaces in paths)
+Set-Location 'C:\Path With Spaces\project'
+
+# Combine commands with semicolon
+Set-Location 'C:\Project'; npm install
+
+# Run npm commands
+npm run dev
+npm run build
+
+# Handle file operations
+New-Item -ItemType Directory -Path 'new-folder'
+Remove-Item 'file.txt'
+Rename-Item -Path 'old.js' -NewName 'new.js'
+```
+
 ### Command-Driven Development
 
 All development commands must be run through npm scripts:
