@@ -1,62 +1,42 @@
 # Standard Project Setup Instructions
 
-## PowerShell VS Code Commands
+## PowerShell VS Code Commands (Windows)
 
 Always use PowerShell commands in VS Code terminals for consistency across Windows environments.
+All commands should be executed within the PRPs-agentic-eng workspace.
 
 ### Project Initialization
 
 ```powershell
-# Create new Vite project with React and TypeScript
+# Initialize in current workspace (PRPs-agentic-eng)
 npm create vite@latest app -- --template react-ts
+
+# Install core dependencies
 cd app
 npm install
+
+# Install development tools and testing frameworks
+npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-react eslint-plugin-react-hooks prettier vitest @testing-library/react @testing-library/jest-dom @vitejs/plugin-react @playwright/test
+
+# Initialize Playwright
+npx playwright install
 ```
 
-### Tailwind CSS Setup (Standard Method)
-
-1. Install Tailwind CSS and its peer dependencies:
+### E2E Testing Setup (Required)
 
 ```powershell
-npm install -D tailwindcss@3.3.3 postcss@8.4.27 autoprefixer@10.4.14
-```
+# Create e2e test directory and config
+mkdir e2e
+npm init playwright@latest
 
-2. Create Tailwind CSS configuration:
+# Run Playwright tests
+npm run test:e2e
 
-```powershell
-npx tailwindcss init -p
-```
+# Open Playwright UI mode for development
+npm run test:e2e -- --ui
 
-3. Configure your `tailwind.config.js`:
-
-```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-```
-
-4. Configure your `postcss.config.js`:
-
-```javascript
-export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-};
-```
-
-5. Add Tailwind directives to your `src/index.css`:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+# Update test snapshots if needed
+npm run test:e2e -- -u
 ```
 
 ### Common VS Code PowerShell Commands
@@ -87,9 +67,48 @@ npm run lint
 npm run format
 ```
 
+### Styling Setup with Tailwind CSS (Recommended)
+
+Tailwind CSS is recommended for this project because:
+
+1. Zero-runtime CSS (styles are generated at build time)
+2. Better performance compared to runtime CSS-in-JS solutions
+3. Excellent TypeScript integration and IDE support
+4. Built-in design system that's highly customizable
+5. Seamless integration with modern component libraries
+
+```powershell
+# Install Tailwind CSS and its peer dependencies
+npm install -D tailwindcss postcss autoprefixer
+
+# Generate Tailwind and PostCSS config files
+npx tailwindcss init -p
+```
+
+Configure your `tailwind.config.js`:
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+Add Tailwind directives to your `src/index.css`:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
 ### Important Notes
 
 1. Always use npm over yarn for consistency
-2. Use specific versions for Tailwind CSS and its dependencies to avoid compatibility issues
-3. Keep package.json scripts consistent across projects
-4. Use PowerShell-compatible commands (semicolons for multiple commands)
+2. Keep package.json scripts consistent across projects
+3. Use PowerShell-compatible commands (semicolons for multiple commands)
+4. Consider using CSS Modules for components that require complex styling beyond utility classes

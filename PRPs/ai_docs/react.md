@@ -78,7 +78,7 @@ src/features/feature-name/
 ## Essential Tools & Configurations
 
 1. **Build Tool**: Vite with React plugin
-2. **Styling**: Tailwind CSS or CSS Modules
+2. **Styling**: CSS Modules
 3. **State Management**: React Query for server state
 4. **Form Handling**: React Hook Form with Zod
 5. **Testing**: Vitest + React Testing Library

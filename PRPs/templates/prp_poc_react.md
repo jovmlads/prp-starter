@@ -91,7 +91,7 @@ _For POC development: "Does this context enable building a working prototype tha
 ```yaml
 # Current Tech Stack Requirements
 framework: [React 19/Next.js 15/Vite]
-styling: [Tailwind CSS/CSS Modules/styled-components]
+styling: [CSS Modules/styled-components]
 components: [shadcn/ui/Material-UI/custom components]
 typescript: [Strict mode/Basic types/Zod validation]
 testing: [React Testing Library/Vitest/Jest]

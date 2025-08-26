@@ -2,17 +2,31 @@
 
 This guide follows the bulletproof React architecture for creating scalable and maintainable React applications.
 
+## Development Environment Requirements
+
+- Windows PowerShell
+- VS Code
+- Node.js 18+
+- Use PRPs-agentic-eng workspace
+- Playwright for E2E testing
+
 ## Project Initialization
 
-Create a new React project in the `app` directory at the root of this repository:
+Initialize the project in the existing PRPs-agentic-eng workspace:
 
 ```powershell
 # Create project using Vite
 npm create vite@latest app -- --template react-ts
 cd app
 
-# Install dependencies
+# Install core dependencies
 npm install
+
+# Install development and testing tools
+npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-react eslint-plugin-react-hooks prettier vitest @testing-library/react @testing-library/jest-dom @vitejs/plugin-react @playwright/test
+
+# Initialize Playwright
+npx playwright install
 
 # Install additional required dependencies
 npm install @tanstack/react-query @hookform/resolvers zod react-hook-form @testing-library/react @testing-library/user-event vitest @vitejs/plugin-react eslint prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-sonarjs husky lint-staged msw shadcn-ui
@@ -99,44 +113,47 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:react-hooks/recommended',
-    'plugin:sonarjs/recommended',
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react-hooks/recommended",
+    "plugin:sonarjs/recommended",
   ],
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh', '@typescript-eslint', 'sonarjs'],
+  plugins: ["react-refresh", "@typescript-eslint", "sonarjs"],
   rules: {
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/explicit-function-return-type': 'error',
-    'no-console': ['error', { allow: ['warn', 'error'] }],
-    'sonarjs/cognitive-complexity': ['error', 15],
-    'sonarjs/no-duplicate-string': ['error', 3],
-    'check-file/filename-naming-convention': [
-      'error',
+    "react-refresh/only-export-components": [
+      "warn",
+      { allowConstantExport: true },
+    ],
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "no-console": ["error", { allow: ["warn", "error"] }],
+    "sonarjs/cognitive-complexity": ["error", 15],
+    "sonarjs/no-duplicate-string": ["error", 3],
+    "check-file/filename-naming-convention": [
+      "error",
       {
-        '**/*.{ts,tsx}': 'KEBAB_CASE',
+        "**/*.{ts,tsx}": "KEBAB_CASE",
       },
       {
         ignoreMiddleExtensions: true,
       },
     ],
-    'check-file/folder-naming-convention': [
-      'error',
+    "check-file/folder-naming-convention": [
+      "error",
       {
-        'src/**/!(__tests__)': 'KEBAB_CASE',
+        "src/**/!(__tests__)": "KEBAB_CASE",
       },
     ],
   },
-}
+};
 ```
 
 ### Prettier Configuration (.prettierrc)
@@ -156,24 +173,24 @@ module.exports = {
 ### Vite Configuration (vite.config.ts)
 
 ```typescript
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'query-vendor': ['@tanstack/react-query'],
-          'form-vendor': ['react-hook-form', 'zod'],
+          "react-vendor": ["react", "react-dom"],
+          "query-vendor": ["@tanstack/react-query"],
+          "form-vendor": ["react-hook-form", "zod"],
         },
       },
     },
@@ -185,19 +202,19 @@ export default defineConfig({
 
 ```typescript
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/testing/setup.ts'],
+    environment: "jsdom",
+    setupFiles: ["./src/testing/setup.ts"],
     coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      provider: "v8",
+      reporter: ["text", "json", "html"],
       statements: 80,
       branches: 80,
       functions: 80,
@@ -206,7 +223,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 });
@@ -242,9 +259,12 @@ Add these scripts to your package.json:
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit",
-    "validate": "npm run type-check && npm run lint && npm run test:coverage",
+    "validate": "npm run type-check && npm run lint && npm run test:coverage && npm run test:e2e",
     "prepare": "cd .. && husky install app/.husky"
   }
 }
@@ -253,18 +273,21 @@ Add these scripts to your package.json:
 ## Quality Standards
 
 1. **TypeScript**:
+
    - Strict mode enabled
    - No explicit `any` types
    - Explicit return types required
    - All external data validated with Zod
 
 2. **Testing**:
+
    - Minimum 80% code coverage
    - Co-locate tests with components in `__tests__` folders
    - Use React Testing Library
    - Test behavior, not implementation
 
 3. **Code Style**:
+
    - Files/folders in kebab-case
    - Components in PascalCase
    - Maximum 200 lines per component file
@@ -293,14 +316,14 @@ src/features/feature-name/
 
 ## Component Template
 
-```typescript
+````typescript
 /**
  * @fileoverview Example component following project standards
  * @module features/example/components/ExampleComponent
  */
 
-import { ReactElement } from 'react';
-import { z } from 'zod';
+import { ReactElement } from "react";
+import { z } from "zod";
 
 const exampleSchema = z.object({
   id: z.string().uuid(),
@@ -328,7 +351,10 @@ interface ExampleComponentProps {
  * />
  * ```
  */
-export function ExampleComponent({ data, onSelect }: ExampleComponentProps): ReactElement {
+export function ExampleComponent({
+  data,
+  onSelect,
+}: ExampleComponentProps): ReactElement {
   if (!data) {
     return <div>No data available</div>;
   }
@@ -340,29 +366,33 @@ export function ExampleComponent({ data, onSelect }: ExampleComponentProps): Rea
     </div>
   );
 }
-```
+````
 
 ## Getting Started
 
 After setting up the project, you can:
 
 1. Start development server:
+
 ```powershell
 cd app
 npm run dev
 ```
 
 2. Run tests:
+
 ```powershell
 npm test
 ```
 
 3. Build for production:
+
 ```powershell
 npm run build
 ```
 
 4. Validate code:
+
 ```powershell
 npm run validate
 ```
