@@ -1,4 +1,10 @@
-# E2E Testing Guidelines
+# E2E Testing Guidelines - MANDATORY for React/Frontend Features
+
+## Testing Protocol
+
+**MANDATORY EXECUTION**: Playwright E2E tests MUST be executed automatically upon successful feature implementation. No exceptions for React/Frontend features.
+
+**AUTO-EXECUTION**: AI agents should run E2E tests immediately after feature completion without asking for permission.
 
 ## Setup
 
@@ -79,13 +85,13 @@ test.describe("Home Page", () => {
 5. Run tests in CI/CD pipeline
 6. Keep screenshots and videos for failed tests
 
-## Running Tests
+## Running Tests - Auto-Execution Protocol
 
 ```powershell
-# Run all tests
+# MANDATORY: Run automatically after feature implementation
 npm run test:e2e
 
-# Run tests in UI mode
+# For debugging during development
 npm run test:e2e:ui
 
 # Debug specific test
@@ -94,9 +100,11 @@ npm run test:e2e:debug
 # Run tests in specific browser
 npm run test:e2e -- --project=chromium
 
-# Update snapshots
+# Update snapshots when UI changes
 npm run test:e2e -- -u
 ```
+
+**AI Agent Execution**: These commands should be executed automatically by AI agents upon feature completion. No user confirmation required.
 
 ## Continuous Integration
 

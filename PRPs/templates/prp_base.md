@@ -266,6 +266,12 @@ psql $DATABASE_URL -c "SELECT 1;" || echo "Database connection failed"
 ### Level 4: Creative & Domain-Specific Validation
 
 ```bash
+# MANDATORY: E2E Testing for React/Frontend Features
+# Run Playwright E2E tests for all user-facing functionality
+npx playwright test --headed
+npx playwright test data-table-widget.spec.ts  # Feature-specific tests
+npx playwright test ticker-sync.spec.ts        # Integration tests
+
 # MCP Server Validation Examples:
 
 # Playwright MCP (for web interfaces)
@@ -292,7 +298,7 @@ bandit -r src/
 # API Documentation Validation (if API endpoints)
 # swagger-codegen validate -i openapi.json
 
-# Expected: All creative validations pass, performance meets requirements
+# Expected: All creative validations pass, performance meets requirements, ALL E2E TESTS PASS
 ```
 
 ## Final Validation Checklist
@@ -313,6 +319,15 @@ bandit -r src/
 - [ ] Integration points work as specified
 - [ ] User persona requirements satisfied (if applicable)
 
+### E2E Testing Validation (MANDATORY for React/Frontend Features)
+
+- [ ] **Playwright E2E tests created and executed** for all user-facing functionality
+- [ ] E2E tests cover primary user journeys and success paths
+- [ ] E2E tests include error scenarios and edge cases
+- [ ] All E2E tests pass: `npx playwright test`
+- [ ] Test data-testid attributes added to components for reliable element selection
+- [ ] E2E test results documented and any failures resolved
+
 ### Code Quality Validation
 
 - [ ] Follows existing codebase patterns and naming conventions
@@ -326,6 +341,15 @@ bandit -r src/
 - [ ] Code is self-documenting with clear variable/function names
 - [ ] Logs are informative but not verbose
 - [ ] Environment variables documented if new ones added
+
+### PRP Completion Protocol
+
+**MANDATORY: Once all validation checklist items are completed successfully:**
+
+- [ ] **Move completed PRD file to `PRPs/completed/` folder**
+- [ ] **Move completed implementation file to `PRPs/completed/` folder**
+- [ ] **Update `PRPs/completed/README.md`** with feature completion details
+- [ ] **Confirm file organization in completed folder** shows proper separation of active vs completed work
 
 ---
 

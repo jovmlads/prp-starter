@@ -30,6 +30,36 @@ A PRP keeps the goal and justification sections of a PRD yet adds three AI-criti
 
 - The PRP folder is used to prepare and pipe PRPs to the agentic coder.
 
+## PRP Completion Protocol
+
+### File Organization Standards
+
+**Active Work**: All PRD and implementation files remain in main `PRPs/` directory during development
+
+**Completion Process**: Upon successful feature implementation and validation:
+
+1. **Automatically move** completed PRD file to `PRPs/completed/` folder
+2. **Automatically move** completed implementation file to `PRPs/completed/` folder
+3. **Update** `PRPs/completed/README.md` with feature completion details
+4. **Maintain** clear separation between active and completed work
+
+### Mandatory E2E Testing
+
+**For React/Frontend Features**: Playwright E2E tests are **MANDATORY** upon successful implementation
+
+- Execute automatically after feature completion: `npx playwright test`
+- Cover all primary user journeys and error scenarios
+- Include data-testid attributes for reliable element selection
+- All tests must pass before marking feature as complete
+
+### Terminal Command Execution
+
+**No Confirmation Required**: AI agents should proceed directly with terminal commands without asking for user confirmation
+
+- Execute build, test, and deployment commands immediately when needed
+- Install dependencies automatically when required
+- Run validation commands without prompting user approval
+
 ## Why context is non-negotiable
 
 Large-language-model outputs are bounded by their context window; irrelevant or missing context literally squeezes out useful tokens

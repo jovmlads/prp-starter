@@ -225,11 +225,11 @@ npx husky init
 
 Create `.husky/pre-commit`:
 
-```bash
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+```powershell
+# PowerShell Husky pre-commit hook
+. "$PSScriptRoot/_/husky.ps1"
 
-npm run type-check && npm run lint && npm run test
+npm run type-check ; npm run lint ; npm run test
 ```
 
 ### Package.json Scripts

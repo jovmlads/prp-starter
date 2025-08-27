@@ -240,7 +240,7 @@ workspace_root:
 
 ### Level 1: Syntax & Build (Immediate Feedback)
 
-```bash
+```powershell
 # TypeScript and linting validation
 npm run lint                     # ESLint with React/TS rules
 npx tsc --noEmit                # Type checking without build
@@ -255,7 +255,7 @@ npm run analyze                  # Bundle size analysis (if available)
 
 ### Level 2: Demo Validation (User Experience)
 
-```bash
+```powershell
 # Development server
 npm run dev                      # Dev server starts successfully
 # Manual validation checklist:
@@ -275,7 +275,7 @@ npm test -- --coverage           # Basic coverage report
 
 ### Level 3: Concept Validation (Stakeholder & Business)
 
-```bash
+```powershell
 # Stakeholder demo preparation
 # ✓ Demo script prepared with key talking points
 # ✓ Mock data scenarios cover realistic use cases
@@ -319,6 +319,8 @@ npm test -- --coverage           # Basic coverage report
 - [ ] **Limitations Clear**: Known constraints clearly documented
 - [ ] **Next Steps Defined**: Production requirements identified
 - [ ] **Success Criteria Met**: All original POC goals achieved
+- [ ] **E2E Tests Executed**: Basic Playwright tests validate core user journeys
+- [ ] **Files Organized**: Completed POC files moved to `PRPs/completed/` folder
 
 ## POC Anti-Patterns
 
