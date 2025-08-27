@@ -3,9 +3,9 @@ import {
   SidebarProvider,
   SidebarInset,
   SidebarTrigger,
-} from '@/components/ui/sidebar';
+} from '../ui/sidebar';
 import { AppSidebar } from './sidebar';
-import { Separator } from '@/components/ui/separator';
+import { Separator } from '../ui/separator';
 
 export function RootLayout() {
   return (

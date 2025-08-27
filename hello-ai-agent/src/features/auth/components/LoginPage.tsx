@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { LoginForm } from './LoginForm';
 
 interface LoginPageProps {
@@ -6,14 +7,15 @@ interface LoginPageProps {
 }
 
 export function LoginPage({ onLoginSuccess, onForgotPassword }: LoginPageProps) {
+  const navigate = useNavigate();
+
   const handleLoginSuccess = () => {
-    // Redirect to dashboard or home page
-    console.log('Login successful');
+    console.log('Login successful - redirecting to home');
+    navigate('/home');
     onLoginSuccess?.();
   };
 
   const handleForgotPassword = () => {
-    // Navigate to forgot password page
     console.log('Navigate to forgot password');
     onForgotPassword?.();
   };
@@ -27,6 +29,12 @@ export function LoginPage({ onLoginSuccess, onForgotPassword }: LoginPageProps) 
             <p className="text-balance text-muted-foreground">
               Enter your email below to login to your account
             </p>
+            <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
+              <p className="text-sm text-blue-800 font-medium">Demo Credentials:</p>
+              <p className="text-xs text-blue-600 mt-1">admin@example.com / admin123</p>
+              <p className="text-xs text-blue-600">user@example.com / user123</p>
+              <p className="text-xs text-blue-600">demo@example.com / demo123</p>
+            </div>
           </div>
           <LoginForm
             onSuccess={handleLoginSuccess}

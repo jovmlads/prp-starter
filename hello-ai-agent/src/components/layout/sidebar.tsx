@@ -8,14 +8,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar';
+} from '../ui/sidebar';
 import { Home, LayoutDashboard, Settings, User } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
 const menuItems = [
   {
     title: 'Home',
-    url: '/',
+    url: '/home',
     icon: Home,
   },
   {
@@ -76,9 +76,12 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton onClick={() => {
+              localStorage.clear();
+              window.location.href = '/login';
+            }}>
               <User />
-              <span>Account</span>
+              <span>Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
