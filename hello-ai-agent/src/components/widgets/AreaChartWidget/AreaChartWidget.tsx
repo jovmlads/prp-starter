@@ -15,7 +15,6 @@ import {
 import {
   Area,
   AreaChart,
-  ResponsiveContainer,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -195,80 +194,80 @@ export function AreaChartWidget({
               config={chartConfig}
               className="h-full w-full chart-container"
             >
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                  data={data?.data || []}
-                  margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
-                >
-                  <defs>
-                    <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                      <stop
-                        offset="0%"
-                        stopColor={chartColors.gradient.from}
-                        stopOpacity={0.4}
-                      />
-                      <stop
-                        offset="100%"
-                        stopColor={chartColors.gradient.from}
-                        stopOpacity={0.1}
-                      />
-                    </linearGradient>
-                  </defs>
-                  {showGrid && (
-                    <CartesianGrid
-                      strokeDasharray="3 3"
-                      stroke={chartColors.grid}
-                      strokeOpacity={0.5}
+              <AreaChart
+                data={data?.data || []}
+                width={594}
+                height={height}
+                margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
+              >
+                <defs>
+                  <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="0%"
+                      stopColor={chartColors.gradient.from}
+                      stopOpacity={0.4}
                     />
-                  )}
-                  <XAxis
-                    dataKey="formattedDate"
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 12, fill: chartColors.text }}
-                  />
-                  <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 12, fill: chartColors.text }}
-                    tickFormatter={(value) => {
-                      if (value < 1) {
-                        return `$${value.toFixed(4)}`;
-                      } else if (value < 1000) {
-                        return `$${value.toFixed(0)}`;
-                      } else {
-                        return `$${(value / 1000).toFixed(0)}k`;
-                      }
-                    }}
-                  />
-                  {showTooltip && (
-                    <ChartTooltip
-                      content={
-                        <ChartTooltipContent
-                          labelFormatter={(value) => `Date: ${value}`}
-                          formatter={(value, name) => [
-                            new Intl.NumberFormat('en-US', {
-                              style: 'currency',
-                              currency: 'USD',
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 6,
-                            }).format(value as number),
-                            name,
-                          ]}
-                        />
-                      }
+                    <stop
+                      offset="100%"
+                      stopColor={chartColors.gradient.from}
+                      stopOpacity={0.1}
                     />
-                  )}
-                  <Area
-                    type="monotone"
-                    dataKey="value"
-                    stroke={chartColors.stroke}
-                    strokeWidth={2}
-                    fill={`url(#${gradientId})`}
-                    connectNulls={false}
+                  </linearGradient>
+                </defs>
+                {showGrid && (
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    stroke={chartColors.grid}
+                    strokeOpacity={0.5}
                   />
-                </AreaChart>
-              </ResponsiveContainer>
+                )}
+                <XAxis
+                  dataKey="formattedDate"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: chartColors.text }}
+                />
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: chartColors.text }}
+                  tickFormatter={(value) => {
+                    if (value < 1) {
+                      return `$${value.toFixed(4)}`;
+                    } else if (value < 1000) {
+                      return `$${value.toFixed(0)}`;
+                    } else {
+                      return `$${(value / 1000).toFixed(0)}k`;
+                    }
+                  }}
+                />
+                {showTooltip && (
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        labelFormatter={(value) => `Date: ${value}`}
+                        formatter={(value, name) => [
+                          new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 6,
+                          }).format(value as number),
+                          name,
+                        ]}
+                      />
+                    }
+                  />
+                )}
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke={chartColors.stroke}
+                  strokeWidth={2}
+                  fill={`url(#${gradientId})`}
+                  connectNulls={false}
+                />
+              </AreaChart>
             </ChartContainer>
           )}
         </div>
