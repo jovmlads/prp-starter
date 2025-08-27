@@ -7,7 +7,11 @@ import {
 import { AppSidebar } from './sidebar';
 import { Separator } from '../ui/separator';
 
-export function RootLayout() {
+interface RootLayoutProps {
+  children?: React.ReactNode;
+}
+
+export function RootLayout({ children }: RootLayoutProps) {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -19,7 +23,7 @@ export function RootLayout() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <Outlet />
+          {children || <Outlet />}
         </div>
       </SidebarInset>
     </SidebarProvider>

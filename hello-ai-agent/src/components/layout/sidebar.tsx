@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '../ui/sidebar';
-import { Home, LayoutDashboard, Settings, User } from 'lucide-react';
+import { Home, LayoutDashboard, Settings, User, FileText } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
 const menuItems = [
@@ -32,6 +32,11 @@ const menuItems = [
     title: 'Profile',
     url: '/profile',
     icon: User,
+  },
+  {
+    title: 'Form',
+    url: '/form',
+    icon: FileText,
   },
 ];
 
