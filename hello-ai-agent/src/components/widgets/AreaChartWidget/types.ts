@@ -34,6 +34,7 @@ export interface AreaChartWidgetProps {
   showGrid?: boolean;
   showTooltip?: boolean;
   defaultTicker?: string;
+  onTickerChange?: (ticker: string) => void;
 }
 
 export interface UseChartDataOptions {

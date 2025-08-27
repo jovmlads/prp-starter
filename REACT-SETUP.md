@@ -17,7 +17,7 @@ Initialize the project in the existing PRPs-agentic-eng workspace:
 ```powershell
 # Create project using Vite
 npm create vite@latest app -- --template react-ts
-cd app
+Set-Location app
 
 # Install core dependencies
 npm install
@@ -304,11 +304,11 @@ npx husky init
 
 Create `.husky/pre-commit`:
 
-```bash
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+```powershell
+#!/usr/bin/env pwsh
+. "$(Split-Path $MyInvocation.MyCommand.Path)/_/husky.ps1"
 
-npm run type-check && npm run lint && npm run test
+npm run type-check; if ($?) { npm run lint }; if ($?) { npm run test }
 ```
 
 ### Package.json Scripts
@@ -330,7 +330,7 @@ Add these scripts to your package.json:
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit",
     "validate": "npm run type-check && npm run lint && npm run test:coverage && npm run test:e2e",
-    "prepare": "cd .. && husky install app/.husky"
+    "prepare": "Set-Location ..; husky install app/.husky"
   }
 }
 ```
@@ -440,7 +440,7 @@ After setting up the project, you can:
 1. Start development server:
 
 ```powershell
-cd app
+Set-Location app
 npm run dev
 ```
 

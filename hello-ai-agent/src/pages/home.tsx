@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { TimeWidget } from '../components/widgets/TimeWidget';
 import { DateWidget } from '../components/widgets/DateWidget';
 import { AreaChartWidget } from '../components/widgets/AreaChartWidget';
+import { DataTableWidget } from '../components/widgets/DataTableWidget';
 
 export default function Home() {
+  // Shared ticker state for both chart and table widgets
+  const [selectedTicker, setSelectedTicker] = useState('bitcoin');
+
   return (
     <div className="max-w-4xl w-full">
       <div className="space-y-6 w-full">
@@ -24,7 +29,15 @@ export default function Home() {
 
         {/* Full-width chart widget */}
         <div className="mt-6 w-full">
-          <AreaChartWidget />
+          <AreaChartWidget
+            defaultTicker={selectedTicker}
+            onTickerChange={setSelectedTicker}
+          />
+        </div>
+
+        {/* Data table widget */}
+        <div className="mt-6 w-full">
+          <DataTableWidget ticker={selectedTicker} />
         </div>
       </div>
     </div>

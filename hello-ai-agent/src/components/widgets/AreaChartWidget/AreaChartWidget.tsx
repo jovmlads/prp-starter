@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -46,8 +46,15 @@ export function AreaChartWidget({
   showGrid = true,
   showTooltip = true,
   defaultTicker = 'bitcoin',
+  onTickerChange,
 }: AreaChartWidgetProps) {
   const [selectedTicker, setSelectedTicker] = useState(defaultTicker);
+
+  // Sync internal state with prop changes
+  useEffect(() => {
+    setSelectedTicker(defaultTicker);
+  }, [defaultTicker]);
+
   const { data, isLoading, error, refetch } = useChartData({
     refreshInterval,
     ticker: selectedTicker,
@@ -81,12 +88,14 @@ export function AreaChartWidget({
 
   const handleTickerSelect = (tickerId: string) => {
     setSelectedTicker(tickerId);
+    onTickerChange?.(tickerId);
   };
 
   if (error && !data) {
     return (
       <Card
         className={`w-full transition-all duration-200 hover:shadow-lg ${className}`}
+        data-testid="area-chart-widget"
       >
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -119,6 +128,7 @@ export function AreaChartWidget({
   return (
     <Card
       className={`w-full max-w-full transition-all duration-200 hover:shadow-lg ${className}`}
+      data-testid="area-chart-widget"
     >
       <CardHeader>
         <div className="space-y-4">

@@ -497,16 +497,16 @@ npm run test:rag
 
 ### Validation Gates (Must be Executable)
 
-```bash
+```powershell
 # Level 1: Syntax & Style
-ruff check --fix && mypy .
+ruff check --fix ; mypy .
 
 # Level 2: Unit Tests
 uv run pytest tests/ -v
 
 # Level 3: Integration
 uv run uvicorn main:app --reload
-curl -X POST http://localhost:8000/endpoint -H "Content-Type: application/json" -d '{...}'
+Invoke-RestMethod -Uri "http://localhost:8000/endpoint" -Method Post -Headers @{"Content-Type"="application/json"} -Body '{...}'
 
 # Level 4: Deployment
 # mcp servers, or other creative ways to self validate
@@ -537,6 +537,8 @@ curl -X POST http://localhost:8000/endpoint -H "Content-Type: application/json" 
    - Design component architecture
 
 2. **Implementation Phase**
+- Use Windows Powershell commands always
+- Use current folder as a workspace
    - Write component code
    - Implement unit tests
    - Add integration tests
@@ -558,6 +560,8 @@ curl -X POST http://localhost:8000/endpoint -H "Content-Type: application/json" 
    - Update documentation
    - Verify E2E test coverage
    - Check accessibility compliance
+
+   # Run Playwright E2E tests
 
 5. **Release Phase**
    - Final test suite execution

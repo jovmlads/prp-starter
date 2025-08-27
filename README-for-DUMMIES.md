@@ -98,7 +98,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 1: Get the Big Picture**
 
-```bash
+```powershell
 /prp-planning-create "user profile page with avatar upload and bio editing"
 ```
 
@@ -107,7 +107,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 2: Define How Parts Connect**
 
-```bash
+```powershell
 /api-contract-define "create API endpoints for the user profile feature described in PRPs/user-profile-prd.md"
 ```
 
@@ -116,7 +116,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 3: Create Detailed Instructions**
 
-```bash
+```powershell
 /prp-base-create "implement user profile feature using PRPs/user-profile-prd.md architecture and PRPs/contracts/user-profile-api-contract.md specifications"
 ```
 
@@ -125,7 +125,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 4: Build It**
 
-```bash
+```powershell
 /prp-base-execute PRPs/user-profile-implementation.md
 ```
 
@@ -137,7 +137,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 1: Plan the Changes**
 
-```bash
+```powershell
 /prp-spec-create "migrate user authentication from basic auth to OAuth2 with Google integration"
 ```
 
@@ -146,7 +146,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 2: Execute the Changes**
 
-```bash
+```powershell
 /prp-spec-execute SPEC_PRP/PRPs/oauth2-migration.md
 ```
 
@@ -158,7 +158,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 1: Define the Task**
 
-```bash
+```powershell
 /prp-task-create "add email validation to the signup form with proper error messages"
 ```
 
@@ -167,7 +167,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 2: Do the Task**
 
-```bash
+```powershell
 /prp-task-execute TASK_PRP/PRPs/email-validation.md
 ```
 
@@ -179,7 +179,7 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **Step 1: Create Action Plan**
 
-```bash
+```powershell
 /task-list-init "hackathon project: social media dashboard with posts, likes, and user profiles"
 ```
 
@@ -403,13 +403,13 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 
 ### **❌ Using Commands in Isolation**
 
-```bash
+```powershell
 # WRONG - each command creates isolated work
 /api-contract-define "user authentication"
 /prp-base-create "user authentication"
 ```
 
-```bash
+```powershell
 # RIGHT - each command builds on the previous
 /prp-planning-create "user authentication with social login"
 /api-contract-define "create API for authentication described in PRPs/user-auth-prd.md"
@@ -418,12 +418,12 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 
 ### **❌ Skipping the Planning Phase**
 
-```bash
+```powershell
 # WRONG - jumping straight to implementation
 /prp-base-create "some complicated feature"
 ```
 
-```bash
+```powershell
 # RIGHT - plan first, then implement
 /prp-planning-create "some complicated feature"
 /prp-base-create "implement feature using PRPs/complicated-feature-prd.md"
@@ -431,12 +431,12 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 
 ### **❌ Not Being Specific**
 
-```bash
+```powershell
 # WRONG - vague and unhelpful
 /prp-base-create "make the app better"
 ```
 
-```bash
+```powershell
 # RIGHT - specific and actionable
 /prp-base-create "add user profile editing with avatar upload, bio editing, and email preferences"
 ```
@@ -751,13 +751,13 @@ When creating implementation PRPs, reference existing code patterns, documentati
 
 Many commands work better together:
 
-```bash
-/prime-core
-/prp-planning-create "feature description"
-/api-contract-define "using PRPs/feature-prd.md"
-/prp-base-create "using both previous files"
-/prp-base-execute PRPs/feature-implementation.md
-/smart-commit "feat: add new feature"
+```powershell
+/prime-core ; `
+/prp-planning-create "feature description" ; `
+/api-contract-define "using PRPs/feature-prd.md" ; `
+/prp-base-create "using both previous files" ; `
+/prp-base-execute PRPs/feature-implementation.md ; `
+/smart-commit "feat: add new feature" ; `
 /create-pr
 ```
 

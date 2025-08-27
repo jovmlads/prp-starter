@@ -7,6 +7,7 @@ Implement a TypeScript/JavaScript feature using the PRP file.
 ## Execution Process
 
 1. **Load PRP**
+
    - Read the specified PRP file
    - Understand all context and requirements
    - Follow all instructions in the PRP and extend the research if needed
@@ -14,6 +15,7 @@ Implement a TypeScript/JavaScript feature using the PRP file.
    - Do more web searches and codebase exploration as needed
 
 2. **ULTRATHINK**
+
    - Ultrathink before you execute the plan. Create a comprehensive plan addressing all requirements.
    - Break down the PRP into clear todos using the TodoWrite tool.
    - Use agents subagents and batchtool to enhance the process.
@@ -24,21 +26,27 @@ Implement a TypeScript/JavaScript feature using the PRP file.
 3. ## **Execute the plan**
 
    ## Execute the PRP step by step
+
    - Implement all the code
    - Follow TypeScript/JavaScript best practices
    - Ensure proper type safety and error handling
    - Follow existing codebase patterns and conventions
 
 4. **Validate**
+
    - Run each validation command from the PRP
    - The better validation that is done, the more confident we can be that the implementation is correct.
    - Fix any failures (type errors, linting issues, test failures)
    - Re-run until all pass
+   - **MANDATORY**: Execute Playwright E2E tests for React/Frontend features: `npx playwright test`
    - Always re-read the PRP to validate and review the implementation to ensure it meets the requirements
 
-5. **Complete**
+5. **Complete & Organize**
+
    - Ensure all checklist items done
    - Run final validation suite
+   - **AUTOMATICALLY**: Move completed PRD and implementation .md files to `PRPs/completed/` folder
+   - **AUTOMATICALLY**: Update `PRPs/completed/README.md` with completion details
    - Report completion status
    - Read the PRP again to ensure you have implemented everything
 
