@@ -9,8 +9,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '../ui/sidebar';
-import { Home, LayoutDashboard, Settings, User, FileText } from 'lucide-react';
+import {
+  Home,
+  LayoutDashboard,
+  Settings,
+  User,
+  FileText,
+  Users,
+} from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 const menuItems = [
   {
@@ -18,6 +26,9 @@ const menuItems = [
     url: '/home',
     icon: Home,
   },
+];
+
+const adminOnlyItems = [
   {
     title: 'Dashboard',
     url: '/dashboard',
@@ -38,10 +49,26 @@ const menuItems = [
     url: '/form',
     icon: FileText,
   },
+  {
+    title: 'Users',
+    url: '/users',
+    icon: Users,
+  },
 ];
 
 export function AppSidebar() {
   const location = useLocation();
+  const { logout, user } = useAuth();
+
+  const isAdmin = user?.role === 'admin';
+  const visibleMenuItems = isAdmin
+    ? [...menuItems, ...adminOnlyItems]
+    : menuItems;
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = '/login';
+  };
 
   return (
     <Sidebar variant="inset" collapsible="icon">
@@ -60,7 +87,7 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => (
+              {visibleMenuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
@@ -81,10 +108,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={() => {
-              localStorage.clear();
-              window.location.href = '/login';
-            }}>
+            <SidebarMenuButton onClick={handleLogout}>
               <User />
               <span>Logout</span>
             </SidebarMenuButton>

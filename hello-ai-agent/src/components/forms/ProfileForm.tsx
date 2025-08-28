@@ -2,11 +2,29 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFieldArray, ControllerRenderProps } from 'react-hook-form';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useProfile, useUpdateProfile, useVerifiedEmails } from '@/hooks/useProfile';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  useProfile,
+  useUpdateProfile,
+  useVerifiedEmails,
+} from '@/hooks/useProfile';
 import { profileFormSchema, type ProfileFormData } from '@/types/profile';
 import { useToast } from '@/components/ui/toast';
 
@@ -18,24 +36,34 @@ export function ProfileForm() {
 
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileFormSchema),
-    mode: "onSubmit",
-    reValidateMode: "onBlur",
+    mode: 'onBlur', // Change from onChange to onBlur to prevent constant validation
+    reValidateMode: 'onBlur',
     shouldFocusError: true,
-    criteriaMode: "all", // Show all validation errors
+    criteriaMode: 'firstError', // Show only the first validation error to avoid multiple errors
     defaultValues: {
-      username: "shadcn",
-      email: "user@example.com", 
-      bio: "I own a computer.",
+      username: 'shadcn',
+      email: 'user@example.com',
+      bio: 'I own a computer.',
       urls: [
-        { id: "website", label: "Website", url: "https://shadcn.com", type: "website" },
-        { id: "twitter", label: "Twitter", url: "https://twitter.com/shadcn", type: "twitter" }
-      ]
-    }
+        {
+          id: 'website',
+          label: 'Website',
+          url: 'https://shadcn.com',
+          type: 'website',
+        },
+        {
+          id: 'twitter',
+          label: 'Twitter',
+          url: 'https://twitter.com/shadcn',
+          type: 'twitter',
+        },
+      ],
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "urls"
+    name: 'urls',
   });
 
   // Load profile data into form when available
@@ -50,47 +78,49 @@ export function ProfileForm() {
       // Clear any existing errors first
       form.clearErrors();
       await updateProfile(data);
-      console.log("Profile updated successfully", data);
-      showToast("Profile updated successfully!", "success");
+      console.log('Profile updated successfully', data);
+      showToast('Profile updated successfully!', 'success');
     } catch (error) {
-      console.error("Failed to update profile", error);
-      showToast("Failed to update profile. Please try again.", "error");
+      console.error('Failed to update profile', error);
+      showToast('Failed to update profile. Please try again.', 'error');
     }
   };
 
   const onInvalid = (errors: any) => {
-    console.log("Form validation errors:", errors);
-    
+    console.log('Form validation errors:', errors);
+
     // Show toast with validation errors
     const errorMessages = Object.entries(errors)
       .map(([field, error]: [string, any]) => {
         const fieldName = field.charAt(0).toUpperCase() + field.slice(1);
         return `${fieldName}: ${error.message}`;
       })
-      .join(", ");
-    
-    showToast(`Please fix the following errors: ${errorMessages}`, "error");
-    
+      .join(', ');
+
+    showToast(`Please fix the following errors: ${errorMessages}`, 'error');
+
     // Ensure errors are displayed in form fields
     Object.entries(errors).forEach(([field, error]: [string, any]) => {
       form.setError(field as keyof ProfileFormData, {
         type: 'manual',
-        message: error.message
+        message: error.message,
       });
     });
   };
 
   if (isLoading) {
-    return <div className="flex items-center justify-center p-8">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center p-8">Loading...</div>
+    );
   }
 
   return (
     <Form {...form}>
-      <form 
+      <form
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit(onSubmit, onInvalid)(e);
-        }} 
+        }}
         className="space-y-8"
       >
         <div className="space-y-6">
@@ -100,20 +130,24 @@ export function ProfileForm() {
               This is how others will see you on the site.
             </p>
           </div>
-          
+
           {/* Username Field */}
           <FormField
             control={form.control}
             name="username"
-            render={({ field }: { field: ControllerRenderProps<ProfileFormData, 'username'> }) => (
+            render={({
+              field,
+            }: {
+              field: ControllerRenderProps<ProfileFormData, 'username'>;
+            }) => (
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
                   <Input placeholder="shadcn" {...field} />
                 </FormControl>
-                <FormDescription>
-                  This is your public display name. It can be your real name or a pseudonym.
-                  You can only change this once every 30 days.
+                <FormDescription className="text-blue-600 font-medium">
+                  This is your public display name. It can be your real name or
+                  a pseudonym. You can only change this once every 30 days.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -124,10 +158,17 @@ export function ProfileForm() {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }: { field: ControllerRenderProps<ProfileFormData, 'email'> }) => (
+            render={({
+              field,
+            }: {
+              field: ControllerRenderProps<ProfileFormData, 'email'>;
+            }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a verified email to display" />
@@ -140,14 +181,19 @@ export function ProfileForm() {
                       </SelectItem>
                     )) || (
                       <>
-                        <SelectItem value="user@example.com">user@example.com</SelectItem>
-                        <SelectItem value="admin@example.com">admin@example.com</SelectItem>
+                        <SelectItem value="user@example.com">
+                          user@example.com
+                        </SelectItem>
+                        <SelectItem value="admin@example.com">
+                          admin@example.com
+                        </SelectItem>
                       </>
                     )}
                   </SelectContent>
                 </Select>
-                <FormDescription>
-                  You can manage verified email addresses in your email settings.
+                <FormDescription className="text-blue-600 font-medium">
+                  You can manage verified email addresses in your email
+                  settings.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -158,7 +204,11 @@ export function ProfileForm() {
           <FormField
             control={form.control}
             name="bio"
-            render={({ field }: { field: ControllerRenderProps<ProfileFormData, 'bio'> }) => (
+            render={({
+              field,
+            }: {
+              field: ControllerRenderProps<ProfileFormData, 'bio'>;
+            }) => (
               <FormItem>
                 <FormLabel>Bio</FormLabel>
                 <FormControl>
@@ -168,8 +218,9 @@ export function ProfileForm() {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
-                  You can @mention other users and organizations to link to them.
+                <FormDescription className="text-blue-600 font-medium">
+                  You can @mention other users and organizations to link to
+                  them.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -179,17 +230,24 @@ export function ProfileForm() {
           {/* URLs Section */}
           <div className="space-y-4">
             <FormLabel>URLs</FormLabel>
-            <FormDescription>
+            <FormDescription className="text-blue-600 font-medium">
               Add links to your website, blog, or social media profiles.
             </FormDescription>
-            
+
             <div className="space-y-2">
               {fields.map((field, index) => (
                 <div key={field.id} className="flex items-center space-x-2">
                   <FormField
                     control={form.control}
                     name={`urls.${index}.url`}
-                    render={({ field }: { field: ControllerRenderProps<ProfileFormData, `urls.${number}.url`> }) => (
+                    render={({
+                      field,
+                    }: {
+                      field: ControllerRenderProps<
+                        ProfileFormData,
+                        `urls.${number}.url`
+                      >;
+                    }) => (
                       <FormItem className="flex-1">
                         <FormControl>
                           <Input
@@ -213,18 +271,20 @@ export function ProfileForm() {
                   )}
                 </div>
               ))}
-              
+
               {fields.length < 5 && (
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => append({ 
-                    id: `url-${Date.now()}`, 
-                    label: 'Custom', 
-                    url: '', 
-                    type: 'custom' 
-                  })}
+                  onClick={() =>
+                    append({
+                      id: `url-${Date.now()}`,
+                      label: 'Custom',
+                      url: '',
+                      type: 'custom',
+                    })
+                  }
                 >
                   Add URL
                 </Button>
@@ -234,7 +294,7 @@ export function ProfileForm() {
         </div>
 
         <Button type="submit" disabled={isUpdating}>
-          {isUpdating ? "Updating..." : "Update profile"}
+          {isUpdating ? 'Updating...' : 'Update profile'}
         </Button>
       </form>
     </Form>
