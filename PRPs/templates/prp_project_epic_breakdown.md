@@ -520,6 +520,50 @@ npm run integration-test-suite
 
 **This definitive breakdown provides [X] Epics with [Y] specific features that can be implemented using the standard PRP workflow. Each Epic has clear ownership, dependencies, and implementation commands for immediate execution.**
 
+## Master Lists Export
+
+### Create Master Lists File: `PRPs/[project-name]-epic-feature-master-list.md`
+
+Generate a separate master reference file containing:
+
+**Complete Epic List:**
+- [Epic ID1]: [Epic Name 1]
+- [Epic ID2]: [Epic Name 2]
+- [Epic ID3]: [Epic Name 3]
+
+**Complete Feature List by Epic:**
+- **Epic [ID1]: [Epic Name 1]**
+  - [ID1].1: [Feature Name 1]
+  - [ID1].2: [Feature Name 2]
+  - [ID1].3: [Feature Name 3]
+- **Epic [ID2]: [Epic Name 2]**
+  - [ID2].1: [Feature Name 1]
+  - [ID2].2: [Feature Name 2]
+
+### Create Jira Import File: `PRPs/[project-name]-jira-import.csv`
+
+Generate a Jira-ready CSV file for instant project setup:
+
+```csv
+Issue Type,Summary,Description,Epic Link,Priority,Story Points,Components,Assignee,Labels
+Epic,[Epic Name 1],[Epic Description],,High,,[Component],[Team Lead],epic
+Story,[Feature Name 1],[Feature Description],[Epic Name 1],Medium,5,[Component],[Developer],feature
+Task,[Task Name 1],[Task Description],[Epic Name 1],Low,2,[Component],[Developer],task
+```
+
+**CSV Generation Rules:**
+- **Epics**: High priority, assigned to Team Leads, no story points
+- **Features (Stories)**: Medium priority, 3-8 story points based on complexity
+- **Tasks**: Low priority, 1-3 story points, technical implementation work
+- **Components**: Map to architecture areas (Frontend, Backend, Database, Infrastructure)
+- **Assignees**: Use team structure from Epic assignments
+- **Descriptions**: Include key implementation details and acceptance criteria
+
+**Story Point Guidelines:**
+- 1-2 points: Simple configuration, minor changes
+- 3-5 points: Standard features, moderate complexity
+- 8-13 points: Complex features, major functionality
+
 ## Next Steps
 
 1. **Epic Prioritization**: Review Epic breakdown and adjust priorities based on business value and technical dependencies

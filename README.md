@@ -182,6 +182,8 @@ For enterprise-level projects that require multiple teams working in parallel, u
 **What this creates:**
 
 - `PRPs/project-epic-breakdown.md` - Complete project decomposition into independent Epics
+- `PRPs/[project-name]-epic-feature-master-list.md` - Master reference file with all Epic and feature titles
+- `PRPs/[project-name]-jira-import.csv` - **Jira-ready CSV file for instant project import**
 - **Definitive Epic & Feature Breakdown** - Clear table of all Epics with team assignments, complexity, and dependencies
 - **Complete Feature Lists** - Each Epic broken down into ALL necessary features (3-15+ features as needed) with implementation sub-capabilities
 - **Implementation Commands** - Exact PRP commands to use for each Epic and feature
@@ -192,7 +194,8 @@ For enterprise-level projects that require multiple teams working in parallel, u
 
 1. **Epic Summary Table** - All Epics with IDs, owners, timelines, dependencies
 2. **Detailed Feature Breakdown** - Each Epic contains ALL necessary features (could be 3, could be 15+ features - like automated Jira backlog generation)
-3. **Implementation Roadmap** - Phase-by-phase commands for parallel development
+3. **Jira Import Ready** - CSV file with all Epics, Features, and Tasks formatted for Jira import
+4. **Implementation Roadmap** - Phase-by-phase commands for parallel development
 4. **Team Assignment Strategy** - Clear Epic ownership for parallel execution
 
 **Epic → Feature → Task Workflow:**
@@ -532,6 +535,33 @@ git worktree add -b feature-api ../project-api
 cd ../project-auth && claude
 cd ../project-api && claude
 ```
+
+### Jira Integration
+
+The Epic breakdown system generates ready-to-import Jira files:
+
+```bash
+# Generate project breakdown with Jira export
+/project-epic-breakdown "your complex project description"
+
+# Files created:
+# - PRPs/project-epic-breakdown.md (detailed breakdown)
+# - PRPs/[project-name]-epic-feature-master-list.md (quick reference)
+# - PRPs/[project-name]-jira-import.csv (Jira-ready import file)
+```
+
+**Jira Import Process:**
+
+1. **Create Jira Project** with appropriate issue types and components
+2. **Import CSV File**: Use Jira's CSV import feature to load all Epics, Stories, and Tasks
+3. **Assign Teams**: Map Epic assignments to Jira teams and sprints
+4. **Track Progress**: Use Epic burndown charts and sprint boards for monitoring
+
+**CSV File Structure:**
+- **Epics**: High-level business capabilities mapped to development teams
+- **Stories**: User-facing features with story point estimates
+- **Tasks**: Technical implementation work with effort estimates
+- **Relationships**: Proper Epic-Story-Task hierarchy for tracking
 
 ### CI/CD Integration
 

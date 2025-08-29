@@ -1,0 +1,20 @@
+Issue Type,Summary,Description,Epic Link,Priority,Story Points,Components,Assignee,Labels
+Epic,User Authentication System,Complete user authentication with OAuth2 and role-based access control,,High,,Backend,Backend Team Lead,epic
+Story,User Registration,Allow new users to create accounts with email verification and profile setup,User Authentication System,Medium,5,Frontend,Frontend Developer,feature
+Story,OAuth2 Login Integration,Implement Google and GitHub OAuth2 login with account linking,User Authentication System,Medium,8,Backend,Backend Developer,feature  
+Story,Password Reset Flow,Allow users to reset forgotten passwords via email with secure token validation,User Authentication System,Medium,3,Backend,Backend Developer,feature
+Story,Role-Based Access Control,Implement user roles (admin/user/moderator) with permission management,User Authentication System,High,8,Backend,Backend Developer,feature
+Task,Setup JWT Token Service,Configure JWT token generation validation and refresh mechanism,User Authentication System,High,3,Backend,Backend Developer,task
+Task,Create User Database Schema,Design and implement user data models with proper indexing,User Authentication System,High,2,Database,Database Developer,task
+Task,Email Service Integration,Setup email service for verification and password reset emails,User Authentication System,Medium,3,Backend,Backend Developer,task
+Sub-task,Email Verification Template,Create responsive HTML email template for account verification,User Authentication System,Low,1,Frontend,Frontend Developer,subtask
+Sub-task,Password Strength Validation,Implement client-side password validation with real-time feedback,User Authentication System,Low,1,Frontend,Frontend Developer,subtask
+Sub-task,OAuth2 Error Handling,Handle OAuth2 authentication errors and edge cases gracefully,User Authentication System,Low,2,Frontend,Frontend Developer,subtask
+Epic,Product Catalog Management,Complete product browsing filtering and search functionality,,High,,Frontend,Frontend Team Lead,epic
+Story,Product Listing Page,Display products with pagination filtering and sorting options,Product Catalog Management,Medium,5,Frontend,Frontend Developer,feature
+Story,Product Search Engine,Implement full-text search with filters and autocomplete,Product Catalog Management,High,8,Backend,Backend Developer,feature
+Story,Product Details View,Show detailed product information with image gallery and reviews,Product Catalog Management,Medium,5,Frontend,Frontend Developer,feature
+Story,Category Navigation,Hierarchical category browsing with breadcrumb navigation,Product Catalog Management,Medium,3,Frontend,Frontend Developer,feature
+Task,Search Index Setup,Configure Elasticsearch for product search indexing,Product Catalog Management,High,5,Backend,Backend Developer,task
+Task,Image Upload Service,Setup CDN and image processing for product photos,Product Catalog Management,Medium,3,Backend,Backend Developer,task
+Task,Product API Endpoints,Create REST endpoints for product CRUD operations,Product Catalog Management,High,3,Backend,Backend Developer,task

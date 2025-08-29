@@ -723,7 +723,7 @@ When creating implementation PRPs, reference existing code patterns, documentati
 - **What they do:** Break complex projects into independent Epics with definitive feature lists for parallel development
 - **When to use:** Enterprise projects, multiple teams, 3+ month timelines
 - **Example:** `/project-epic-breakdown "e-commerce platform with inventory, analytics, multi-channel"`
-- **Result:** Creates Epic summary table with complete feature breakdown (comprehensive like automated Jira), team assignments, implementation commands, and parallel development roadmap
+- **Result:** Creates Epic summary table with complete feature breakdown (comprehensive like automated Jira), team assignments, implementation commands, parallel development roadmap, **and Jira-ready CSV import file** for instant project setup
 
 ---
 

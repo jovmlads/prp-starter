@@ -63,6 +63,11 @@ Provide a complete project breakdown including:
   - Complete list of ALL Epic titles
   - Complete list of ALL feature titles organized by Epic
   - Quick reference format for project overview and tracking
+- **Jira Import File**: Generate `PRPs/[project-name]-jira-import.csv` with ready-to-import structure:
+  - CSV format compatible with Jira import
+  - All Epics, Features, and Tasks properly structured
+  - Issue types, priorities, estimates, and relationships
+  - Team assignments and component mappings
 - **Detailed Epic Specifications**: For each Epic, provide:
   - Epic Owner and Timeline
   - Implementation Commands (specific PRP commands to use)
@@ -77,6 +82,15 @@ Provide a complete project breakdown including:
 - Include ALL necessary sub-capabilities for full feature implementation
 - Think like a senior architect creating a complete project backlog
 - **Separate Master List File**: Create `PRPs/[project-name]-epic-feature-master-list.md` with complete Epic and feature title listings for quick reference
+- **Jira CSV Export**: Create `PRPs/[project-name]-jira-import.csv` with all project items in Jira-compatible format
+
+**Jira Import File Structure**:
+```csv
+Issue Type,Summary,Description,Epic Link,Priority,Story Points,Components,Assignee,Labels
+Epic,[Epic Name],[Epic Description],,High,,[Component],[Team Lead],[epic-label]
+Story,[Feature Name],[Feature Description],[Epic Name],Medium,[Points],[Component],[Developer],[feature-label]
+Task,[Task Name],[Task Description],[Epic Name],Low,[Points],[Component],[Developer],[task-label]
+```
 
 **Feature Naming Convention**: Use format `[EpicID].[FeatureNumber]: [Feature Name]`
 
