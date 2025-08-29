@@ -16,6 +16,7 @@ import {
   User,
   FileText,
   Users,
+  Database,
 } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -33,6 +34,11 @@ const adminOnlyItems = [
     title: 'Dashboard',
     url: '/dashboard',
     icon: LayoutDashboard,
+  },
+  {
+    title: 'DB CRUD',
+    url: '/db-crud',
+    icon: Database,
   },
   {
     title: 'Settings',

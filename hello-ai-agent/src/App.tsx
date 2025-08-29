@@ -21,6 +21,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import UsersPage from './pages/UsersPage';
+import DBCRUDPage from './pages/DBCRUDPage';
 
 const queryClient = new QueryClient();
 
@@ -80,6 +81,14 @@ function App() {
                           element={
                             <AdminRoute>
                               <UsersPage />
+                            </AdminRoute>
+                          }
+                        />
+                        <Route
+                          path="/db-crud"
+                          element={
+                            <AdminRoute>
+                              <DBCRUDPage />
                             </AdminRoute>
                           }
                         />

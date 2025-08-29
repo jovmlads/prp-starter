@@ -14,7 +14,15 @@ export const startMSW = async () => {
 
   if (process.env.NODE_ENV === 'development') {
     await worker.start({
-      onUnhandledRequest: 'warn',
+      onUnhandledRequest: (request, print) => {
+        // Bypass Supabase requests - let them go through to real API
+        if (request.url.includes('supabase.co')) {
+          return;
+        }
+
+        // Warn about other unhandled requests
+        print.warning();
+      },
     });
   }
 };
