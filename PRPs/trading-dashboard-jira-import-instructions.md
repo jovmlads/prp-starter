@@ -1,20 +1,26 @@
 # Trading Dashboard - Jira Import Instructions
 
-## 🎯 **Proper Epic → Story → Subtask Hierarchy**
+## 🎯 **New CSV Structure - Universal Jira Compatibility**
 
-The updated CSV file (`trading-dashboard-jira-import.csv`) is designed to create the correct Jira hierarchy structure:
+The updated CSV file (`trading-dashboard-jira-import.csv`) uses **standard Jira fields only** - no custom fields needed:
 
 ```
-Epic (Authentication & Security Foundation)
-├── Story (User Registration & Login System)
-│   ├── Subtask (Email/password registration with validation)
-│   ├── Subtask (Secure login with JWT token generation)
-│   └── Subtask (Password strength requirements and validation)
-├── Story (Session Management & Token Handling)
-│   ├── Subtask (JWT token refresh mechanism)
-│   └── Subtask (Secure token storage in httpOnly cookies)
+Epic (Authentication & Security Foundation) [Parent: empty]
+├── Story (User Registration & Login System) [Parent: Authentication & Security Foundation]
+│   ├── Subtask (Email/password registration) [Parent: Authentication & Security Foundation]
+│   ├── Subtask (Secure login with JWT) [Parent: Authentication & Security Foundation]
+│   └── Subtask (Password validation) [Parent: Authentication & Security Foundation]
+├── Story (Session Management & Token Handling) [Parent: Authentication & Security Foundation]
 └── [Other Stories...]
 ```
+
+### **Key Improvements**:
+
+✅ **Parent Field**: Uses standard Jira Parent field instead of custom Epic Name  
+✅ **Component Field**: Uses singular "Component" instead of "Components"  
+✅ **Universal Compatibility**: Works with any Jira Cloud instance  
+✅ **No Setup Required**: All fields are standard - no custom field creation needed  
+✅ **Automatic Hierarchy**: Parent field creates Epic → Story → Subtask links automatically
 
 ## 📋 **Step-by-Step Jira Import Process**
 
@@ -61,18 +67,19 @@ Epic (Authentication & Security Foundation)
    Issue Type              → Issue Type
    Summary                 → Summary
    Description             → Description
-   Epic Name               → Epic Name (Custom Field)
    Priority                → Priority
    Story Points            → Story Points
-   Components              → Components
+   Component               → Component/s
    Assignee                → Assignee
    Labels                  → Labels
+   Parent                  → Parent (for Epic linking)
    ```
 
-4. **Configure Epic Linking**:
-   - Ensure **Epic Name** field is mapped correctly
-   - This creates automatic Epic → Story relationships
+4. **Epic Linking with Parent Field**:
+   - The **Parent** column will automatically create Epic → Story relationships
+   - Stories with matching Parent values will be linked to their Epic
    - Subtasks will be linked to their parent Stories
+   - **No custom fields needed** - uses standard Jira Parent field
 
 ### **Step 3: Verify Import Results**
 
@@ -133,20 +140,21 @@ Story,User Registration & Login System,...
 Task,Email/password registration,...  ❌ Tasks not linked properly
 ```
 
-### **After (Proper Hierarchy)**:
+### **After (Proper Hierarchy - Using Parent Field)**:
 
 ```csv
-Issue Type,Summary,Description,Epic Name,Priority...
-Epic,Authentication & Security Foundation,,,...           ← Epic
-Story,User Registration & Login System,Authentication & Security Foundation,...  ← Story linked to Epic
-Subtask,Email/password registration,Authentication & Security Foundation,...     ← Subtask linked to Epic
+Issue Type,Summary,Description,Priority,Story Points,Component,Parent...
+Epic,Authentication & Security Foundation,,...,,Authentication,          ← Epic (no parent)
+Story,User Registration & Login System,...,Medium,5,Authentication,Authentication & Security Foundation  ← Story linked to Epic
+Subtask,Email/password registration,...,Low,2,Authentication,Authentication & Security Foundation     ← Subtask linked to Epic
 ```
 
 ### **Critical Fix**:
 
-- Changed **Epic Link** → **Epic Name** for proper Story-to-Epic linking
-- Changed **Task** → **Subtask** for proper hierarchy
-- Added **Epic Name** values to all Stories and Subtasks for automatic linking
+- **Removed Epic Name** → **Added Parent field** for universal Jira compatibility
+- **Changed Components** → **Component** (singular) for standard field mapping
+- **Parent field automatically creates** Epic → Story → Subtask hierarchy
+- **No custom fields required** - uses standard Jira Parent linking
 
 ## 📊 **Expected Jira Structure After Import**
 
