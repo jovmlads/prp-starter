@@ -424,6 +424,56 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 
 ---
 
+## The Documentation Requirement 📚
+
+### **MANDATORY for React Projects: Document Everything!**
+
+**After every completed feature, epic, or task, you MUST create documentation:**
+
+### **📝 Documentation Process**
+
+1. **Create documentation file** in `app/docs/` folder:
+   - Features: `feature-{name}-documentation.md`
+   - Epics: `epic-{name}-documentation.md`
+
+2. **Use the template** from `PRPs/templates/documentation_template.md`
+
+3. **Include everything**:
+   - ✅ How components work (with code examples)
+   - ✅ API integration patterns
+   - ✅ Testing coverage summary
+   - ✅ Common problems and solutions
+   - ✅ Dependencies and configuration
+
+### **🎯 Why Documentation Matters**
+
+- **Future You**: You'll forget how things work in 6 months
+- **Team Members**: Others need to understand and maintain your code
+- **Problem Solving**: Documented troubleshooting saves hours of debugging
+- **Code Quality**: Well-documented code is usually better code
+
+### **💡 Documentation Example**
+
+```markdown
+# User Authentication Feature Documentation
+
+## Overview
+Secure login system with JWT tokens and role-based access.
+
+## Components Created
+- LoginForm - Handles user login with validation
+- AuthProvider - Manages authentication state globally
+
+## Usage Example
+<LoginForm onSuccess={handleLoginSuccess} />
+
+## Common Issues
+**Problem**: Login fails with 401 error
+**Solution**: Check if API base URL is correctly configured
+```
+
+---
+
 ## When to Use Each Command 🤔
 
 ### **Use `/project-epic-breakdown` when:**
@@ -649,10 +699,18 @@ When creating implementation PRPs, reference existing code patterns, documentati
 4. **Build it:**
 
    ```bash
-   /execute-base-prp PRPs/website-footer-implementation.md
+   /prp-base-execute PRPs/website-footer-implementation.md
    ```
 
-5. **Celebrate!** 🎉 You just used AI to build a feature with proper planning, documentation, and quality control!
+5. **Document Your Success!** 📝 Create feature documentation in your React project's `app/docs/` folder:
+
+   ```bash
+   # For React projects - this is MANDATORY!
+   # Create or update feature documentation
+   # Use the template from PRPs/templates/documentation_template.md
+   ```
+
+6. **Celebrate!** 🎉 You just used AI to build a feature with proper planning, documentation, and quality control!
 
 ---
 

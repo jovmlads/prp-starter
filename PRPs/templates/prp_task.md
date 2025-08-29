@@ -173,3 +173,48 @@ DEBUG api_error:
 - Keep validation commands simple and fast
 - Chain related tasks with clear dependencies
 - Always include rollback/undo steps for risky changes
+
+## Documentation Requirements (MANDATORY for React Projects)
+
+### Task Completion Documentation
+
+**CRITICAL**: After successful task completion, update relevant documentation:
+
+```powershell
+# For React projects - update feature documentation
+# Check if docs directory exists
+if (!(Test-Path "app/docs")) { New-Item -ItemType Directory -Path "app/docs" -Force }
+
+# Update or create task-specific documentation section
+# Add to existing feature documentation or create new if needed
+```
+
+**Documentation Update Checklist:**
+
+- [ ] **Update `app/docs/{feature-name}-documentation.md`** with task changes
+- [ ] **Add component modifications** and usage examples if applicable
+- [ ] **Document any new dependencies** or configuration changes
+- [ ] **Include troubleshooting notes** for task-specific issues encountered
+- [ ] **Update code examples** if component interfaces changed
+- [ ] **Verify documentation accuracy** by testing provided examples
+
+**Documentation Structure for Task Updates:**
+
+```markdown
+## Task: {Task Description}
+**Completed**: {Date}
+
+### Changes Made
+- Brief list of modifications
+- Components affected
+- Configuration updates
+
+### Usage Impact
+- How existing usage patterns are affected
+- New usage patterns introduced
+- Breaking changes (if any)
+
+### Testing Notes
+- Test scenarios covered
+- Edge cases addressed
+```

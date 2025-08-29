@@ -229,11 +229,23 @@ challenges:
 - [ ] Performance benchmarks met
 - [ ] Security review passed
 - [ ] Documentation complete
+- [ ] **Feature/Epic documentation created in `app/docs/` folder** (MANDATORY for React projects)
+- [ ] **Documentation includes: component usage, API integration, testing patterns**
+- [ ] **Code examples and troubleshooting guide provided**
 
 ## Measurable Outcomes
 - Metric 1: [Target value]
 - Metric 2: [Target value]
 - User satisfaction: [Target score]
+
+## Documentation Requirements (MANDATORY for React Projects)
+- [ ] **Create `app/docs/{feature-name}-documentation.md` or `app/docs/{epic-name}-documentation.md`**
+- [ ] **Include component usage examples with code snippets**
+- [ ] **Document API integration patterns and data flow**
+- [ ] **Provide testing approach and coverage summary**
+- [ ] **List dependencies and configuration details**
+- [ ] **Add troubleshooting section with common issues and solutions**
+- [ ] **Update `app/docs/README.md` with navigation links to new documentation**
 ```
 
 ### Phase 4: Validation & Output

@@ -143,6 +143,11 @@ src/
 ├── testing/         # Test utilities
 ├── types/           # Shared types
 └── utils/           # Shared utility functions
+
+docs/                 # MANDATORY: Feature and epic documentation
+├── feature-{name}-documentation.md  # Individual feature docs
+├── epic-{name}-documentation.md     # Epic-level documentation  
+└── README.md        # Documentation index and navigation
 ```
 
 ## Essential Configuration Files

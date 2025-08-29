@@ -560,12 +560,29 @@ Invoke-RestMethod -Uri "http://localhost:8000/endpoint" -Method Post -Headers @{
    - Update documentation
    - Verify E2E test coverage
    - Check accessibility compliance
+   - **Create or update feature documentation in `app/docs/` folder**
+   - **Document component usage patterns and integration examples**
 
-   # Run Playwright E2E tests
+5. **Documentation Phase (MANDATORY for React Projects)**
+   ```powershell
+   # Create docs directory if it doesn't exist
+   New-Item -ItemType Directory -Path "app/docs" -Force
 
-5. **Release Phase**
+   # Create or update feature documentation
+   # File naming: {feature-name}-documentation.md or {epic-name}-documentation.md
+   ```
+   
+   **Documentation Structure Requirements:**
+   - **Overview**: Feature purpose and business value
+   - **Components**: List of created/modified components with usage examples
+   - **API Integration**: External API usage and data flow patterns
+   - **Testing**: Test coverage summary and testing patterns used
+   - **Troubleshooting**: Common issues and solutions
+   - **Dependencies**: External libraries and their configuration
+
+6. **Release Phase**
    - Final test suite execution
-   - Documentation review
+   - Documentation review and validation
    - Performance verification
    - Merge approval
 

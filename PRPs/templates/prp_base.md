@@ -342,6 +342,15 @@ bandit -r src/
 - [ ] Logs are informative but not verbose
 - [ ] Environment variables documented if new ones added
 
+### React Project Documentation Requirements (MANDATORY for React/Frontend Features)
+
+- [ ] **Create or update documentation file in `app/docs/` folder** with feature implementation details
+- [ ] **Documentation includes**: Component usage examples, API integration details, testing patterns
+- [ ] **File naming convention**: `{feature-name}-documentation.md` or `{epic-name}-documentation.md`
+- [ ] **Documentation structure**: Overview, Components, API Integration, Testing, Troubleshooting
+- [ ] **Code examples included**: Component usage, hook implementations, error handling patterns
+- [ ] **Cross-references added**: Links to related components, dependencies, external APIs
+
 ### PRP Completion Protocol
 
 **MANDATORY: Once all validation checklist items are completed successfully:**
@@ -350,6 +359,7 @@ bandit -r src/
 - [ ] **Move completed implementation file to `PRPs/completed/` folder**
 - [ ] **Update `PRPs/completed/README.md`** with feature completion details
 - [ ] **Confirm file organization in completed folder** shows proper separation of active vs completed work
+- [ ] **For React projects: Verify `app/docs/` folder contains updated feature documentation**
 
 ---
 

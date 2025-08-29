@@ -159,21 +159,77 @@ Once MCP servers are configured, use these patterns:
 Create the following directory structure in the `src` folder:
 
 ```
-src/
-├── app/              # Application layer
-│   ├── routes/       # Application routes
-│   ├── app.tsx       # Main application component
-│   └── provider.tsx  # Application providers
-├── assets/          # Static assets (images, fonts, etc.)
-├── components/      # Shared components
-├── config/          # Global configurations
-├── features/        # Feature-based modules
-├── hooks/           # Shared hooks
-├── lib/            # Reusable libraries
-├── stores/         # Global state stores
-├── testing/        # Test utilities
-├── types/          # Shared types
-└── utils/          # Shared utility functions
+app/                  # React application root (MANDATORY location)
+├── src/              # Source code directory
+│   ├── app/          # Application layer
+│   │   ├── routes/   # Application routes
+│   │   ├── app.tsx   # Main application component
+│   │   └── provider.tsx  # Application providers
+│   ├── assets/       # Static assets (images, fonts, etc.)
+│   ├── components/   # Shared components
+│   ├── config/       # Global configurations
+│   ├── features/     # Feature-based modules
+│   ├── hooks/        # Shared hooks
+│   ├── lib/          # Reusable libraries
+│   ├── stores/       # Global state stores
+│   ├── testing/      # Test utilities
+│   ├── types/        # Shared types
+│   └── utils/        # Shared utility functions
+├── docs/             # MANDATORY: Project documentation
+│   ├── feature-{name}-documentation.md  # Individual feature docs
+│   ├── epic-{name}-documentation.md     # Epic-level documentation
+│   ├── api-integration.md               # API integration patterns
+│   ├── testing-guide.md                 # Testing approach and examples
+│   └── README.md                        # Documentation index
+├── public/           # Static assets
+├── tests/            # E2E and integration tests
+└── package.json      # Project configuration
+```
+
+### Documentation Standards (MANDATORY)
+
+#### docs/ Folder Requirements
+
+**CRITICAL**: Every completed feature, epic, or task MUST have corresponding documentation in the `docs/` folder.
+
+**Documentation File Structure:**
+
+```
+docs/
+├── README.md                            # Navigation and project overview
+├── feature-{name}-documentation.md      # Per-feature documentation
+├── epic-{name}-documentation.md         # Epic-level documentation
+├── api-integration.md                   # External API usage patterns
+├── testing-guide.md                     # Testing approach and examples
+├── component-library.md                 # Reusable component documentation
+└── troubleshooting.md                   # Common issues and solutions
+```
+
+**Documentation Template for Features:**
+
+```markdown
+# {Feature Name} Documentation
+
+## Overview
+Brief description of the feature and its business value.
+
+## Components Created/Modified
+List of React components with usage examples.
+
+## API Integration
+External APIs used, data flow patterns, error handling.
+
+## Testing Coverage
+Test types implemented, coverage summary, testing patterns.
+
+## Dependencies
+External libraries added, configuration details.
+
+## Usage Examples
+Code snippets showing how to use the feature.
+
+## Troubleshooting
+Common issues and their solutions.
 ```
 
 ## Configuration Files

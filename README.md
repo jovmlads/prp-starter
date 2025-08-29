@@ -331,6 +331,8 @@ The PRP framework operates at multiple levels to support projects of any scale:
 2. **Validation Loops**: Provide executable tests/lints the AI can run and fix
 3. **Information Dense**: Use keywords and patterns from the codebase
 4. **Progressive Success**: Start simple, validate, then enhance
+5. **Documentation First**: Create or update documentation in `app/docs/` folder after completion (MANDATORY for React projects)
+6. **Knowledge Preservation**: Document component usage, API patterns, and troubleshooting for future reference
 
 ### Example PRP Structure
 
@@ -408,14 +410,35 @@ your-project/
 |   `-- settings.json      # Tool permissions
 |-- PRPs/
 |   |-- templates/         # PRP templates
-|   |-- scrips/           # PRP runner
-|   |-- ai_docs/          # Library documentation
-|   |-- completed/        # Finished PRPs
-|   `-- *.md              # Active PRPs
-|-- CLAUDE.md             # Project-specific guidelines
-|-- src/                  # Your source code
-`-- tests/                # Your tests
+|   |-- scripts/           # PRP runner
+|   |-- ai_docs/           # Library documentation
+|   |-- completed/         # Finished PRPs
+|   `-- *.md               # Active PRPs
+|-- app/                   # React application (MANDATORY for React projects)
+|   |-- src/               # React source code
+|   |-- docs/              # MANDATORY: Feature and epic documentation
+|   |   |-- README.md      # Documentation navigation
+|   |   |-- feature-*.md   # Individual feature documentation
+|   |   |-- epic-*.md      # Epic-level documentation
+|   |   `-- *.md           # Additional project documentation
+|   |-- tests/             # E2E and integration tests
+|   `-- package.json       # React project configuration
+|-- CLAUDE.md              # Project-specific guidelines
+|-- src/                   # Your source code (non-React projects)
+`-- tests/                 # Your tests (non-React projects)
 ```
+
+### Documentation Requirements for React Projects
+
+**MANDATORY**: Every React project must include a `docs/` folder with:
+
+- **README.md**: Navigation index for all documentation
+- **Feature Documentation**: `feature-{name}-documentation.md` for each completed feature
+- **Epic Documentation**: `epic-{name}-documentation.md` for completed epics
+- **Component Library**: Documentation of reusable components
+- **API Integration**: External API usage patterns and examples
+- **Testing Guide**: Testing approach and coverage examples
+- **Troubleshooting**: Common issues and solutions
 
 ## Setting Up CLAUDE.md
 
