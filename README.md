@@ -115,25 +115,50 @@ The `.claude/commands/` directory contains 12 pre-configured commands that appea
 
 ### Available Commands
 
-1. **PRP Creation & Execution**:
-   - `/create-base-prp` - Generate comprehensive PRPs with research
-   - `/execute-base-prp` - Execute PRPs against codebase
-   - `/planning-create` - Create planning documents with diagrams
-   - `/spec-create-adv` - Advanced specification creation
-   - `/spec-execute` - Execute specifications
+1. **Project Planning & Architecture**:
 
-2. **Code Review & Refactoring**:
-   - `/review-general` - General code review
-   - `/review-staged-unstaged` - Review git changes
-   - `/refactor-simple` - Simple refactoring tasks
+   - `/project-epic-breakdown` - Decompose complex projects into independent Epics for parallel development
+   - `/planning-create` - Create comprehensive planning documents with diagrams and architecture
+   - `/api-contract-define` - Define precise API contracts and interfaces between systems
 
-3. **Git & GitHub**:
-   - `/create-pr` - Create pull requests
+2. **PRP Creation & Execution**:
 
-4. **Utilities**:
-   - `/prime-core` - Prime Claude with project context
-   - `/onboarding` - Onboarding process for new team members
-   - `/debug` - Debugging workflow
+   - `/create-base-prp` - Generate comprehensive PRPs with research and context
+   - `/execute-base-prp` - Execute PRPs with 4-level validation against codebase
+   - `/spec-create-adv` - Advanced specification creation for modifications
+   - `/spec-execute` - Execute specifications with rollback planning
+   - `/task-create` - Create focused task lists with surgical precision
+   - `/task-execute` - Execute specific tasks with immediate validation
+
+3. **Rapid Development**:
+
+   - `/hackathon-research` - Multi-agent analysis for rapid prototyping
+   - `/parallel-prp-creation` - Batch PRP creation using parallel processing
+   - `/task-list-init` - Emergency planning for urgent projects
+
+4. **Code Quality & Review**:
+
+   - `/review-general` - Comprehensive code review with security and performance analysis
+   - `/review-staged-unstaged` - Review git changes with targeted feedback
+   - `/refactor-simple` - Systematic refactoring analysis and recommendations
+   - `/debug-RCA` - Root cause analysis for complex debugging
+
+5. **Git & Collaboration**:
+
+   - `/create-pr` - Generate comprehensive pull requests with testing notes
+   - `/smart-commit` - Intelligent commit message generation
+   - `/conflict-resolver-general` - Intelligent merge conflict resolution
+
+6. **TypeScript Specialization**:
+
+   - `/TS-create-base-prp` - TypeScript-optimized PRP creation
+   - `/TS-execute-base-prp` - Execute with TypeScript-specific validation
+   - `/TS-review-general` - Type safety focused code review
+
+7. **Project Utilities**:
+   - `/prime-core` - Prime Claude with comprehensive project context
+   - `/onboarding` - Generate developer onboarding documentation
+   - `/new-dev-branch` - Create development branches with proper conventions
 
 ### How to Use Commands
 
@@ -144,26 +169,140 @@ The `.claude/commands/` directory contains 12 pre-configured commands that appea
    /create-base-prp user authentication system with OAuth2
    ```
 
+## Project Planning at Scale
+
+### Epic Breakdown for Complex Projects
+
+For enterprise-level projects that require multiple teams working in parallel, use the Epic breakdown system:
+
+```bash
+/project-epic-breakdown "e-commerce platform with inventory management, customer analytics, and multi-channel integration"
+```
+
+**What this creates:**
+
+- `PRPs/project-epic-breakdown.md` - Complete project decomposition into independent Epics
+- **Definitive Epic & Feature Breakdown** - Clear table of all Epics with team assignments, complexity, and dependencies
+- **Complete Feature Lists** - Each Epic broken down into ALL necessary features (3-15+ features as needed) with implementation sub-capabilities
+- **Implementation Commands** - Exact PRP commands to use for each Epic and feature
+- Clear dependency management and parallel development phases
+- Integration points and API contracts between Epics
+
+**Key Outputs:**
+
+1. **Epic Summary Table** - All Epics with IDs, owners, timelines, dependencies
+2. **Detailed Feature Breakdown** - Each Epic contains ALL necessary features (could be 3, could be 15+ features - like automated Jira backlog generation)
+3. **Implementation Roadmap** - Phase-by-phase commands for parallel development
+4. **Team Assignment Strategy** - Clear Epic ownership for parallel execution
+
+**Epic → Feature → Task Workflow:**
+
+```
+1. Project → Epics (using /project-epic-breakdown)
+2. Epic → Features (using /planning-create for each Epic)
+3. Feature → Implementation (using /create-base-prp → /execute-base-prp)
+4. Task → Focused work (using /task-create → /task-execute)
+```
+
+### Example: Enterprise Development Flow
+
+**Step 1: Break down the project**
+
+```bash
+/project-epic-breakdown "modern e-commerce platform supporting 10k concurrent users"
+```
+
+_Result: 6 independent Epics that can be developed in parallel_
+
+**Step 2: Plan each Epic**
+
+```bash
+/planning-create "Epic C1: Product Catalog Management from PRPs/project-epic-breakdown.md"
+/planning-create "Epic C2: Order Management System from PRPs/project-epic-breakdown.md"
+/planning-create "Epic F1: Platform Infrastructure from PRPs/project-epic-breakdown.md"
+```
+
+_Result: Detailed PRDs for each Epic with technical architecture_
+
+**Step 3: Implement Epic features**
+
+```bash
+/create-base-prp "implement product catalog using PRPs/product-catalog-prd.md"
+/execute-base-prp PRPs/product-catalog-implementation.md
+```
+
+_Result: Working Epic delivered by each team_
+
+This enables true parallel development where 4-6 teams can work simultaneously with minimal coordination overhead.
+
 ## Using PRPs
+
+### PRP Hierarchy and Planning Levels
+
+The PRP framework operates at multiple levels to support projects of any scale:
+
+**1. Project Level** - Epic Breakdown (New!)
+
+- **Command**: `/project-epic-breakdown`
+- **Purpose**: Decompose complex projects into independent, parallelizable Epics
+- **Use case**: Enterprise projects, multiple teams, 3+ month timelines
+- **Output**: Epic dependency matrix, parallel development phases, team allocation
+
+**2. Epic Level** - Feature Planning
+
+- **Command**: `/planning-create`
+- **Purpose**: Detailed feature specification with technical architecture
+- **Use case**: Major features, significant user-facing capabilities
+- **Output**: Comprehensive PRD with diagrams, API specifications, success criteria
+
+**3. Feature Level** - Implementation Planning
+
+- **Command**: `/create-base-prp`
+- **Purpose**: Detailed implementation instructions with full context
+- **Use case**: New features requiring comprehensive development
+- **Output**: Step-by-step implementation guide with 4-level validation
+
+**4. Task Level** - Focused Work
+
+- **Command**: `/task-create`
+- **Purpose**: Surgical precision for specific, focused changes
+- **Use case**: Bug fixes, small enhancements, targeted improvements
+- **Output**: Specific work orders with immediate validation
 
 ### Creating a PRP
 
-1. **Use the template** as a starting point:
+1. **Use the appropriate template** for your planning level:
 
    ```bash
+   # For Epic breakdown (enterprise projects)
+   cp PRPs/templates/prp_project_epic_breakdown.md PRPs/my-project-epics.md
+
+   # For comprehensive feature planning
+   cp PRPs/templates/prp_planning_base.md PRPs/my-feature-planning.md
+
+   # For detailed implementation
    cp PRPs/templates/prp_base.md PRPs/my-feature.md
+
+   # For focused tasks
+   cp PRPs/templates/prp_task.md PRPs/my-task.md
    ```
 
-2. **Fill in the sections**:
-   - Goal: What needs to be built
-   - Why: Business value and user impact
-   - Context: Documentation, code examples, gotchas
-   - Implementation Blueprint: Tasks and pseudocode
-   - Validation Loop: Executable tests
+2. **Fill in the sections** according to the template structure
 
-3. **Or use Claude to generate one**:
-   ```
-   /create-base-prp implement user authentication with JWT tokens
+3. **Or use Claude commands to generate** (recommended):
+
+   ```bash
+   # Generate Epic breakdown for complex projects
+   /project-epic-breakdown "description of your complex project"
+
+   # Generate comprehensive feature planning
+   /planning-create "detailed feature description"
+
+   # Generate implementation PRP
+   /create-base-prp "implement feature using PRPs/feature-planning.md"
+
+   # Generate focused task
+   /task-create "specific task description"
    ```
 
 ### Executing a PRP
@@ -293,6 +432,71 @@ See the example CLAUDE.md in this repository for a comprehensive template.
 
 ## Advanced Usage
 
+### Multi-Level Development Strategy
+
+The PRP framework supports projects at any scale through its hierarchical approach:
+
+**Enterprise Project (6+ months, 20+ developers)**:
+
+```bash
+/project-epic-breakdown → Multiple independent Epics
+  ↓ For each Epic:
+/planning-create → Detailed Epic specifications
+  ↓ For each Epic feature:
+/create-base-prp → Implementation guides
+  ↓ For specific changes:
+/task-create → Focused work orders
+```
+
+**Team Project (1-3 months, 3-8 developers)**:
+
+```bash
+/planning-create → Feature specifications
+  ↓ For each feature:
+/create-base-prp → Implementation guides
+  ↓ For bugs/enhancements:
+/task-create → Focused work
+```
+
+**Individual Project (days-weeks, 1-2 developers)**:
+
+```bash
+/create-base-prp → Implementation guides
+  ↓ For specific tasks:
+/task-create → Focused work
+```
+
+### Parallel Development with Epic Breakdown
+
+Use the Epic system to enable true parallel development:
+
+**Phase 1**: Project Planning
+
+```bash
+/project-epic-breakdown "your complex project description"
+```
+
+**Phase 2**: Epic Distribution (parallel teams)
+
+```bash
+# Team Alpha
+/planning-create "Epic F1: Infrastructure from PRPs/project-epic-breakdown.md"
+
+# Team Beta
+/planning-create "Epic C1: Core Business Logic from PRPs/project-epic-breakdown.md"
+
+# Team Gamma
+/planning-create "Epic E1: Enhancement Features from PRPs/project-epic-breakdown.md"
+```
+
+**Phase 3**: Implementation (parallel execution)
+
+```bash
+# Each team implements their Epic independently
+/create-base-prp "implement Epic F1 using PRPs/infrastructure-prd.md"
+/execute-base-prp PRPs/infrastructure-implementation.md
+```
+
 ### Running Multiple Claude Sessions
 
 Use Git worktrees for parallel development:
@@ -335,6 +539,44 @@ Do something specific to my project.
 [Your command implementation]
 ```
 
+## Pro Tips for Command Usage 🎯
+
+### **🔄 Command Chaining**
+
+Many commands work better together:
+
+**Epic-Level Project Development:**
+
+```powershell
+/project-epic-breakdown "complex project description" ; `
+/prp-planning-create "Epic 1 description" ; `
+/prp-base-create "implement Epic 1 using PRPs/epic1-prd.md" ; `
+/prp-base-execute PRPs/epic1-implementation.md ; `
+/smart-commit "feat: add Epic 1" ; `
+/create-pr
+```
+
+**Feature-Level Development:**
+
+```powershell
+/prime-core ; `
+/prp-planning-create "feature description" ; `
+/api-contract-define "using PRPs/feature-prd.md" ; `
+/prp-base-create "implement feature using PRPs/feature-prd.md and PRPs/contracts/feature-api-contract.md" ; `
+/prp-base-execute PRPs/feature-implementation.md ; `
+/smart-commit "feat: add new feature" ; `
+/create-pr
+```
+
+### **⚡ Parallel Processing**
+
+For Epic-level projects, use parallel development:
+
+- Multiple teams working on independent Epics simultaneously
+- Each Epic generates its own feature breakdown using `/prp-planning-create`
+- API contracts define integration points between Epics
+- Completed features move to `PRPs\completed\` for archival
+
 ## Resources Included
 
 ### Documentation (PRPs/ai_docs/)
@@ -347,12 +589,16 @@ Do something specific to my project.
 
 ### Templates (PRPs/templates/)
 
-- `prp_base.md` - Comprehensive PRP template with validation
-- `prp_spec.md` - Specification template
-- `prp_planning_base.md` - Planning template with diagrams
+- `prp_project_epic_breakdown.md` - Epic breakdown template for complex projects
+- `prp_planning_base.md` - Comprehensive planning template with architecture diagrams
+- `prp_base.md` - Implementation template with 4-level validation
+- `prp_spec.md` - Specification template for modifications and refactoring
+- `prp_task.md` - Focused task template for surgical precision work
+- `prp_poc_react.md` - React-specific POC template with modern patterns
 
-### Example PRP
+### Examples (PRPs/examples/)
 
+- `epic-breakdown-ecommerce-example.md` - Complete e-commerce platform Epic breakdown
 - `example-from-workshop-mcp-crawl4ai-refactor-1.md` - Real-world refactoring example
 
 ## License

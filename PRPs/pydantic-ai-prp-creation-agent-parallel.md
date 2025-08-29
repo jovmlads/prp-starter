@@ -561,7 +561,7 @@ uv run python -m prp_agent "Create a simple REST API with FastAPI"
 
 # Test with different models use the actual keys in the .env file and test real requests
 OPENAI_API_KEY="test-key" uv run python -m prp_agent "User authentication" --model="openai:gpt-4o-mini"
-ANTHROPIC_API_KEY="test-key" uv run python -m prp_agent "User authentication" --model="anthropic:claude-3-haiku-20240307"
+ANTHROPIC_API_KEY="test-key" uv run python -m prp_agent "User authentication" --model="anthropic:claude-4-haiku-20250101"
 
 # Test error handling
 uv run python -m prp_agent ""  # Should fail with validation error

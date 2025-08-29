@@ -402,7 +402,7 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
                   timeout_minutes: "60"
                   github_token: ${{ steps.app-token.outputs.token }}
                   use_bedrock: "true"
-                  model: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+                  model: "us.anthropic.claude-4-sonnet-20250219-v1:0"
         ```
 
         <Tip>
@@ -474,7 +474,7 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
                   timeout_minutes: "60"
                   github_token: ${{ steps.app-token.outputs.token }}
                   use_vertex: "true"
-                  model: "claude-3-7-sonnet@20250219"
+                  model: "claude-4-sonnet@20250219"
                 env:
                   ANTHROPIC_VERTEX_PROJECT_ID: ${{ steps.auth.outputs.project_id }}
                   CLOUD_ML_REGION: us-east5

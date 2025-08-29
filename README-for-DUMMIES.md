@@ -16,7 +16,13 @@ Instead of randomly writing code and hoping it works, you use specialized "AI co
 
 Think of the PRP commands as different specialists in a construction company:
 
-### **🏗️ The Master Architect** (`/prp-planning-create`)
+### **🏗️ The Master Project Architect** (`/project-epic-breakdown`)
+
+- **What they do:** Take massive projects (like building an entire city district) and break them into independent construction sites that can be built simultaneously by different crews
+- **When to use:** When you have a complex project that needs multiple teams working in parallel
+- **Example:** "Build an e-commerce platform" → 6 independent Epics that different teams can build at the same time
+
+### **🏗️ The Building Architect** (`/planning-create`)
 
 - **What they do:** Take your vague idea ("I want a nice house") and create detailed architectural plans with blueprints, materials list, and construction phases
 - **When to use:** When you have a rough idea but need comprehensive planning
@@ -28,37 +34,37 @@ Think of the PRP commands as different specialists in a construction company:
 - **When to use:** After the architect creates plans, when you need frontend and backend to work together
 - **Example:** Defines exactly how the "like button" talks to the database
 
-### **📐 The Detail Architect** (`/prp-base-create`)
+### **📐 The Detail Architect** (`/create-base-prp`)
 
 - **What they do:** Create incredibly detailed construction manuals with every nail, screw, and measurement specified
 - **When to use:** When you need comprehensive implementation instructions
 - **Example:** Step-by-step instructions for building the entire like button feature
 
-### **🔧 The Renovation Specialist** (`/prp-spec-create`)
+### **🔧 The Renovation Specialist** (`/spec-create-adv`)
 
 - **What they do:** Plan how to change existing buildings (like converting a garage into a bedroom)
 - **When to use:** When you need to modify existing code rather than build something new
 - **Example:** Changing from simple authentication to OAuth2
 
-### **✅ The Project Foreman** (`/prp-task-create`)
+### **✅ The Project Foreman** (`/task-create`)
 
 - **What they do:** Create focused daily work orders with quality checks
 - **When to use:** For small, specific tasks that need careful execution
 - **Example:** "Add a dark mode toggle to the settings page"
 
-### **🔨 The Master Builder** (`/prp-base-execute`)
+### **🔨 The Master Builder** (`/execute-base-prp`)
 
 - **What they do:** Actually build the entire feature following the detailed plans
 - **When to use:** After you have comprehensive building plans
 - **Example:** Takes the like button plans and builds the working feature
 
-### **🏠 The Renovation Team** (`/prp-spec-execute`)
+### **🏠 The Renovation Team** (`/spec-execute`)
 
 - **What they do:** Execute renovation plans, carefully transforming existing structures
 - **When to use:** After you have renovation specifications
 - **Example:** Actually migrates your authentication system
 
-### **⚡ The Specialist Crew** (`/prp-task-execute`)
+### **⚡ The Specialist Crew** (`/task-execute`)
 
 - **What they do:** Handle focused tasks with surgical precision
 - **When to use:** After you have specific task lists
@@ -79,7 +85,9 @@ Think of the PRP commands as different specialists in a construction company:
 Just like real construction, each specialist builds on the work of the previous one:
 
 ```
-🏗️ Master Architect creates building plans
+🏗️ Master Project Architect creates Epic breakdown for complex projects
+    ↓ (Epic assignments get passed to...)
+🏗️ Building Architect creates detailed plans for each Epic
     ↓ (Plans get passed to...)
 📋 Structural Engineer creates connection specs
     ↓ (Both plans and specs get passed to...)
@@ -90,16 +98,86 @@ Just like real construction, each specialist builds on the work of the previous 
 
 **IMPORTANT:** Each step uses the output from previous steps - they're not isolated tools!
 
+### **The Four Levels of Construction** 🏗️
+
+**Level 1: City Planning** (Enterprise Projects)
+
+- Use `/project-epic-breakdown` for complex projects
+- Creates independent construction sites (Epics)
+- Multiple teams can work simultaneously
+- Example: E-commerce platform → 6 independent Epics
+
+**Level 2: Building Architecture** (Major Features)
+
+- Use `/planning-create` for comprehensive features
+- Creates detailed architectural plans
+- Example: User authentication system → Complete technical specification
+
+**Level 3: Detailed Construction** (Implementation)
+
+- Use `/create-base-prp` for new features
+- Creates step-by-step construction manuals
+- Example: Like button → Working implementation with tests
+
+**Level 4: Quick Repairs** (Small Tasks)
+
+- Use `/task-create` for focused work
+- Creates specific work orders
+- Example: Change button color → Targeted change with validation
+
 ---
 
 ## The Step-by-Step Process 📋
+
+### **For Complex Enterprise Projects (Multiple Teams)**
+
+**Step 1: City Planning - Break Down the Project**
+
+```powershell
+/project-epic-breakdown "e-commerce platform with inventory management, customer analytics, and multi-channel integration"
+```
+
+- Creates: `PRPs/project-epic-breakdown.md` (city master plan)
+- Contains: **Definitive Epic & Feature Breakdown** with specific feature lists, team assignments, implementation commands, and parallel development roadmap
+
+**Step 2: Building Architecture for Each Epic**
+
+```powershell
+# Team Alpha takes Epic F1
+/planning-create "Epic F1: Platform Infrastructure from PRPs/project-epic-breakdown.md"
+
+# Team Beta takes Epic C1
+/planning-create "Epic C1: Product Catalog from PRPs/project-epic-breakdown.md"
+
+# Team Gamma takes Epic C2
+/planning-create "Epic C2: Order Management from PRPs/project-epic-breakdown.md"
+```
+
+- Creates: Detailed architectural plans for each Epic
+- Contains: Complete technical specifications for parallel development
+
+**Step 3: Implementation (Each Team Works Independently)**
+
+```powershell
+# Team Alpha implements their Epic
+/create-base-prp "implement infrastructure Epic using PRPs/infrastructure-prd.md"
+/execute-base-prp PRPs/infrastructure-implementation.md
+
+# Team Beta implements their Epic
+/create-base-prp "implement product catalog using PRPs/product-catalog-prd.md"
+/execute-base-prp PRPs/product-catalog-implementation.md
+```
+
+- Result: Multiple teams building different parts simultaneously with no conflicts
+
+---
 
 ### **For Building New Features (Most Common)**
 
 **Step 1: Get the Big Picture**
 
 ```powershell
-/prp-planning-create "user profile page with avatar upload and bio editing"
+/planning-create "user profile page with avatar upload and bio editing"
 ```
 
 - Creates: `PRPs/user-profile-prd.md` (architectural plans)
@@ -117,7 +195,7 @@ Just like real construction, each specialist builds on the work of the previous 
 **Step 3: Create Detailed Instructions**
 
 ```powershell
-/prp-base-create "implement user profile feature using PRPs/user-profile-prd.md architecture and PRPs/contracts/user-profile-api-contract.md specifications"
+/create-base-prp "implement user profile feature using PRPs/user-profile-prd.md architecture and PRPs/contracts/user-profile-api-contract.md specifications"
 ```
 
 - Creates: `PRPs/user-profile-implementation.md` (construction manual)
@@ -126,7 +204,7 @@ Just like real construction, each specialist builds on the work of the previous 
 **Step 4: Build It**
 
 ```powershell
-/prp-base-execute PRPs/user-profile-implementation.md
+/execute-base-prp PRPs/user-profile-implementation.md
 ```
 
 - Result: Working user profile feature with all tests passing
@@ -138,7 +216,7 @@ Just like real construction, each specialist builds on the work of the previous 
 **Step 1: Plan the Changes**
 
 ```powershell
-/prp-spec-create "migrate user authentication from basic auth to OAuth2 with Google integration"
+/spec-create-adv "migrate user authentication from basic auth to OAuth2 with Google integration"
 ```
 
 - Creates: `SPEC_PRP/PRPs/oauth2-migration.md` (renovation plans)
@@ -147,7 +225,7 @@ Just like real construction, each specialist builds on the work of the previous 
 **Step 2: Execute the Changes**
 
 ```powershell
-/prp-spec-execute SPEC_PRP/PRPs/oauth2-migration.md
+/spec-execute SPEC_PRP/PRPs/oauth2-migration.md
 ```
 
 - Result: Authentication system successfully migrated
@@ -159,7 +237,7 @@ Just like real construction, each specialist builds on the work of the previous 
 **Step 1: Define the Task**
 
 ```powershell
-/prp-task-create "add email validation to the signup form with proper error messages"
+/task-create "add email validation to the signup form with proper error messages"
 ```
 
 - Creates: `TASK_PRP/PRPs/email-validation.md` (work order)
@@ -168,7 +246,7 @@ Just like real construction, each specialist builds on the work of the previous 
 **Step 2: Do the Task**
 
 ```powershell
-/prp-task-execute TASK_PRP/PRPs/email-validation.md
+/task-execute TASK_PRP/PRPs/email-validation.md
 ```
 
 - Result: Email validation added with proper testing
@@ -197,10 +275,10 @@ Just like real construction, each specialist builds on the work of the previous 
 
 Let's build a social media like button from scratch, step by step:
 
-### **Step 1: The Master Architect Does Their Magic** 🏗️
+### **Step 1: The Building Architect Does Their Magic** 🏗️
 
 ```bash
-/prp-planning-create "social media like button with real-time updates and analytics tracking"
+/planning-create "social media like button with real-time updates and analytics tracking"
 ```
 
 **What happens behind the scenes:**
@@ -240,7 +318,7 @@ Let's build a social media like button from scratch, step by step:
 ### **Step 3: The Detail Architect Creates the Construction Manual** 📐
 
 ```bash
-/prp-base-create "implement like button feature using architecture from PRPs/like-button-prd.md and API specifications from PRPs/contracts/like-button-api-contract.md"
+/create-base-prp "implement like button feature using architecture from PRPs/like-button-prd.md and API specifications from PRPs/contracts/like-button-api-contract.md"
 ```
 
 **What happens behind the scenes:**
@@ -259,7 +337,7 @@ Let's build a social media like button from scratch, step by step:
 ### **Step 4: The Master Builder Constructs the Feature** 🔨
 
 ```bash
-/prp-base-execute PRPs/like-button-implementation.md
+/execute-base-prp PRPs/like-button-implementation.md
 ```
 
 **What happens behind the scenes:**
@@ -291,13 +369,13 @@ Let's build a social media like button from scratch, step by step:
 ### **Step 5: Adding a Quick Enhancement** ✅
 
 ```bash
-/prp-task-create "add animated heart floating effect when users like posts for better visual feedback"
+/task-create "add animated heart floating effect when users like posts for better visual feedback"
 ```
 
 **What happens:** Creates focused task list for the animation enhancement
 
 ```bash
-/prp-task-execute TASK_PRP/PRPs/heart-animation.md
+/task-execute TASK_PRP/PRPs/heart-animation.md
 ```
 
 **Result:** Beautiful floating heart animation added to the like button
@@ -348,12 +426,21 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 
 ## When to Use Each Command 🤔
 
-### **Use `/prp-planning-create` when:**
+### **Use `/project-epic-breakdown` when:**
+
+- You have a complex project that needs multiple teams
+- The project will take 3+ months with 10+ developers
+- You need independent work streams that don't block each other
+- You want to enable true parallel development
+- Example: "Build an e-commerce platform" or "Create a social media app"
+
+### **Use `/planning-create` when:**
 
 - You have a vague idea that needs to become a concrete plan
 - You're starting a new major feature
 - You need to research and understand the problem space
 - You want comprehensive documentation with diagrams
+- Example: "User authentication system" or "Real-time chat feature"
 
 ### **Use `/api-contract-define` when:**
 
@@ -361,27 +448,31 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 - Frontend and backend teams need to coordinate
 - You need exact API endpoint definitions
 - You want to prevent integration issues
+- Example: After planning, before implementation
 
-### **Use `/prp-base-create` when:**
+### **Use `/create-base-prp` when:**
 
 - You need comprehensive implementation instructions
 - You're building something completely new
 - You want all the context and examples included
 - You need the full 4-level validation process
+- Example: "Implement user profile feature using PRPs/user-profile-prd.md"
 
-### **Use `/prp-spec-create` when:**
+### **Use `/spec-create-adv` when:**
 
 - You need to modify existing code
 - You're doing a migration or refactoring
 - You need to document current vs. desired state
 - You want rollback plans for safety
+- Example: "Migrate from REST to GraphQL" or "Upgrade React 18 to 19"
 
-### **Use `/prp-task-create` when:**
+### **Use `/task-create` when:**
 
 - You have a small, focused change to make
 - You need surgical precision on specific code
 - You want immediate validation after each step
 - The change affects only a few files
+- Example: "Add dark mode toggle" or "Fix validation bug"
 
 ### **Use the execute commands when:**
 
@@ -406,27 +497,41 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 ```powershell
 # WRONG - each command creates isolated work
 /api-contract-define "user authentication"
-/prp-base-create "user authentication"
+/create-base-prp "user authentication"
 ```
 
 ```powershell
 # RIGHT - each command builds on the previous
-/prp-planning-create "user authentication with social login"
+/planning-create "user authentication with social login"
 /api-contract-define "create API for authentication described in PRPs/user-auth-prd.md"
-/prp-base-create "implement authentication using PRPs/user-auth-prd.md and PRPs/contracts/user-auth-api-contract.md"
+/create-base-prp "implement authentication using PRPs/user-auth-prd.md and PRPs/contracts/user-auth-api-contract.md"
 ```
 
 ### **❌ Skipping the Planning Phase**
 
 ```powershell
 # WRONG - jumping straight to implementation
-/prp-base-create "some complicated feature"
+/create-base-prp "some complicated feature"
 ```
 
 ```powershell
 # RIGHT - plan first, then implement
-/prp-planning-create "some complicated feature"
-/prp-base-create "implement feature using PRPs/complicated-feature-prd.md"
+/planning-create "some complicated feature"
+/create-base-prp "implement feature using PRPs/complicated-feature-prd.md"
+```
+
+### **❌ Not Using Epic Breakdown for Complex Projects**
+
+```powershell
+# WRONG - trying to plan a huge project as one feature
+/planning-create "entire e-commerce platform with everything"
+```
+
+```powershell
+# RIGHT - break into independent Epics first
+/project-epic-breakdown "e-commerce platform with inventory, analytics, and multi-channel"
+/planning-create "Epic C1: Product Catalog from PRPs/project-epic-breakdown.md"
+/planning-create "Epic C2: Order Management from PRPs/project-epic-breakdown.md"
 ```
 
 ### **❌ Not Being Specific**
@@ -445,13 +550,22 @@ All commands should be run in PowerShell within the PRPs-agentic-eng workspace.
 
 ## Pro Tips for Success 🚀
 
-### **🎯 Always Start with Planning**
+### **🎯 Always Start with the Right Level**
 
-For any non-trivial feature, start with `/prp-planning-create`. The time you spend planning saves hours of implementation confusion.
+**Complex Project (multiple teams)?** → Start with `/project-epic-breakdown`
+**Major Feature?** → Start with `/planning-create`  
+**Implementation of planned feature?** → Start with `/create-base-prp`
+**Small change?** → Start with `/task-create`
 
 ### **🔗 Connect Your Commands**
 
 Always reference previous outputs in your next command. If you created `PRPs/user-auth-prd.md`, reference it in your next command.
+
+### **🏗️ Think Hierarchically**
+
+- **Project** → Epic breakdown → Epic planning → Implementation → Tasks
+- Don't try to do everything in one giant command
+- Break complex work into manageable pieces
 
 ### **📝 Be Specific in Your Requests**
 
@@ -473,21 +587,48 @@ When creating implementation PRPs, reference existing code patterns, documentati
 
 ## Quick Reference Card 📋
 
-| Command                | Purpose               | Input                    | Output                          |
-| ---------------------- | --------------------- | ------------------------ | ------------------------------- |
-| `/prp-planning-create` | Master planning       | Rough idea               | Comprehensive PRD with diagrams |
-| `/api-contract-define` | Technical specs       | Feature + PRD reference  | API contracts and interfaces    |
-| `/prp-base-create`     | Implementation manual | Feature + all references | Complete construction guide     |
-| `/prp-base-execute`    | Build new feature     | Implementation PRP path  | Working feature                 |
-| `/prp-spec-create`     | Renovation plans      | Change requirements      | Current→desired transformation  |
-| `/prp-spec-execute`    | Execute changes       | Spec PRP path            | Modified code                   |
-| `/prp-task-create`     | Focused work orders   | Specific task            | Detailed task list              |
-| `/prp-task-execute`    | Do specific tasks     | Task PRP path            | Completed task                  |
-| `/task-list-init`      | Emergency planning    | Urgent project           | Trackable checklist             |
+| Command                   | Purpose               | Input                    | Output                               |
+| ------------------------- | --------------------- | ------------------------ | ------------------------------------ |
+| `/project-epic-breakdown` | City planning         | Complex project          | Independent Epics for parallel teams |
+| `/planning-create`        | Feature planning      | Rough idea               | Comprehensive PRD with diagrams      |
+| `/api-contract-define`    | Technical specs       | Feature + PRD reference  | API contracts and interfaces         |
+| `/create-base-prp`        | Implementation manual | Feature + all references | Complete construction guide          |
+| `/execute-base-prp`       | Build new feature     | Implementation PRP path  | Working feature                      |
+| `/spec-create-adv`        | Renovation plans      | Change requirements      | Current→desired transformation       |
+| `/spec-execute`           | Execute changes       | Spec PRP path            | Modified code                        |
+| `/task-create`            | Focused work orders   | Specific task            | Detailed task list                   |
+| `/task-execute`           | Do specific tasks     | Task PRP path            | Completed task                       |
+| `/task-list-init`         | Emergency planning    | Urgent project           | Trackable checklist                  |
 
 ---
 
 ## Getting Started Right Now 🚀
+
+### **Your First Epic Breakdown (Complex Project - 10 minutes)**
+
+1. **Pick a complex project** like "social media platform with user profiles, posts, messaging, and analytics"
+
+2. **Break it down into Epics:**
+
+   ```bash
+   /project-epic-breakdown "social media platform with user profiles, posts, messaging, and analytics"
+   ```
+
+3. **Pick one Epic to plan:**
+
+   ```bash
+   /planning-create "Epic C1: User Profile Management from PRPs/project-epic-breakdown.md"
+   ```
+
+4. **Create implementation guide:**
+
+   ```bash
+   /create-base-prp "implement user profile Epic using PRPs/user-profile-prd.md"
+   ```
+
+5. **Assign to different teams and watch parallel development happen!** 🚀
+
+---
 
 ### **Your First Feature (5 minutes)**
 
@@ -496,19 +637,19 @@ When creating implementation PRPs, reference existing code patterns, documentati
 2. **Plan it:**
 
    ```bash
-   /prp-planning-create "website footer with copyright, privacy policy link, and contact link"
+   /planning-create "website footer with copyright, privacy policy link, and contact link"
    ```
 
 3. **Create implementation guide:**
 
    ```bash
-   /prp-base-create "implement footer using architecture from PRPs/website-footer-prd.md"
+   /create-base-prp "implement footer using architecture from PRPs/website-footer-prd.md"
    ```
 
 4. **Build it:**
 
    ```bash
-   /prp-base-execute PRPs/website-footer-implementation.md
+   /execute-base-prp PRPs/website-footer-implementation.md
    ```
 
 5. **Celebrate!** 🎉 You just used AI to build a feature with proper planning, documentation, and quality control!
@@ -516,6 +657,17 @@ When creating implementation PRPs, reference existing code patterns, documentati
 ---
 
 ## All Available Commands - The Complete Toolbox 🧰
+
+### **Project & Epic Management Commands** 🏗️
+
+#### **🌆 /project-epic-breakdown - Enterprise Project Decomposition**
+
+- **What they do:** Break complex projects into independent Epics with definitive feature lists for parallel development
+- **When to use:** Enterprise projects, multiple teams, 3+ month timelines
+- **Example:** `/project-epic-breakdown "e-commerce platform with inventory, analytics, multi-channel"`
+- **Result:** Creates Epic summary table with complete feature breakdown (comprehensive like automated Jira), team assignments, implementation commands, and parallel development roadmap
+
+---
 
 ### **Development Commands** 💻
 
@@ -750,6 +902,19 @@ When creating implementation PRPs, reference existing code patterns, documentati
 ### **🔄 Command Chaining**
 
 Many commands work better together:
+
+**Epic-Level Project Development:**
+
+```powershell
+/project-epic-breakdown "complex project description" ; `
+/prp-planning-create "Epic 1 description" ; `
+/prp-base-create "implement Epic 1 using PRPs/epic1-prd.md" ; `
+/prp-base-execute PRPs/epic1-implementation.md ; `
+/smart-commit "feat: add Epic 1" ; `
+/create-pr
+```
+
+**Feature-Level Development:**
 
 ```powershell
 /prime-core ; `

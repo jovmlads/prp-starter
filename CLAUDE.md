@@ -92,7 +92,7 @@ This i### Component Best Practices
      };
 
      return <AgChartsReact options={chartOptions} />;
-   };RP (Product Requirement Prompt) Framework** repository for React frontend development. The core concept: **"PRP = PRD + curated codebase intelligence + agent/runbook"** - designed to enable AI agents to ship production-ready React code on the first pass using Claude Sonnet 3.5 and RAG-enhanced development practices.
+   };RP (Product Requirement Prompt) Framework** repository for React frontend development. The core concept: **"PRP = PRD + curated codebase intelligence + agent/runbook"** - designed to enable AI agents to ship production-ready React code on the first pass using Claude Sonnet 4 and RAG-enhanced development practices.
    ```
 
 ## Workspace Configuration
@@ -323,9 +323,9 @@ src/
 
 ### AI Development Configuration
 
-#### Claude Sonnet 3.5 Setup
+#### Claude Sonnet 4 Setup
 
-- **Model**: Always use Claude Sonnet 3.5 for enhanced coding capabilities
+- **Model**: Always use Claude Sonnet 4 for enhanced coding capabilities
 - **Context Window**: 200k tokens for comprehensive codebase understanding
 - **Temperature**: 0.7 for balanced creativity and precision
 - **RAG Integration**: Automatic retrieval from curated React documentation
