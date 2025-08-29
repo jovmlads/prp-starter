@@ -106,28 +106,191 @@ After import, you should see:
 - **Sprint Board**: Shows Stories and Subtasks for current sprint
 - **Kanban Board**: Shows flow of work through TO DO → IN PROGRESS → DONE
 
-### **Step 4: Post-Import Configuration**
+### **Step 4: Move Epics from Timeline to Board**
 
-1. **Create Epic Board**:
+🎯 **Your Epics are visible in Timeline/Roadmap but not on the Board. Here's how to move them:**
 
-   - Go to **Boards → Create Board → Create Epic Board**
-   - Configure to show all 7 Trading Dashboard Epics
+#### **Method 1: Epic Board Configuration (Recommended)**
+
+1. **Create Epic-Specific Board**:
+
+   - Go to your project → **Boards** → **View all boards**
+   - Click **Create board** → **Create a Kanban board**
+   - Select **Board from an existing project** → Choose your project
+
+2. **Configure for Epics**:
+
+   - **Board Name**: "Trading Dashboard - Epic Board"
+   - **Board Type**: Kanban (better for Epic management)
+   - **Issue Filter**: Will auto-populate with project Epics
+
+3. **Enable Epic Panel**:
+   - In board settings → **Features** → Enable **Epics**
+   - This shows Epics in a sidebar with their child Stories
+
+#### **Method 2: Add Epics to Existing Board Filter**
+
+1. **Access Board Settings**:
+
+   - On your current Board → Click **⋯** (more options)
+   - Select **Board settings** (if visible)
+
+2. **Update Board Filter**:
+
+   - Go to **General** tab → **Saved filter**
+   - Edit the JQL filter to include Epics:
+
+   ```jql
+   project = "Trading Dashboard A1" AND type in (Epic, Story, Task)
+   ```
+
+3. **Save Changes**:
+   - Epics will now appear on your board alongside Stories
+
+#### **Method 3: Direct Epic Movement (Manual)**
+
+1. **Open Any Epic**:
+
+   - From Timeline view, click on an Epic
+   - Or go to List view and click an Epic
+
+2. **Change Epic Status**:
+
+   - In the Epic details → **Status** field
+   - Change from whatever status to **TO DO**
+   - Epic should now appear in TO DO column on Board
+
+3. **Bulk Epic Movement**:
+   - Select multiple Epics in List view
+   - **Bulk change** → **Edit Issues** → **Change Status**
+   - Set all to **TO DO** or **IN PROGRESS**
+
+#### **Method 4: Backlog-to-Board for Epics**
+
+1. **Epic Backlog View**:
+
+   - Go to **Backlog** tab
+   - Look for **Epics** panel (usually on left side)
+   - Your 7 Epics should be listed there
+
+2. **Epic Planning**:
+   - Drag Stories from Epics into Sprints
+   - This automatically activates the Epic on the board
+   - Epic progress shows based on Story completion
+
+#### **Method 5: Timeline to Board Sync**
+
+1. **Timeline Epic Status**:
+
+   - In **Timeline** view, click on Epic
+   - Change **Status** from "Timeline-only" to **TO DO**
+
+2. **Board Refresh**:
+   - Go back to **Board** view
+   - Epic should now appear in TO DO column
+   - You can drag between columns (TO DO → IN PROGRESS → DONE)
+
+### **Quick Troubleshooting**:
+
+❌ **Epics not showing on Board?**
+
+- Check if board filter includes `type = Epic`
+- Verify Epic status is not "Timeline-only" or custom status
+
+❌ **Board settings not accessible?**
+
+- Try Method 3 (Direct Epic Status Change)
+- Or create new Epic-specific board (Method 1)
+
+❌ **Only Stories showing, no Epics?**
+
+- Your board might be configured for Story-level work only
+- Use Epic panel or create Epic board instead
+
+### **Step 5: Populate the Board (Simple Direct Method)**
+
+🎯 **Your board is empty because imported CSV issues are in the List view but not appearing on the Board. Here's the simplest fix:**
+
+#### **Method 1: Use Backlog View (Works 100% of the time)**
+
+1. **Switch to Backlog**:
+
+   - Look for **Backlog** tab in your project navigation
+   - Click **Backlog** (usually next to Board)
+
+2. **You'll See All Issues**:
+
+   - All 39 imported issues will be visible in the backlog
+   - They're organized as a list of items ready for sprint planning
+
+3. **Move to Board**:
+   - **Create Sprint**: Click **Create Sprint** button
+   - **Drag Issues**: Drag issues from Backlog to Sprint
+   - **Start Sprint**: Click **Start Sprint** button
+   - **View Board**: Switch back to Board tab - issues now visible!
+
+#### **Method 2: Manual Issue Movement (Direct)**
+
+1. **Go to Any Single Issue**:
+
+   - From your List view, click any Story
+   - Look for **More** actions (⋯ button)
+
+2. **Move to Sprint**:
+
+   - Click **Move to Sprint** or **Add to Sprint**
+   - Select or create a sprint
+   - Repeat for a few issues
+
+3. **Board Population**:
+   - Board will show issues as you add them to sprints
+   - TO DO column populates automatically
+
+#### **Method 3: URL-Based Board Creation**
+
+1. **Try This Direct URL**:
+
+   ```
+   https://[your-domain].atlassian.net/jira/software/projects/[PROJECT-KEY]/boards
+   ```
+
+   Replace `[your-domain]` with your Jira domain and `[PROJECT-KEY]` with your project key
+
+2. **Auto-Generated Board**:
+   - Should show a default board with all issues
+   - If not, the Backlog method above will definitely work
+
+### **Step 5: Post-Import Configuration**
+
+1. **Verify Board Population**:
+
+   - Refresh your board - should now show all 39 issues
+   - **Epics**: Show in Epic panel (if enabled)
+   - **Stories**: Show in main board columns
 
 2. **Set Up Sprints**:
 
+   - Click **Backlog** tab
    - Create sprints based on development phases:
      - **Sprint 1-2**: Foundation Epics (F1, F2)
      - **Sprint 3-5**: Core Business Epics (C1, C2, C3)
      - **Sprint 6-8**: Enhancement & Integration (E1, I1)
 
-3. **Team Assignment**:
+3. **Start Sprint Planning**:
+
+   - Drag Stories from **Backlog** to **Sprint 1**
+   - Begin with **Authentication & Security Foundation** Epic
+   - Add **UI Foundation & Component Library** Epic
+   - Click **Start Sprint**
+
+4. **Team Assignment**:
 
    - **Team Alpha**: Authentication & Trading Dashboard Epics
    - **Team Beta**: UI Foundation & Market Data Epics
    - **Team Gamma**: Top Gainers & Analytics Epic
    - **Integration Team**: Real-time Synchronization Epic
 
-4. **Configure Workflows**:
+5. **Configure Workflows**:
    - Ensure proper transitions between TO DO → IN PROGRESS → DONE
    - Set up automatic Epic progress based on Story completion
    - Configure notifications for team members
