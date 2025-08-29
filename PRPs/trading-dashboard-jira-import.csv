@@ -1,53 +1,48 @@
-Issue Type,Summary,Description,Priority,Story Points,Component,Assignee,Labels,Parent
-Epic,Authentication & Security Foundation,Secure user authentication system with industry-standard login/logout functionality,High,,Authentication,Team Alpha,epic,
-Story,User Registration & Login System,Email/password registration with validation and secure login with JWT token generation,Medium,5,Authentication,Developer 1,feature,Authentication & Security Foundation
-Subtask,Email/password registration with validation,Implement user registration form with proper validation rules,Low,2,Authentication,Developer 1,task,Authentication & Security Foundation
-Subtask,Secure login with JWT token generation,Implement login functionality with JWT token creation,Low,3,Authentication,Developer 1,task,Authentication & Security Foundation
-Subtask,Password strength requirements and validation,Add password complexity validation and user feedback,Low,1,Authentication,Developer 1,task,Authentication & Security Foundation
-Story,Session Management & Token Handling,JWT token refresh mechanism and secure session management,Medium,5,Authentication,Developer 2,feature,Authentication & Security Foundation
-Subtask,JWT token refresh mechanism,Implement automatic token refresh before expiration,Low,3,Authentication,Developer 2,task,Authentication & Security Foundation
-Subtask,Secure token storage in httpOnly cookies,Store JWT tokens securely in httpOnly cookies,Low,2,Authentication,Developer 2,task,Authentication & Security Foundation
-Story,Password Recovery & Account Management,Password reset flow with email verification and account management,Medium,5,Authentication,Developer 1,feature,Authentication & Security Foundation
-Story,Protected Routes & Authorization,React Router protected route implementation with authorization,Medium,3,Authentication,Developer 2,feature,Authentication & Security Foundation
-Story,Supabase RLS Policies & Data Security,Row Level Security policy configuration and data protection,High,8,Database,Developer 2,feature,Authentication & Security Foundation
-Epic,UI Foundation & Component Library,Establish design system and reusable UI components using shadcn/ui,High,,Frontend,Team Beta,epic,
-Story,shadcn/ui Setup & Configuration,Complete shadcn/ui installation with custom Trading Dashboard theme,Medium,5,Frontend,Developer 3,feature,UI Foundation & Component Library
-Story,Dashboard Layout Components,Main dashboard layout with header sidebar and responsive navigation,Medium,5,Frontend,Developer 4,feature,UI Foundation & Component Library
-Story,Data Table Components,Reusable data table with sorting filtering and pagination,Medium,8,Frontend,Developer 3,feature,UI Foundation & Component Library
-Story,Chart & Visualization Components,shadcn/ui chart components setup with responsive design and interactive controls,Medium,8,Frontend,Developer 4,feature,UI Foundation & Component Library
-Story,Form & Input Components,Trading-specific form inputs with validation and error messaging,Medium,5,Frontend,Developer 3,feature,UI Foundation & Component Library
-Story,Widget & Card Components,Dashboard widget containers and statistics display cards,Medium,3,Frontend,Developer 4,feature,UI Foundation & Component Library
-Epic,Trading Dashboard & Position Management,Core trading dashboard displaying active trades watchlists and real-time position monitoring,High,,Trading,Team Alpha,epic,
-Story,Active Trades Display & Management,Real-time active trades table with live P&L and trade management,High,8,Trading,Developer 1,feature,Trading Dashboard & Position Management
-Story,Watchlist Management System,Add/remove instruments to watchlist with real-time price updates,High,5,Trading,Developer 2,feature,Trading Dashboard & Position Management
-Story,Risk & Reward Calculations,Automatic risk:reward ratio calculations and portfolio risk management,High,8,Trading,Developer 1,feature,Trading Dashboard & Position Management
-Story,Closed Trades Summary,Daily closed trades summary with performance metrics,Medium,5,Trading,Developer 2,feature,Trading Dashboard & Position Management
-Story,Trade Import & Export,CSV import for existing trades and data export functionality,Medium,5,Trading,Developer 1,feature,Trading Dashboard & Position Management
-Story,Position Monitoring Dashboard,Real-time portfolio value display and risk exposure monitoring,High,8,Trading,Developer 2,feature,Trading Dashboard & Position Management
-Epic,Market Data Integration & Trading Signals,Integration with free market data APIs and trading signal generation,High,,Market Data,Team Beta,epic,
-Story,Free API Integration Setup,Alpha Vantage and Polygon.io API integration with rate limiting,High,8,Market Data,Developer 3,feature,Market Data Integration & Trading Signals
-Story,Real-time Price Data Service,WebSocket connections for live price updates with caching,High,8,Market Data,Developer 4,feature,Market Data Integration & Trading Signals
-Story,Trading Signal Generation,NQ1! EMA 10/20 crossover signal with trend analysis,Medium,5,Market Data,Developer 3,feature,Market Data Integration & Trading Signals
-Story,Market Status Integration,Real-time market open/close status with timezone support,Medium,3,Market Data,Developer 4,feature,Market Data Integration & Trading Signals
-Story,Data Caching & Performance,Multi-level caching strategy with TTL management,Medium,5,Market Data,Developer 3,feature,Market Data Integration & Trading Signals
-Story,Error Handling & Fallbacks,API failure detection with automatic failover mechanisms,Medium,5,Market Data,Developer 4,feature,Market Data Integration & Trading Signals
-Epic,Top Gainers & Market Analytics,Display market analytics including top gainers for different time periods and market cap categories,Medium,,Analytics,Team Gamma,epic,
-Story,Top Gainers Data Collection,Small mid and large cap top gainers identification with percentage calculations,Medium,5,Analytics,Developer 5,feature,Top Gainers & Market Analytics
-Story,Time Period Analysis,30 60 and 120-day top gainers analysis with period comparison,Medium,5,Analytics,Developer 5,feature,Top Gainers & Market Analytics
-Story,Industry Group Classification,Automatic industry group assignment with sector performance analysis,Medium,3,Analytics,Developer 5,feature,Top Gainers & Market Analytics
-Story,Gainers Display Interface,Interactive top gainers table with filtering and ranking,Medium,5,Analytics,Developer 5,feature,Top Gainers & Market Analytics
-Story,Market Analytics Dashboard,Market sentiment indicators with sector rotation analysis,Medium,8,Analytics,Developer 5,feature,Top Gainers & Market Analytics
-Epic,Advanced Trading Statistics & Analytics,Comprehensive trading performance analysis with statistical visualizations and metrics,Medium,,Statistics,Available Team,epic,
-Story,Equity Curve Visualization,Interactive equity curve chart using shadcn/ui charts with zoom/pan and drawdown analysis,Medium,8,Statistics,Developer 6,feature,Advanced Trading Statistics & Analytics
-Story,Return Distribution Analysis,Bell curve visualization of returns using shadcn/ui charts with statistical metrics,Medium,8,Statistics,Developer 7,feature,Advanced Trading Statistics & Analytics
-Story,Comprehensive Trading Statistics,Win rate calculation average risk:reward ratio and performance metrics,Medium,5,Statistics,Developer 6,feature,Advanced Trading Statistics & Analytics
-Story,Historical Trades Analysis,Complete historical trades table with advanced filtering,Medium,5,Statistics,Developer 7,feature,Advanced Trading Statistics & Analytics
-Story,Performance Attribution & Metrics,Sharpe ratio risk-adjusted metrics and drawdown analysis,Medium,8,Statistics,Developer 6,feature,Advanced Trading Statistics & Analytics
-Story,Reporting & Export Features,PDF report generation and Excel export with formatted data,Low,5,Statistics,Developer 7,feature,Advanced Trading Statistics & Analytics
-Epic,Real-time Data Synchronization & Performance Optimization,Optimize real-time data flow implement caching strategies and ensure performance across all features,Medium,,Integration,Integration Team,epic,
-Story,WebSocket Connection Management,Persistent WebSocket connections with automatic reconnection,High,8,Integration,Developer 8,feature,Real-time Data Synchronization & Performance Optimization
-Story,Real-time Data Broadcasting,Live price update distribution to all components,High,5,Integration,Developer 8,feature,Real-time Data Synchronization & Performance Optimization
-Story,Intelligent Caching Strategy,Multi-level cache implementation with invalidation strategies,Medium,8,Integration,Developer 8,feature,Real-time Data Synchronization & Performance Optimization
-Story,Performance Monitoring & Optimization,Real-time performance metrics collection and optimization,Medium,5,Integration,Developer 8,feature,Real-time Data Synchronization & Performance Optimization
-Story,Error Handling & Recovery,Graceful degradation for failed services with recovery processes,Medium,5,Integration,Developer 8,feature,Real-time Data Synchronization & Performance Optimization
-Story,Data Synchronization Coordination,Cross-component data consistency with conflict resolution,Medium,8,Integration,Developer 8,feature,Real-time Data Synchronization & Performance Optimization
+Issue Type,Summary,Description,Priority,Assignee,Labels
+Epic,Authentication & Security Foundation,Secure user authentication system with industry-standard login/logout functionality,High,Team Alpha,epic
+Story,User Registration & Login System,Email/password registration with validation and secure login with JWT token generation,Medium,Developer 1,feature
+Story,Session Management & Token Handling,JWT token refresh mechanism and secure session management,Medium,Developer 2,feature
+Story,Password Recovery & Account Management,Password reset flow with email verification and account management,Medium,Developer 1,feature
+Story,Protected Routes & Authorization,React Router protected route implementation with authorization,Medium,Developer 2,feature
+Story,Supabase RLS Policies & Data Security,Row Level Security policy configuration and data protection,High,Developer 2,feature
+Epic,UI Foundation & Component Library,Establish design system and reusable UI components using shadcn/ui,High,Team Beta,epic
+Story,shadcn/ui Setup & Configuration,Complete shadcn/ui installation with custom Trading Dashboard theme,Medium,Developer 3,feature
+Story,Dashboard Layout Components,Main dashboard layout with header sidebar and responsive navigation,Medium,Developer 4,feature
+Story,Data Table Components,Reusable data table with sorting filtering and pagination,Medium,Developer 3,feature
+Story,Chart & Visualization Components,shadcn/ui chart components setup with responsive design and interactive controls,Medium,Developer 4,feature
+Story,Form & Input Components,Trading-specific form inputs with validation and error messaging,Medium,Developer 3,feature
+Story,Widget & Card Components,Dashboard widget containers and statistics display cards,Medium,Developer 4,feature
+Epic,Trading Dashboard & Position Management,Core trading dashboard displaying active trades watchlists and real-time position monitoring,High,Team Alpha,epic
+Story,Active Trades Display & Management,Real-time active trades table with live P&L and trade management,High,Developer 1,feature
+Story,Watchlist Management System,Add/remove instruments to watchlist with real-time price updates,High,Developer 2,feature
+Story,Risk & Reward Calculations,Automatic risk:reward ratio calculations and portfolio risk management,High,Developer 1,feature
+Story,Closed Trades Summary,Daily closed trades summary with performance metrics,Medium,Developer 2,feature
+Story,Trade Import & Export,CSV import for existing trades and data export functionality,Medium,Developer 1,feature
+Story,Position Monitoring Dashboard,Real-time portfolio value display and risk exposure monitoring,High,Developer 2,feature
+Epic,Market Data Integration & Trading Signals,Integration with free market data APIs and trading signal generation,High,Team Beta,epic
+Story,Free API Integration Setup,Alpha Vantage and Polygon.io API integration with rate limiting,High,Developer 3,feature
+Story,Real-time Price Data Service,WebSocket connections for live price updates with caching,High,Developer 4,feature
+Story,Trading Signal Generation,NQ1! EMA 10/20 crossover signal with trend analysis,Medium,Developer 3,feature
+Story,Market Status Integration,Real-time market open/close status with timezone support,Medium,Developer 4,feature
+Story,Data Caching & Performance,Multi-level caching strategy with TTL management,Medium,Developer 3,feature
+Story,Error Handling & Fallbacks,API failure detection with automatic failover mechanisms,Medium,Developer 4,feature
+Epic,Top Gainers & Market Analytics,Display market analytics including top gainers for different time periods and market cap categories,Medium,Team Gamma,epic
+Story,Top Gainers Data Collection,Small mid and large cap top gainers identification with percentage calculations,Medium,Developer 5,feature
+Story,Time Period Analysis,30 60 and 120-day top gainers analysis with period comparison,Medium,Developer 5,feature
+Story,Industry Group Classification,Automatic industry group assignment with sector performance analysis,Medium,Developer 5,feature
+Story,Gainers Display Interface,Interactive top gainers table with filtering and ranking,Medium,Developer 5,feature
+Story,Market Analytics Dashboard,Market sentiment indicators with sector rotation analysis,Medium,Developer 5,feature
+Epic,Advanced Trading Statistics & Analytics,Comprehensive trading performance analysis with statistical visualizations and metrics,Medium,Available Team,epic
+Story,Equity Curve Visualization,Interactive equity curve chart using shadcn/ui charts with zoom/pan and drawdown analysis,Medium,Developer 6,feature
+Story,Return Distribution Analysis,Bell curve visualization of returns using shadcn/ui charts with statistical metrics,Medium,Developer 7,feature
+Story,Comprehensive Trading Statistics,Win rate calculation average risk:reward ratio and performance metrics,Medium,Developer 6,feature
+Story,Historical Trades Analysis,Complete historical trades table with advanced filtering,Medium,Developer 7,feature
+Story,Performance Attribution & Metrics,Sharpe ratio risk-adjusted metrics and drawdown analysis,Medium,Developer 6,feature
+Story,Reporting & Export Features,PDF report generation and Excel export with formatted data,Low,Developer 7,feature
+Epic,Real-time Data Synchronization & Performance Optimization,Optimize real-time data flow implement caching strategies and ensure performance across all features,Medium,Integration Team,epic
+Story,WebSocket Connection Management,Persistent WebSocket connections with automatic reconnection,High,Developer 8,feature
+Story,Real-time Data Broadcasting,Live price update distribution to all components,High,Developer 8,feature
+Story,Intelligent Caching Strategy,Multi-level cache implementation with invalidation strategies,Medium,Developer 8,feature
+Story,Performance Monitoring & Optimization,Real-time performance metrics collection and optimization,Medium,Developer 8,feature
+Story,Error Handling & Recovery,Graceful degradation for failed services with recovery processes,Medium,Developer 8,feature
+Story,Data Synchronization Coordination,Cross-component data consistency with conflict resolution,Medium,Developer 8,feature

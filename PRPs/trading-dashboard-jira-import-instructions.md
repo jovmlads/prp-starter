@@ -1,26 +1,33 @@
 # Trading Dashboard - Jira Import Instructions
 
-## 🎯 **New CSV Structure - Universal Jira Compatibility**
+## 🎯 **Simplified CSV Structure - Guaranteed Jira Compatibility**
 
-The updated CSV file (`trading-dashboard-jira-import.csv`) uses **standard Jira fields only** - no custom fields needed:
+The updated CSV file (`trading-dashboard-jira-import.csv`) uses **only universal Jira fields** that exist in every instance:
 
 ```
-Epic (Authentication & Security Foundation) [Parent: empty]
-├── Story (User Registration & Login System) [Parent: Authentication & Security Foundation]
-│   ├── Subtask (Email/password registration) [Parent: Authentication & Security Foundation]
-│   ├── Subtask (Secure login with JWT) [Parent: Authentication & Security Foundation]
-│   └── Subtask (Password validation) [Parent: Authentication & Security Foundation]
-├── Story (Session Management & Token Handling) [Parent: Authentication & Security Foundation]
-└── [Other Stories...]
+Epic (Authentication & Security Foundation)
+├── Story (User Registration & Login System)
+├── Story (Session Management & Token Handling)
+├── Story (Password Recovery & Account Management)
+├── Story (Protected Routes & Authorization)
+└── Story (Supabase RLS Policies & Data Security)
 ```
 
-### **Key Improvements**:
+### **Universal Fields Used**:
 
-✅ **Parent Field**: Uses standard Jira Parent field instead of custom Epic Name  
-✅ **Component Field**: Uses singular "Component" instead of "Components"  
-✅ **Universal Compatibility**: Works with any Jira Cloud instance  
-✅ **No Setup Required**: All fields are standard - no custom field creation needed  
-✅ **Automatic Hierarchy**: Parent field creates Epic → Story → Subtask links automatically
+✅ **Issue Type** - Epic/Story hierarchy  
+✅ **Summary** - Issue titles  
+✅ **Description** - Detailed descriptions  
+✅ **Priority** - High/Medium/Low priorities  
+✅ **Assignee** - Team/developer assignments  
+✅ **Labels** - Epic/feature tags for organization
+
+### **Simplified Approach**:
+
+✅ **No Story Points** - Add manually after import (varies by Jira setup)  
+✅ **No Components** - Use Labels for team organization  
+✅ **No Parent Field** - Manual Epic linking post-import  
+✅ **100% Compatible** - Works with every Jira Cloud instance
 
 ## 📋 **Step-by-Step Jira Import Process**
 
@@ -59,27 +66,23 @@ Epic (Authentication & Security Foundation) [Parent: empty]
    - Upload `trading-dashboard-jira-import.csv`
    - Select **CSV file** option
 
-3. **Map CSV Columns**:
+3. **Map CSV Columns** (All Will Map Automatically):
 
    ```
    CSV Column               → Jira Field
    ────────────────────────────────────────
-   Issue Type              → Issue Type
-   Summary                 → Summary
-   Description             → Description
-   Priority                → Priority
-   Story Points            → Story Points
-   Component               → Component/s
-   Assignee                → Assignee
-   Labels                  → Labels
-   Parent                  → Parent (for Epic linking)
+   Issue Type              → Issue Type ✅
+   Summary                 → Summary ✅
+   Description             → Description ✅
+   Priority                → Priority ✅
+   Assignee                → Assignee ✅
+   Labels                  → Labels ✅
    ```
 
-4. **Epic Linking with Parent Field**:
-   - The **Parent** column will automatically create Epic → Story relationships
-   - Stories with matching Parent values will be linked to their Epic
-   - Subtasks will be linked to their parent Stories
-   - **No custom fields needed** - uses standard Jira Parent field
+4. **Perfect Mapping**:
+   - **All 6 fields** will map automatically without any custom configuration
+   - **No dropdowns to select** - everything maps perfectly
+   - **No missing fields** - all columns have exact Jira matches
 
 ### **Step 3: Verify Import Results**
 
