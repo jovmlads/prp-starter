@@ -86,21 +86,45 @@ Frontend-only with mocked data.
 
 _For POC development: "Does this context enable building a working prototype that validates the core concept?"_
 
-### React Technology Stack
+### React Technology Stack (POC-Optimized)
+
+> **📚 For complete React setup**, see [REACT-SETUP.md](../../REACT-SETUP.md)
 
 ```yaml
-# Current Tech Stack Requirements
-framework: [React 19/Next.js 15/Vite]
-styling: [CSS Modules/styled-components]
-components: [shadcn/ui/Material-UI/custom components]
-typescript: [Strict mode/Basic types/Zod validation]
-testing: [React Testing Library/Vitest/Jest]
+# POC-Specific Technology Choices
+framework: [React 19/Next.js 15/Vite] # Use Vite for fastest POC setup
+styling: [Tailwind CSS/CSS Modules] # Tailwind for rapid UI development
+components: [shadcn/ui/Material-UI] # Use MCP servers for faster integration
+typescript: [Basic types/Zod validation] # Minimal but strict typing
+testing: [Basic smoke tests only] # Not comprehensive for POCs
 
-# POC-Specific Choices
-mock_data: [MSW/Static JSON/faker.js]
-data_pattern: [REST API simulation/GraphQL mocks/Static objects]
-state_management: [useState/useReducer/Zustand (if complex)]
-routing: [React Router/Next.js router/hash routing]
+# MCP Servers (MANDATORY - Essential for POCs)
+mcp_servers: [shadcn-mcp/mui-mcp] # Official servers only for POCs
+mcp_pattern: [Use MCP for rapid component discovery and implementation]
+
+# POC-Specific Choices (Optimized for Speed)
+mock_data: [Static JSON/faker.js] # Avoid MSW complexity for simple POCs
+data_pattern: [Static objects/Simple REST simulation] # Keep data simple
+state_management: [useState/useReducer only] # Avoid complex state for POCs
+routing: [React Router/hash routing] # Simple routing sufficient
+```
+
+### MCP Server Setup (MANDATORY - POC Priority)
+
+> **📚 For complete MCP setup instructions**, see [REACT-SETUP.md](../../REACT-SETUP.md#mcp-server-setup-for-ui-libraries)
+
+```yaml
+# CRITICAL: MCP servers are ESSENTIAL for POC speed
+# Use official documentation access to build components rapidly
+
+# Essential MCP Servers for POC Development
+shadcn_ui: "npx shadcn@latest mcp init --client claude"
+material_ui: "claude mcp add mui-mcp -- npx -y @mui/mcp@latest"
+
+# POC MCP Usage Pattern
+discovery: "Ask: 'Show me all available components for [specific UI need]'"
+implementation: "Ask: 'Add [component-name] and create [specific functionality]'"
+validation: "Use /mcp command to verify connections before starting POC"
 ```
 
 ### Mock Data Strategy
@@ -187,14 +211,17 @@ workspace_root:
 
 ### Implementation Tasks
 
-**Task 1: CREATE React application foundation**
+**Task 1: CREATE React POC foundation**
 
-- SETUP: Follow the detailed React setup guide in `PRPs/templates/react_setup.md`
-- CONFIGURE: All configuration files will be automatically set up by following the guide
-- INSTALL: Required packages as listed in the setup guide
-- MOCK: Set up MSW and faker.js following the guide
-- PLACEMENT: Follow the vertical slice architecture from the guide
-- DOCUMENT: Add JSDoc documentation following the standards
+> **📚 FOLLOW**: Complete React setup guide at [REACT-SETUP.md](../../REACT-SETUP.md)  
+> **🎯 POC Focus**: Use the comprehensive setup but focus only on essential features for POC
+
+- SETUP: Follow the detailed React setup guide for full tooling benefits
+- CONFIGURE: All quality tools help even in POCs (TypeScript, ESLint, Prettier)
+- INSTALL: Use complete dependency list - tooling helps POC development speed
+- MCP: **MANDATORY** - Set up MCP servers first for rapid component development
+- STRUCTURE: Follow vertical slice architecture even for POCs (easier to extract features later)
+- DOCUMENT: Minimal JSDoc - focus on component props and complex logic only
 
 **Task 2: CREATE mock data system**
 

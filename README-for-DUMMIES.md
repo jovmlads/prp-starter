@@ -755,7 +755,7 @@ Many commands work better together:
 /prime-core ; `
 /prp-planning-create "feature description" ; `
 /api-contract-define "using PRPs/feature-prd.md" ; `
-/prp-base-create "using both previous files" ; `
+/prp-base-create "implement feature using PRPs/feature-prd.md and PRPs/contracts/feature-api-contract.md" ; `
 /prp-base-execute PRPs/feature-implementation.md ; `
 /smart-commit "feat: add new feature" ; `
 /create-pr

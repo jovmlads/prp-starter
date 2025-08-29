@@ -1,196 +1,107 @@
-# React Development Guide
+# React Development Reference Guide
 
-This document provides guidance for React development in this repository, following the bulletproof React architecture and best practices.
+> **📚 MAIN SETUP GUIDE**: [REACT-SETUP.md](../../REACT-SETUP.md) - Complete setup instructions  
+> **🤖 CLAUDE GUIDELINES**: [claude_md_files/CLAUDE-REACT.md](../../claude_md_files/CLAUDE-REACT.md) - AI assistant patterns  
+> **📋 TEMPLATE**: [templates/react_setup.md](../templates/react_setup.md) - Quick reference template
 
-## Setup Guides
+This document provides high-level guidance for React development in this repository, following the bulletproof React architecture and best practices.
 
-The following guides provide comprehensive React project setup instructions:
+## Setup Guide Hierarchy
 
-1. **Quick Reference**: `REACT-SETUP.md` in the repository root
-2. **Authoritative Version**: `PRPs/templates/react_setup.md`
+1. **[REACT-SETUP.md](../../REACT-SETUP.md)** - **AUTHORITATIVE** comprehensive setup guide
+2. **[templates/react_setup.md](../templates/react_setup.md)** - Quick reference template
+3. **[claude_md_files/CLAUDE-REACT.md](../../claude_md_files/CLAUDE-REACT.md)** - Claude-specific development patterns
+4. **[templates/prp_poc_react.md](../templates/prp_poc_react.md)** - POC-specific template
 
-These guides should be followed exactly when:
+## Quick Command Reference
 
-- Creating new React projects
-- Setting up development environments
-- Configuring tools and linters
-- Structuring components and features
+> **📚 For complete commands and explanations**, see [REACT-SETUP.md](../../REACT-SETUP.md#project-initialization)
 
-## Project Structure
+```powershell
+# Essential setup
+npm create vite@latest app -- --template react-ts
+cd app && npm install
 
-All React projects MUST follow the vertical slice architecture:
-
-```
-src/
-├── app/              # Application layer
-│   ├── routes/       # Application routes
-│   ├── app.tsx       # Main application component
-│   └── provider.tsx  # Application providers
-├── assets/          # Static assets
-├── components/      # Shared components
-├── config/         # Global configurations
-├── features/       # Feature-based modules
-├── hooks/          # Shared hooks
-├── lib/            # Reusable libraries
-├── stores/         # Global state stores
-├── testing/        # Test utilities
-├── types/          # Shared types
-└── utils/          # Shared utility functions
+# Development workflow
+npm run dev          # Start development server
+npm run validate     # Run all quality checks
+npm run test:e2e     # Run end-to-end tests
 ```
 
-## Quality Standards
+## Architecture Overview
 
-1. **TypeScript**:
+> **📚 For detailed architecture guidance**, see [REACT-SETUP.md](../../REACT-SETUP.md#vertical-slice-architecture)
 
-   - Strict mode required
-   - No explicit `any`
-   - Explicit return types
-   - Zod validation for all external data
+**MANDATORY**: All React projects MUST follow vertical slice architecture:
 
-2. **Testing**:
+- **Features over layers** - organize by business capabilities
+- **Co-located tests** - tests live with the code they test
+- **Self-contained modules** - each feature has its own components, hooks, types
+- **Shared utilities** - common code in shared directories
 
-   - 80% minimum coverage
-   - Co-located tests in `__tests__`
-   - React Testing Library
-   - Test behavior, not implementation
+## Quality Standards Summary
 
-3. **Code Style**:
-   - Files/folders in kebab-case
-   - Components in PascalCase
-   - Max 200 lines per component
-   - Max cognitive complexity 15
+> **📚 For complete quality standards**, see [REACT-SETUP.md](../../REACT-SETUP.md#quality-standards)
 
-## Feature Module Structure
+1. **TypeScript**: Strict mode, no `any`, explicit return types
+2. **Testing**: 80% minimum coverage, React Testing Library
+3. **Code Style**: kebab-case files, PascalCase components, max 200 lines
+4. **Documentation**: JSDoc for all exports, component prop documentation
 
-Each feature module should be structured as:
+## MCP Integration (MANDATORY)
 
-```
-src/features/feature-name/
-├── api/         # API requests and hooks
-├── assets/      # Feature-specific assets
-├── components/  # Feature components
-├── hooks/       # Feature-specific hooks
-├── stores/      # Feature state management
-├── types/       # Feature TypeScript types
-└── utils/       # Feature utility functions
-```
+> **📚 For complete MCP setup**, see [REACT-SETUP.md](../../REACT-SETUP.md#mcp-server-setup-for-ui-libraries)
 
-## Essential Tools & Configurations
+**CRITICAL**: Always use official MCP servers for React libraries:
 
-1. **Build Tool**: Vite with React plugin
-2. **Styling**: CSS Modules
-3. **State Management**: React Query for server state
-4. **Form Handling**: React Hook Form with Zod
-5. **Testing**: Vitest + React Testing Library
-6. **Linting**: ESLint with TypeScript and SonarJS
+- **shadcn/ui**: `npx shadcn@latest mcp init --client claude`
+- **Material-UI**: `claude mcp add mui-mcp -- npx -y @mui/mcp@latest`
+- **Discovery pattern**: Check for `@[library-name]/mcp` packages
 
 ## Development Commands
 
+> **📚 For complete command explanations**, see [REACT-SETUP.md](../../REACT-SETUP.md#getting-started)
+
 ```bash
-# Development
-npm run dev          # Start dev server
-npm run build        # Production build
-npm run preview      # Preview production build
-
-# Testing
-npm run test         # Run tests
-npm run test:coverage # Check coverage
-npm run test:e2e     # E2E tests
-
-# Quality
-npm run lint         # Run ESLint
-npm run type-check   # Check types
-npm run validate     # Run all checks
+# Quality assurance
+npm run lint         # ESLint with zero warnings
+npm run type-check   # TypeScript validation
+npm run test:coverage # 80% minimum coverage
+npm run validate     # All checks combined
 ```
 
-## Component Template
+## Key Patterns Reference
 
-````typescript
-/**
- * @fileoverview Example feature component following project standards
- * @module features/example/components/ExampleComponent
- */
+> **📚 For complete patterns and examples**, see [claude_md_files/CLAUDE-REACT.md](../../claude_md_files/CLAUDE-REACT.md)
 
-import { ReactElement } from "react";
-import { z } from "zod";
+### Component Development
 
-const exampleSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string().min(1),
-});
+- Use `ReactElement` return type (not `JSX.Element`)
+- Implement proper error boundaries for feature modules
+- Handle ALL states: loading, error, empty, success
+- Co-locate tests with components in `__tests__` folders
 
-type ExampleData = z.infer<typeof exampleSchema>;
+### State Management Hierarchy
 
-interface ExampleComponentProps {
-  /** The data to display in the component */
-  data: ExampleData;
-  /** Callback when item is selected */
-  onSelect: (id: string) => void;
-}
+1. **Local State**: `useState` for component-specific state
+2. **Server State**: TanStack Query for ALL API data (mandatory)
+3. **Context**: For cross-component state within features
+4. **URL State**: Search params for shareable state
 
-/**
- * Example component demonstrating project standards.
- *
- * @component
- * @example
- * ```tsx
- * <ExampleComponent
- *   data={exampleData}
- *   onSelect={handleSelect}
- * />
- * ```
- */
-export function ExampleComponent({
-  data,
-  onSelect,
-}: ExampleComponentProps): ReactElement {
-  if (!data) {
-    return <div>No data available</div>;
-  }
+### Data Validation (MANDATORY)
 
-  return (
-    <div>
-      <h2>{data.title}</h2>
-      <button onClick={() => onSelect(data.id)}>Select</button>
-    </div>
-  );
-}
-````
-
-## Best Practices
-
-1. **Component Development**
-
-   - One component per file
-   - Proper TypeScript interfaces
-   - JSDoc documentation
-   - Handle all states
-   - Use proper error boundaries
-
-2. **State Management**
-
-   - Local state for UI
-   - React Query for server state
-   - Context for feature state
-   - URL for shareable state
-
-3. **Performance**
-
-   - Use React 19 compiler
-   - Implement code splitting
-   - Lazy load components
-   - Optimize bundle size
-
-4. **Security**
-   - Validate all inputs
-   - Sanitize user content
-   - Implement CSP
-   - Secure API calls
+- **ALL external data** must be validated with Zod schemas
+- Use branded types for IDs and domain-specific values
+- Validate at system boundaries, fail fast
+- Never trust external data without validation
 
 ## Additional Resources
 
-- React 19 Documentation
-- TypeScript Handbook
-- Testing Library Guides
-- Vite Documentation
-- ESLint Rules Reference
+- [React 19 Documentation](https://react.dev)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [Testing Library Guides](https://testing-library.com/docs/)
+- [Vite Documentation](https://vitejs.dev)
+
+---
+
+**💡 This reference guide provides overview and quick access. For detailed instructions, examples, and complete setup procedures, always refer to the main [REACT-SETUP.md](../../REACT-SETUP.md) guide.**

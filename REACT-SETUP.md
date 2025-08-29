@@ -22,40 +22,137 @@ Set-Location app
 # Install core dependencies
 npm install
 
-# Install development and testing tools
-npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-react eslint-plugin-react-hooks prettier vitest @testing-library/react @testing-library/jest-dom @vitejs/plugin-react @playwright/test
+# Install development dependencies
+npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-sonarjs prettier vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event @vitejs/plugin-react @playwright/test husky lint-staged
 
-# Initialize Playwright
+# Initialize Playwright for E2E testing
 npx playwright install
+
+# Install production dependencies
+npm install @tanstack/react-query @hookform/resolvers zod react-hook-form msw
 
 # Install and configure Tailwind CSS
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
-# Create src/styles/globals.css with Tailwind directives
-$null = New-Item -ItemType File -Path "src/styles/globals.css" -Force
+# Create styles directory and globals.css
+New-Item -ItemType Directory -Path "src/styles" -Force
 @"
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-"@ | Out-File -FilePath "src/styles/globals.css"
+"@ | Out-File -FilePath "src/styles/globals.css" -Encoding UTF8
 
-# Make sure to import the CSS file in your src/main.tsx
-if (!(Test-Path "src/main.tsx")) {
-    Write-Error "src/main.tsx not found"
-} else {
-    $content = Get-Content "src/main.tsx"
+# Update main.tsx to import global styles
+$mainTsxPath = "src/main.tsx"
+if (Test-Path $mainTsxPath) {
+    $content = Get-Content $mainTsxPath -Raw
     if (!($content -match "import './styles/globals.css'")) {
-        @"
-import './styles/globals.css'
-$($content -join "`n")
-"@ | Out-File -FilePath "src/main.tsx"
+        $newContent = "import './styles/globals.css'`n" + $content
+        $newContent | Out-File -FilePath $mainTsxPath -Encoding UTF8
     }
 }
-
-# Install additional required dependencies
-npm install @tanstack/react-query @hookform/resolvers zod react-hook-form @testing-library/react @testing-library/user-event vitest @vitejs/plugin-react eslint prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-sonarjs husky lint-staged msw shadcn-ui
 ```
+
+## MCP Server Setup for UI Libraries
+
+**CRITICAL**: For every React library you use, check if there's an official MCP (Model Context Protocol) server available. MCP servers provide AI assistants with direct access to official documentation, components, and best practices.
+
+### Required MCP Servers for React Development
+
+#### shadcn/ui MCP Server (MANDATORY)
+
+```powershell
+# Initialize shadcn MCP server for Claude Code
+npx shadcn@latest mcp init --client claude
+
+# Or add manually to .mcp.json
+@"
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    }
+  }
+}
+"@ | Out-File -FilePath ".mcp.json" -Encoding UTF8
+```
+
+#### Material-UI (MUI) MCP Server (MANDATORY)
+
+```powershell
+# Add MUI MCP server for Claude Code
+claude mcp add mui-mcp -- npx -y @mui/mcp@latest
+
+# Or add manually to .mcp.json
+@"
+{
+  "mcpServers": {
+    "mui-mcp": {
+      "command": "npx",
+      "args": ["-y", "@mui/mcp@latest"]
+    }
+  }
+}
+"@ | Out-File -FilePath ".mcp.json" -Encoding UTF8
+```
+
+#### MCP Server Discovery Pattern (MANDATORY)
+
+**For every React library you add to your project, follow this pattern:**
+
+1. **Check official MCP server availability**:
+
+   ```powershell
+   # Search for official MCP server documentation
+   # Check library's official docs for MCP section
+   # Look for @[library-name]/mcp packages on npm
+   ```
+
+2. **Priority order for MCP servers**:
+
+   - Official library MCP servers (highest priority)
+   - Community-maintained MCP servers (verify quality)
+   - Generic documentation MCP servers (lowest priority)
+
+3. **Add to project configuration**:
+   ```powershell
+   # Example for any React library with MCP support
+   claude mcp add [library-name]-mcp -- npx -y @[library-name]/mcp@latest
+   ```
+
+### MCP Configuration Validation
+
+```powershell
+# Verify MCP servers are working
+npx @modelcontextprotocol/inspector
+
+# Check connection in Claude Code
+# Run: /mcp
+# Verify all servers show "Connected" status
+```
+
+### Example MCP Usage Prompts
+
+Once MCP servers are configured, use these patterns:
+
+**shadcn/ui**:
+
+- "Show me all available components in the shadcn registry"
+- "Add the button, dialog and card components to my project"
+- "Create a contact form using components from the shadcn registry"
+
+**Material-UI**:
+
+- "Show me the latest MUI component examples for data tables"
+- "Help me implement a responsive navigation using MUI components"
+- "What are the best practices for theming with MUI v6?"
+
+**General Pattern**:
+
+- "Use the [library-name] MCP server to show me [specific functionality]"
+- "Fetch the official documentation for [component-name] from [library-name]"
 
 ## Project Structure
 
@@ -297,18 +394,20 @@ export default defineConfig({
 ### Git Hooks with Husky
 
 ```powershell
-# Initialize Husky
+# Initialize Husky for git hooks
 npm install husky --save-dev
 npx husky init
-```
 
-Create `.husky/pre-commit`:
-
-```powershell
+# Create pre-commit hook
+$preCommitPath = ".husky/pre-commit"
+@"
 #!/usr/bin/env pwsh
-. "$(Split-Path $MyInvocation.MyCommand.Path)/_/husky.ps1"
+. "`$(Split-Path `$MyInvocation.MyCommand.Path)/_/husky.ps1"
 
-npm run type-check; if ($?) { npm run lint }; if ($?) { npm run test }
+npm run type-check
+if (`$LASTEXITCODE -eq 0) { npm run lint }
+if (`$LASTEXITCODE -eq 0) { npm run test }
+"@ | Out-File -FilePath $preCommitPath -Encoding UTF8
 ```
 
 ### Package.json Scripts

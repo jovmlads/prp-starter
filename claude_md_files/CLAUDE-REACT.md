@@ -1,6 +1,7 @@
-# CLAUDE.md
+# CLAUDE.md - React 19 Development Guidelines
 
-This file provides guidance to Claude Code when working with React 19 applications.
+> **📚 For complete React project setup**, refer to [REACT-SETUP.md](../REACT-SETUP.md)  
+> This file provides Claude-specific guidance for React 19 development patterns and best practices.
 
 ## Core Development Philosophy
 
@@ -97,6 +98,88 @@ rg --files -g "*.tsx"
 - **Document Metadata**: Native support for SEO tags
 - **Enhanced Suspense**: Better loading states and error boundaries
 
+### MCP (Model Context Protocol) Integration (MANDATORY)
+
+**CRITICAL**: Always use official MCP servers for React libraries to access accurate, up-to-date documentation and component examples.
+
+#### Required MCP Servers
+
+**shadcn/ui MCP Server**:
+
+```powershell
+# Initialize for Claude Code
+npx shadcn@latest mcp init --client claude
+
+# Configuration in .mcp.json
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    }
+  }
+}
+```
+
+**Material-UI MCP Server**:
+
+```powershell
+# Add to Claude Code
+claude mcp add mui-mcp -- npx -y @mui/mcp@latest
+
+# Configuration in .mcp.json
+{
+  "mcpServers": {
+    "mui-mcp": {
+      "command": "npx",
+      "args": ["-y", "@mui/mcp@latest"]
+    }
+  }
+}
+```
+
+#### MCP Server Discovery Pattern (MANDATORY)
+
+For every React library you use:
+
+1. **Check for official MCP server**:
+
+   - Visit library's official documentation
+   - Look for MCP section in getting started docs
+   - Search npm for `@[library-name]/mcp` packages
+
+2. **Add to project**:
+
+   ```powershell
+   claude mcp add [library-name]-mcp -- npx -y @[library-name]/mcp@latest
+   ```
+
+3. **Verify connection**:
+   ```powershell
+   # In Claude Code, run:
+   /mcp
+   # Ensure all servers show "Connected" status
+   ```
+
+#### MCP Usage Examples
+
+**shadcn/ui prompts**:
+
+- "Show me all available components in the shadcn registry"
+- "Add the button, dialog and card components to my project"
+- "Create a contact form using components from the shadcn registry"
+
+**Material-UI prompts**:
+
+- "Use the mui-mcp server to show me DataGrid examples"
+- "Fetch the official MUI theming documentation"
+- "What are the latest MUI component best practices?"
+
+**General pattern**:
+
+- "Use the [library-name] MCP server to [specific request]"
+- Always reference the MCP server name in prompts for accurate documentation
+
 ### React 19 TypeScript Integration (MANDATORY)
 
 - **MUST use `ReactElement` instead of `JSX.Element`** for return types
@@ -105,7 +188,7 @@ rg --files -g "*.tsx"
 
 ```typescript
 // ✅ CORRECT: Modern React 19 typing
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 
 function MyComponent(): ReactElement {
   return <div>Content</div>;
@@ -116,7 +199,8 @@ const renderHelper = (): ReactElement | null => {
 };
 
 // ❌ FORBIDDEN: Legacy JSX namespace
-function MyComponent(): JSX.Element {  // Cannot find namespace 'JSX'
+function MyComponent(): JSX.Element {
+  // Cannot find namespace 'JSX'
   return <div>Content</div>;
 }
 ```
@@ -129,7 +213,7 @@ function MyComponent(): JSX.Element {  // Cannot find namespace 'JSX'
  * @module features/contact/components/ContactForm
  */
 
-import { useActionState, ReactElement } from 'react';
+import { useActionState, ReactElement } from "react";
 
 /**
  * Contact form component using React 19 Actions.
@@ -155,8 +239,8 @@ function ContactForm(): ReactElement {
     async (previousState: any, formData: FormData) => {
       // Extract and validate form data
       const result = contactSchema.safeParse({
-        email: formData.get('email'),
-        message: formData.get('message'),
+        email: formData.get("email"),
+        message: formData.get("message"),
       });
 
       if (!result.success) {
@@ -172,19 +256,21 @@ function ContactForm(): ReactElement {
 
   return (
     <form action={submitAction}>
-      <button disabled={isPending}>
-        {isPending ? 'Sending...' : 'Send'}
-      </button>
+      <button disabled={isPending}>{isPending ? "Sending..." : "Send"}</button>
     </form>
   );
 }
 ````
 
-## 🏗️ Project Structure (Vertical Slice Architecture)
+## 🏗️ Project Structure Reference
+
+> **📚 For complete project setup instructions**, see [REACT-SETUP.md](../REACT-SETUP.md#project-structure)
+
+**MANDATORY**: Follow vertical slice architecture:
 
 ```
 src/
-├── features/              # Feature-based modules
+├── features/              # Feature-based modules (NOT layers!)
 │   └── [feature]/
 │       ├── __tests__/     # Co-located tests (MUST be documented)
 │       ├── components/    # Feature components (MUST have JSDoc)
@@ -361,8 +447,8 @@ export const apiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
 ### Form Validation with React Hook Form
 
 ```typescript
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function UserForm(): JSX.Element {
   const {
@@ -371,18 +457,14 @@ function UserForm(): JSX.Element {
     formState: { errors, isSubmitting },
   } = useForm<User>({
     resolver: zodResolver(userSchema),
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   const onSubmit = async (data: User): Promise<void> => {
     // Handle validated data
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Form fields */}
-    </form>
-  );
+  return <form onSubmit={handleSubmit(onSubmit)}>{/* Form fields */}</form>;
 }
 ```
 
@@ -414,8 +496,8 @@ function UserForm(): JSX.Element {
  * @module features/user/__tests__/UserProfile.test
  */
 
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, userEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, userEvent } from "@testing-library/react";
 
 /**
  * Test suite for UserProfile component.
@@ -423,7 +505,7 @@ import { render, screen, userEvent } from '@testing-library/react';
  * Tests user interactions, state management, and error handling.
  * Mocks external dependencies to ensure isolated unit tests.
  */
-describe('UserProfile', () => {
+describe("UserProfile", () => {
   /**
    * Tests that user name updates correctly on form submission.
    *
@@ -432,7 +514,7 @@ describe('UserProfile', () => {
    * - User can type in the name field
    * - Submit button triggers update with correct data
    */
-  it('should update user name on form submission', async () => {
+  it("should update user name on form submission", async () => {
     // Arrange: Set up user event and mock handler
     const user = userEvent.setup();
     const onUpdate = vi.fn();
@@ -441,12 +523,12 @@ describe('UserProfile', () => {
     render(<UserProfile onUpdate={onUpdate} />);
 
     const input = screen.getByLabelText(/name/i);
-    await user.type(input, 'John Doe');
-    await user.click(screen.getByRole('button', { name: /save/i }));
+    await user.type(input, "John Doe");
+    await user.click(screen.getByRole("button", { name: /save/i }));
 
     // Assert: Verify handler called with correct data
     expect(onUpdate).toHaveBeenCalledWith(
-      expect.objectContaining({ name: 'John Doe' })
+      expect.objectContaining({ name: "John Doe" })
     );
   });
 });
@@ -569,7 +651,7 @@ Object.defineProperty(import.meta, "env", {
 export function calculateDiscount(
   originalPrice: number,
   discountPercent: number,
-  minPrice: number,
+  minPrice: number
 ): number {
   // Validate inputs
   if (originalPrice <= 0) {
@@ -626,7 +708,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = (
   {
     /* props */
-  },
+  }
 ) => {
   // Implementation
 };
@@ -665,7 +747,7 @@ function checkPermissions(userRole: Role, requiredRole: Role): boolean {
 // Use exponential backoff with jitter to prevent thundering herd
 const delay = Math.min(
   1000 * Math.pow(2, retryCount) + Math.random() * 1000,
-  30000,
+  30000
 );
 ```
 
