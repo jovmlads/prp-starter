@@ -1,48 +1,48 @@
-Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
-Epic,TDA-1,1,Authentication & Security Foundation,,To Do,High,team.alpha@company.com,epic
-Epic,TDA-2,2,UI Foundation & Component Library,,To Do,High,team.beta@company.com,epic
-Epic,TDA-3,3,Trading Dashboard & Position Management,,To Do,High,team.alpha@company.com,epic
-Epic,TDA-4,4,Market Data Integration & Trading Signals,,To Do,High,team.beta@company.com,epic
-Epic,TDA-5,5,Top Gainers & Market Analytics,,To Do,Medium,team.gamma@company.com,epic
-Epic,TDA-6,6,Advanced Trading Statistics & Analytics,,To Do,Medium,available.team@company.com,epic
-Epic,TDA-7,7,Real-time Data Synchronization & Performance Optimization,,To Do,Medium,integration.team@company.com,epic
-Story,TDA-8,8,User Registration & Login System,TDA-1,To Do,Medium,developer1@company.com,feature
-Story,TDA-9,9,Session Management & Token Handling,TDA-1,To Do,Medium,developer2@company.com,feature
-Story,TDA-10,10,Password Recovery & Account Management,TDA-1,To Do,Medium,developer1@company.com,feature
-Story,TDA-11,11,Protected Routes & Authorization,TDA-1,To Do,Medium,developer2@company.com,feature
-Story,TDA-12,12,Supabase RLS Policies & Data Security,TDA-1,To Do,High,developer2@company.com,feature
-Story,TDA-13,13,shadcn/ui Setup & Configuration,TDA-2,To Do,Medium,developer3@company.com,feature
-Story,TDA-14,14,Dashboard Layout Components,TDA-2,To Do,Medium,developer4@company.com,feature
-Story,TDA-15,15,Data Table Components,TDA-2,To Do,Medium,developer3@company.com,feature
-Story,TDA-16,16,Chart & Visualization Components,TDA-2,To Do,Medium,developer4@company.com,feature
-Story,TDA-17,17,Form & Input Components,TDA-2,To Do,Medium,developer3@company.com,feature
-Story,TDA-18,18,Widget & Card Components,TDA-2,To Do,Medium,developer4@company.com,feature
-Story,TDA-19,19,Active Trades Display & Management,TDA-3,To Do,High,developer1@company.com,feature
-Story,TDA-20,20,Watchlist Management System,TDA-3,To Do,High,developer2@company.com,feature
-Story,TDA-21,21,Risk & Reward Calculations,TDA-3,To Do,High,developer1@company.com,feature
-Story,TDA-22,22,Closed Trades Summary,TDA-3,To Do,Medium,developer2@company.com,feature
-Story,TDA-23,23,Trade Import & Export,TDA-3,To Do,Medium,developer1@company.com,feature
-Story,TDA-24,24,Position Monitoring Dashboard,TDA-3,To Do,High,developer2@company.com,feature
-Story,TDA-25,25,Free API Integration Setup,TDA-4,To Do,High,developer3@company.com,feature
-Story,TDA-26,26,Real-time Price Data Service,TDA-4,To Do,High,developer4@company.com,feature
-Story,TDA-27,27,Trading Signal Generation,TDA-4,To Do,Medium,developer3@company.com,feature
-Story,TDA-28,28,Market Status Integration,TDA-4,To Do,Medium,developer4@company.com,feature
-Story,TDA-29,29,Data Caching & Performance,TDA-4,To Do,Medium,developer3@company.com,feature
-Story,TDA-30,30,Error Handling & Fallbacks,TDA-4,To Do,Medium,developer4@company.com,feature
-Story,TDA-31,31,Top Gainers Data Collection,TDA-5,To Do,Medium,developer5@company.com,feature
-Story,TDA-32,32,Time Period Analysis,TDA-5,To Do,Medium,developer5@company.com,feature
-Story,TDA-33,33,Industry Group Classification,TDA-5,To Do,Medium,developer5@company.com,feature
-Story,TDA-34,34,Gainers Display Interface,TDA-5,To Do,Medium,developer5@company.com,feature
-Story,TDA-35,35,Market Analytics Dashboard,TDA-5,To Do,Medium,developer5@company.com,feature
-Story,TDA-36,36,Equity Curve Visualization,TDA-6,To Do,Medium,developer6@company.com,feature
-Story,TDA-37,37,Return Distribution Analysis,TDA-6,To Do,Medium,developer7@company.com,feature
-Story,TDA-38,38,Comprehensive Trading Statistics,TDA-6,To Do,Medium,developer6@company.com,feature
-Story,TDA-39,39,Historical Trades Analysis,TDA-6,To Do,Medium,developer7@company.com,feature
-Story,TDA-40,40,Performance Attribution & Metrics,TDA-6,To Do,Medium,developer6@company.com,feature
-Story,TDA-41,41,Reporting & Export Features,TDA-6,To Do,Low,developer7@company.com,feature
-Story,TDA-42,42,WebSocket Connection Management,TDA-7,To Do,High,developer8@company.com,feature
-Story,TDA-43,43,Real-time Data Broadcasting,TDA-7,To Do,High,developer8@company.com,feature
-Story,TDA-44,44,Intelligent Caching Strategy,TDA-7,To Do,Medium,developer8@company.com,feature
-Story,TDA-45,45,Performance Monitoring & Optimization,TDA-7,To Do,Medium,developer8@company.com,feature
-Story,TDA-46,46,Error Handling & Recovery,TDA-7,To Do,Medium,developer8@company.com,feature
-Story,TDA-47,47,Data Synchronization Coordination,TDA-7,To Do,Medium,developer8@company.com,feature
+Issue Type,Summary,Priority,Assignee,Labels
+Epic,Authentication & Security Foundation,High,team.alpha@company.com,epic
+Epic,UI Foundation & Component Library,High,team.beta@company.com,epic
+Epic,Trading Dashboard & Position Management,High,team.alpha@company.com,epic
+Epic,Market Data Integration & Trading Signals,High,team.beta@company.com,epic
+Epic,Top Gainers & Market Analytics,Medium,team.gamma@company.com,epic
+Epic,Advanced Trading Statistics & Analytics,Medium,available.team@company.com,epic
+Epic,Real-time Data Synchronization & Performance Optimization,Medium,integration.team@company.com,epic
+Story,User Registration & Login System,Medium,developer1@company.com,feature
+Story,Session Management & Token Handling,Medium,developer2@company.com,feature
+Story,Password Recovery & Account Management,Medium,developer1@company.com,feature
+Story,Protected Routes & Authorization,Medium,developer2@company.com,feature
+Story,Supabase RLS Policies & Data Security,High,developer2@company.com,feature
+Story,shadcn/ui Setup & Configuration,Medium,developer3@company.com,feature
+Story,Dashboard Layout Components,Medium,developer4@company.com,feature
+Story,Data Table Components,Medium,developer3@company.com,feature
+Story,Chart & Visualization Components,Medium,developer4@company.com,feature
+Story,Form & Input Components,Medium,developer3@company.com,feature
+Story,Widget & Card Components,Medium,developer4@company.com,feature
+Story,Active Trades Display & Management,High,developer1@company.com,feature
+Story,Watchlist Management System,High,developer2@company.com,feature
+Story,Risk & Reward Calculations,High,developer1@company.com,feature
+Story,Closed Trades Summary,Medium,developer2@company.com,feature
+Story,Trade Import & Export,Medium,developer1@company.com,feature
+Story,Position Monitoring Dashboard,High,developer2@company.com,feature
+Story,Free API Integration Setup,High,developer3@company.com,feature
+Story,Real-time Price Data Service,High,developer4@company.com,feature
+Story,Trading Signal Generation,Medium,developer3@company.com,feature
+Story,Market Status Integration,Medium,developer4@company.com,feature
+Story,Data Caching & Performance,Medium,developer3@company.com,feature
+Story,Error Handling & Fallbacks,Medium,developer4@company.com,feature
+Story,Top Gainers Data Collection,Medium,developer5@company.com,feature
+Story,Time Period Analysis,Medium,developer5@company.com,feature
+Story,Industry Group Classification,Medium,developer5@company.com,feature
+Story,Gainers Display Interface,Medium,developer5@company.com,feature
+Story,Market Analytics Dashboard,Medium,developer5@company.com,feature
+Story,Equity Curve Visualization,Medium,developer6@company.com,feature
+Story,Return Distribution Analysis,Medium,developer7@company.com,feature
+Story,Comprehensive Trading Statistics,Medium,developer6@company.com,feature
+Story,Historical Trades Analysis,Medium,developer7@company.com,feature
+Story,Performance Attribution & Metrics,Medium,developer6@company.com,feature
+Story,Reporting & Export Features,Low,developer7@company.com,feature
+Story,WebSocket Connection Management,High,developer8@company.com,feature
+Story,Real-time Data Broadcasting,High,developer8@company.com,feature
+Story,Intelligent Caching Strategy,Medium,developer8@company.com,feature
+Story,Performance Monitoring & Optimization,Medium,developer8@company.com,feature
+Story,Error Handling & Recovery,Medium,developer8@company.com,feature
+Story,Data Synchronization Coordination,Medium,developer8@company.com,feature

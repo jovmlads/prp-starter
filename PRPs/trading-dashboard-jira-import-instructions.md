@@ -1,80 +1,66 @@
-# Trading Dashboard - Official Jira Import Instructions
+# Trading Dashboard - Jira CSV Import Instructions (Classic Importer)
 
-## 🎯 **Official Atlassian Parent-Child Mapping Structure**
+## 🎯 **Epic Link Method for Classic Jira CSV Importer**
 
-The updated CSV file (`trading-dashboard-jira-import.csv`) follows **official Atlassian guidelines** for maintaining parent-child relationships during CSV import to Jira Cloud, as documented at: https://support.atlassian.com/jira/kb/keep-issue-parent-child-mapping-during-csv-import-to-jira-cloud/
+The updated CSV file (`trading-dashboard-jira-import.csv`) uses the **Epic Link field** method optimized for the **classic Jira CSV importer** to ensure automatic Epic-Story relationships are created during import.
 
 ```
-Epic (Authentication & Security Foundation) - ID: 1
-├── Story (User Registration & Login System) - ID: 8, Parent: 1
-├── Story (Session Management & Token Handling) - ID: 9, Parent: 1
-├── Story (Password Recovery & Account Management) - ID: 10, Parent: 1
-├── Story (Protected Routes & Authorization) - ID: 11, Parent: 1
-└── Story (Supabase RLS Policies & Data Security) - ID: 12, Parent: 1
+Epic (Authentication & Security Foundation)
+├── Story (User Registration & Login System) - Epic Link: "Authentication & Security Foundation"
+├── Story (Session Management & Token Handling) - Epic Link: "Authentication & Security Foundation"
+├── Story (Password Recovery & Account Management) - Epic Link: "Authentication & Security Foundation"
+├── Story (Protected Routes & Authorization) - Epic Link: "Authentication & Security Foundation"
+└── Story (Supabase RLS Policies & Data Security) - Epic Link: "Authentication & Security Foundation"
 ```
 
-### **Required Fields (Official Atlassian Format)**:
+### **Required Fields (Classic Importer Format)**:
 
 ✅ **Issue Type** - Epic/Story hierarchy (required)  
-✅ **Issue Key** - Placeholder keys (TDA-1, TDA-2, etc.)  
-✅ **Issue ID** - Unique identifiers for parent-child mapping (required)  
 ✅ **Summary** - Issue titles (required)  
-✅ **Parent** - Issue ID references for hierarchy (required)  
-✅ **Status** - All set to "To Do" initially  
+✅ **Epic Link** - Epic names for Story linkage (required for Stories)  
 ✅ **Priority** - High/Medium/Low priorities  
-✅ **Assignee** - Team/developer assignments  
+✅ **Assignee** - Team/developer email assignments  
 ✅ **Labels** - Epic/feature tags for organization
 
-### **Critical Updates from Atlassian Guidelines**:
+### **Key Changes for Classic Importer Compatibility**:
 
-✅ **Parent Field Required** - Essential for maintaining Epic → Story hierarchy  
-✅ **Issue ID Mapping** - Each issue has unique ID, Stories reference Epic IDs in Parent field  
-✅ **Proper Hierarchy Order** - Epics listed first (IDs 1-7), then Stories (IDs 8-47)  
-✅ **Epic Link Deprecated** - Replaced with Parent field as of April 2024  
-✅ **Status Field Added** - All issues start in "To Do" status  
-✅ **Issue Key Placeholders** - TDA-1, TDA-2, etc. (will be reassigned during import)
+✅ **Epic Link Field** - Stories reference Epic names (not IDs or keys)  
+✅ **Simplified Structure** - Removed Issue Key, Issue ID, Parent, Status (not needed)  
+✅ **Epic Name Matching** - Exact Epic Summary matches in Epic Link field  
+✅ **Email Format** - All assignees use valid email format  
+✅ **Label Recognition** - Single word labels for automatic mapping
 
-## 📋 **Step-by-Step Jira Import Process (Official Atlassian Method)**
+## 📋 **Step-by-Step Jira Import Process (Classic Importer Method)**
 
-### **Step 1: Prerequisites - Enable Sub-tasks**
+### **Step 1: Prerequisites - Enable Epic Link Field**
 
-⚠️ **CRITICAL**: Before importing, ensure sub-tasks are enabled in your Jira instance:
+⚠️ **CRITICAL**: Ensure Epic Link field is available in your project:
 
-1. **Navigate to Jira Administration**:
+1. **Check Epic Link Field**:
 
-   - Go to **Settings (cog icon) → System**
-   - Navigate to **Work items → Sub-Tasks**
-   - Or visit directly: `https://[yoursite].atlassian.net/secure/admin/subtasks/ManageSubTasks.jspa`
+   - Go to **Project Settings → Issue Types**
+   - Verify **Epic Link** field is available for Story issue type
+   - If missing, add Epic Link field to Story screens
 
-2. **Enable Sub-tasks**:
-
-   - Ensure sub-tasks are enabled
-   - This makes the **Parent** field available during import mapping
-
-3. **Verify Linked Issues Field**:
-   - Ensure **Linked Issues** field is included on all screens
-   - This resolves Parent field mapping issues during import
+2. **Project Configuration**:
+   - Ensure **Epic** and **Story** issue types are enabled
+   - Verify you're using a Software project (not Business)
 
 ### **Step 2: Prepare Jira Project**
 
-1. **Create New Jira Project**:
-
+1. **Create or Verify Project**:
    - Project Type: **Software Development**
    - Template: **Scrum** or **Kanban**
-   - Project Key: **TDA** (matches CSV Issue Keys)
+   - Ensure Epic and Story issue types are available
 
-2. **Configure Issue Types**:
-   - Ensure **Epic** and **Story** issue types are available
-   - Verify **Parent** field is accessible (requires sub-tasks enabled)
+### **Step 3: Import CSV File Using Classic Importer**
 
-### **Step 3: Import CSV File Using Official Method**
-
-1. **Navigate to Classic Import Experience**:
+1. **Navigate to Classic Import**:
 
    - Go to **Settings (cog icon) → System**
-   - Navigate to **External system import** under "Import and export" heading
-   - Select **Switch to the old experience** (required for Parent field mapping)
+   - Navigate to **External system import**
    - Select **CSV**
+   - **IMPORTANT**: Use the classic experience for Epic Link support
 
 2. **Upload File**:
 
@@ -84,39 +70,56 @@ Epic (Authentication & Security Foundation) - ID: 1
 3. **Select Destination Project**:
 
    - Choose your **Trading Dashboard** project
-   - Leave date/time formatting as default unless you have custom fields
+   - Leave date/time formatting as default
 
 4. **Critical Field Mapping** (Map CSV columns to Jira fields exactly):
 
    ```
-   CSV Column               → Jira Field
-   ────────────────────────────────────────
+   CSV Column               → Jira Field (REQUIRED MAPPING)
+   ──────────────────────────────────────────────────────
    Issue Type              → Issue Type ✅
-   Issue Key               → Issue Key ✅
-   Issue ID                → Issue ID ✅
    Summary                 → Summary ✅
-   Parent                  → Parent ✅
-   Status                  → Status ✅
+   Epic Link               → Epic Link ✅ (CRITICAL for Story linking)
    Priority                → Priority ✅
    Assignee                → Assignee ✅
-   Labels                  → Labels ✅
+   Labels                  → Labels ✅ (Manual mapping required)
    ```
 
-5. **Verify Parent Field Mapping**:
+5. **Epic Link Field Mapping** (MOST IMPORTANT):
 
-   - **MOST IMPORTANT**: Ensure **Parent** column maps to **Parent** field
-   - If Parent field is not available, verify sub-tasks are enabled (Step 1)
-   - This mapping creates the Epic → Story hierarchy automatically
+   - **CSV "Epic Link" column** MUST map to **"Epic Link" field**
+   - This creates automatic Epic → Story relationships
+   - Epics have empty Epic Link, Stories reference Epic names
 
-6. **Status Mapping Verification**:
+6. **Labels Field Mapping** (Classic Importer Fix):
 
-   - Verify **"To Do"** status maps to appropriate status in your project
-   - All issues will be created in "To Do" state initially
+   - **Manual Selection Required**: Classic importer doesn't auto-detect Labels
+   - **Explicitly select "Labels"** from dropdown for Labels column
+   - Don't leave unmapped or it will be ignored
 
-7. **Complete Import**:
+7. **Assignee Field Verification**:
+   - Verify email addresses map correctly to user accounts
+   - Invalid emails will create user creation warnings (acceptable)
+
+### **Step 4: Complete Import Process**
+
+1. **Review Field Mappings**:
+
+   - Verify all 6 fields are properly mapped
+   - **Epic Link mapping is CRITICAL** for hierarchy creation
+   - **Labels field must be manually selected** from dropdown
+
+2. **Import Execution**:
+
    - Click **Next** after field mapping
-   - Review status mappings
+   - Review any warnings (email creation warnings are normal)
    - Click **Begin import**
+
+3. **Expected Import Result**:
+   - **7 Epics** created first
+   - **40 Stories** created with automatic Epic Link relationships
+   - **Epic boards** will show linked Stories immediately
+   - **No manual linking required**
 
 ### **Step 4: Verify Successful Parent-Child Import**
 
@@ -160,9 +163,132 @@ After import, you should see **automatic Epic → Story hierarchy**:
 #### **Problem: Parent Field Not Available During Mapping**
 
 **Solution**:
+
 1. Enable sub-tasks: **Settings → System → Work items → Sub-Tasks**
 2. Add **Linked Issues** field to all screens in project
 3. Restart import process with classic import experience
+
+#### **Problem: "Unable to retrieve issue key for parent" Warnings (EXPECTED)**
+
+**Warning Example**: `Unable to retrieve issue key for parent : TDA-1, TDA-2, TDA-3...`
+
+**Explanation**: ✅ **This is NORMAL and EXPECTED behavior during CSV import**
+
+**Why This Happens**:
+
+1. **Placeholder Issue Keys**: CSV uses placeholder keys (TDA-1, TDA-2) that don't exist yet
+2. **Jira Reassignment**: Jira will assign new sequential keys during import process
+3. **Parent Resolution**: Jira resolves parent relationships AFTER creating all issues
+4. **Hierarchy Creation**: Epic → Story relationships are established using Issue ID mapping
+
+**Verification Steps** (Confirm Import Success):
+
+1. **Check Project Dashboard**:
+
+   - Navigate to your Trading Dashboard project
+   - Verify **7 Epics** and **40 Stories** are visible
+   - New issue keys will be sequential (TD-1, TD-2, TD-3... or similar)
+
+2. **Verify Epic Hierarchy**:
+
+   - Open any Epic (should show "X of Y Stories completed")
+   - Epic should display linked Stories in "Child Issues" section
+   - Stories should show parent Epic in "Parent Link" or "Epic Link" field
+
+3. **Check Board View**:
+   - Epic boards should show 7 Epics with progress tracking
+   - Story boards should group Stories by parent Epic
+   - All 47 issues should be accessible and organized
+
+✅ **Expected Result**: Despite warnings, Epic → Story hierarchy should be created automatically
+
+#### **Problem: Stories Not Linked to Epics After Import (CRITICAL FIX NEEDED)**
+
+**Symptoms**:
+
+- Board shows 40 Stories (TD-8 through TD-47) but no Epics
+- Stories appear unlinked (no parent Epic relationships)
+- 7 Epics exist (TD-1 through TD-7) but are separate from Stories
+
+**Root Cause**: Parent field mapping during import didn't create Epic-Story relationships
+
+**SOLUTION - Manual Epic-Story Linking (Immediate Fix)**:
+
+**Step 1: Bulk Link Stories to Epics**
+
+1. **Open Jira Issues Search**:
+
+   - Navigate to **Issues → Search for Issues**
+   - Use JQL: `project = "Trading Dashboard" AND type = Story`
+
+2. **Bulk Edit Stories by Epic Group**:
+
+   **Epic 1 - Authentication & Security Foundation (TD-1)**:
+
+   - Select Stories: TD-8, TD-9, TD-10, TD-11, TD-12
+   - **Tools → Bulk Change → Edit Issues**
+   - **Add/Change Epic Link** → Select TD-1 (Authentication & Security Foundation)
+
+   **Epic 2 - UI Foundation & Component Library (TD-2)**:
+
+   - Select Stories: TD-13, TD-14, TD-15, TD-16, TD-17, TD-18
+   - **Tools → Bulk Change → Edit Issues**
+   - **Add/Change Epic Link** → Select TD-2 (UI Foundation & Component Library)
+
+   **Epic 3 - Trading Dashboard & Position Management (TD-3)**:
+
+   - Select Stories: TD-19, TD-20, TD-21, TD-22, TD-23, TD-24
+   - **Add/Change Epic Link** → Select TD-3 (Trading Dashboard & Position Management)
+
+   **Epic 4 - Market Data Integration & Trading Signals (TD-4)**:
+
+   - Select Stories: TD-25, TD-26, TD-27, TD-28, TD-29, TD-30
+   - **Add/Change Epic Link** → Select TD-4 (Market Data Integration & Trading Signals)
+
+   **Epic 5 - Top Gainers & Market Analytics (TD-5)**:
+
+   - Select Stories: TD-31, TD-32, TD-33, TD-34, TD-35
+   - **Add/Change Epic Link** → Select TD-5 (Top Gainers & Market Analytics)
+
+   **Epic 6 - Advanced Trading Statistics & Analytics (TD-6)**:
+
+   - Select Stories: TD-36, TD-37, TD-38, TD-39, TD-40, TD-41
+   - **Add/Change Epic Link** → Select TD-6 (Advanced Trading Statistics & Analytics)
+
+   **Epic 7 - Real-time Data Synchronization & Performance Optimization (TD-7)**:
+
+   - Select Stories: TD-42, TD-43, TD-44, TD-45, TD-46, TD-47
+   - **Add/Change Epic Link** → Select TD-7 (Real-time Data Synchronization & Performance)
+
+**Step 2: Verify Epic Boards**
+
+After linking, verify:
+
+- **Epic Panel View**: Each Epic shows "X of Y Stories completed"
+- **Board Configuration**: Enable Epic panels in board settings
+- **Epic Progress**: Stories contribute to Epic completion percentage
+
+**Alternative Method - Individual Story Linking**:
+
+1. **Open each Story** (TD-8, TD-9, etc.)
+2. **Find Epic Link field** (or Parent field)
+3. **Link to appropriate Epic**:
+   - TD-8 through TD-12 → Link to TD-1 (Authentication Epic)
+   - TD-13 through TD-18 → Link to TD-2 (UI Foundation Epic)
+   - [Continue pattern based on groups above]
+
+**Step 3: Configure Board for Epic Display**
+
+1. **Board Settings**:
+
+   - Navigate to **Board → Configure → Card Layout**
+   - Ensure **Epic Name** or **Epic Link** is displayed on cards
+
+2. **Enable Epic Panel**:
+   - **Board → Configure → Epics**
+   - Enable **Epics Panel** to show Epic swimlanes
+
+✅ **Expected Result After Fix**: Board will show Epic-grouped Stories with proper hierarchy and progress tracking
 
 #### **Problem: Invalid Email Address Errors (User Creation)**
 
@@ -171,6 +297,7 @@ After import, you should see **automatic Epic → Story hierarchy**:
 **Cause**: Jira requires valid email addresses for user assignment, not display names
 
 **Solution - Updated CSV with Valid Email Format**:
+
 ```csv
 Original (Invalid)     → Fixed (Valid Email)
 Team Alpha            → team.alpha@company.com
@@ -187,6 +314,7 @@ Available Team        → available.team@company.com
 **Cause**: Parent field containing Epic Issue IDs instead of Epic Issue Keys
 
 **Solution - Corrected Parent Field Format**:
+
 ```csv
 Original (Causes Error)    → Fixed (Correct Format)
 Parent: 1                 → Parent: TDA-1
@@ -199,6 +327,7 @@ Parent: 3                 → Parent: TDA-3
 #### **Problem: Hierarchy Not Created After Import**
 
 **Solution**:
+
 1. Verify **Issue ID** and **Parent** columns were mapped correctly
 2. Check that Epic Keys (TDA-1, TDA-2) appear in Parent column for Stories
 3. Ensure CSV follows hierarchy order: Epics first, then Stories
@@ -206,6 +335,7 @@ Parent: 3                 → Parent: TDA-3
 #### **Problem: Issues Import But No Relationships**
 
 **Solution**:
+
 1. Confirm using **classic import experience** (not new importer)
 2. Verify **Parent** field mapping (not Epic Link - deprecated)
 3. Check Issue Key format consistency (TDA-1, TDA-2, etc.)

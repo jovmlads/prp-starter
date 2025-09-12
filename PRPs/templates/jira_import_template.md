@@ -1,40 +1,34 @@
-# Official Jira Import Template (Atlassian Parent-Child Method)
+# Jira Import Template (Classic Importer - Epic Link Method)
 
-This template follows **official Atlassian guidelines** for generating Jira-ready CSV import files that maintain parent-child relationships during import, as documented at: https://support.atlassian.com/jira/kb/keep-issue-parent-child-mapping-during-csv-import-to-jira-cloud/
+This template uses the **Epic Link field method** optimized for the **classic Jira CSV importer** to ensure automatic Epic-Story relationships are created during import.
 
-## Required CSV Structure (Official Atlassian Format)
+## Required CSV Structure (Classic Importer Format)
 
 The generated `PRPs/[project-name]-jira-import.csv` file **MUST** follow this exact format:
 
 ```csv
-Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
-Epic,PRJ-1,1,Epic Name,,To Do,High,Team Lead,epic
-Story,PRJ-2,2,Feature Name,1,To Do,Medium,Developer,feature
-Story,PRJ-3,3,Another Feature,1,To Do,Medium,Developer,feature
+Issue Type,Summary,Epic Link,Priority,Assignee,Labels
+Epic,Epic Name,,High,team.lead@company.com,epic
+Story,Feature Name,Epic Name,Medium,developer@company.com,feature
+Story,Another Feature,Epic Name,Medium,developer@company.com,feature
 ```
 
-## Critical Requirements (Atlassian Specifications)
+## Critical Requirements (Classic Importer Specifications)
 
 ### **Mandatory Fields**:
 
-✅ **Issue Type** - Epic/Story/Task hierarchy (required)  
-✅ **Issue Key** - Placeholder keys (PRJ-1, PRJ-2, etc.) - will be reassigned  
-✅ **Issue ID** - Unique numeric identifiers for parent-child mapping (required)  
+✅ **Issue Type** - Epic/Story hierarchy (required)  
 ✅ **Summary** - Issue titles (required)  
-✅ **Parent** - Issue ID references for hierarchy (required for non-Epic items)  
-✅ **Status** - Initial status (typically "To Do")
+✅ **Epic Link** - Epic names for Story linkage (required for Stories)  
+✅ **Priority** - High/Medium/Low priorities  
+✅ **Assignee** - Team/developer email assignments  
+✅ **Labels** - Epic/feature tags for organization
 
-### **Hierarchy Ordering Requirements**:
+### **Epic Link Field Rules**:
 
-1. **Epics MUST be listed first** (Issue IDs 1-N, empty Parent field)
-2. **Stories follow Epics** (Issue IDs N+1-M, Parent = Epic Issue ID)
-3. **Sub-tasks follow Stories** (Issue IDs M+1-Z, Parent = Story Issue ID)
-
-### **Parent Field Mapping**:
-
-- **Epics**: Parent field is **empty** (top-level items)
-- **Stories**: Parent field contains **Epic's Issue Key** (e.g., "TDA-1")
-- **Sub-tasks**: Parent field contains **Story's Issue Key** (e.g., "TDA-8")
+- **Epics**: Epic Link field is **empty** (top-level items)
+- **Stories**: Epic Link field contains **exact Epic Summary name**
+- **No Issue IDs or Keys**: Use actual Epic names for linking
 
 ### **Assignee Field Format**:
 
@@ -45,15 +39,13 @@ Story,PRJ-3,3,Another Feature,1,To Do,Medium,Developer,feature
 ## Example Project Structure (Correct Format)
 
 ```csv
-Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
-Epic,TDA-1,1,User Authentication System,,To Do,High,backend.team@company.com,epic
-Epic,TDA-2,2,Dashboard UI Framework,,To Do,High,frontend.team@company.com,epic
-Story,TDA-3,3,User Registration & Login,TDA-1,To Do,Medium,developer1@company.com,feature
-Story,TDA-4,4,OAuth2 Integration,TDA-1,To Do,Medium,developer2@company.com,feature
-Story,TDA-5,5,Dashboard Layout Components,TDA-2,To Do,Medium,developer3@company.com,feature
-Story,TDA-6,6,Navigation & Routing,TDA-2,To Do,Medium,developer4@company.com,feature
-Sub-task,TDA-7,7,Email Verification Template,TDA-3,To Do,Low,developer1@company.com,task
-Sub-task,TDA-8,8,Password Validation Logic,TDA-3,To Do,Low,developer1@company.com,task
+Issue Type,Summary,Epic Link,Priority,Assignee,Labels
+Epic,User Authentication System,,High,backend.team@company.com,epic
+Epic,Dashboard UI Framework,,High,frontend.team@company.com,epic
+Story,User Registration & Login,User Authentication System,Medium,developer1@company.com,feature
+Story,OAuth2 Integration,User Authentication System,Medium,developer2@company.com,feature
+Story,Dashboard Layout Components,Dashboard UI Framework,Medium,developer3@company.com,feature
+Story,Navigation & Routing,Dashboard UI Framework,Medium,developer4@company.com,feature
 ```
 
 ## Field Descriptions (Updated for Parent-Child Method)
