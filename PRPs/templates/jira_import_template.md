@@ -33,21 +33,27 @@ Story,PRJ-3,3,Another Feature,1,To Do,Medium,Developer,feature
 ### **Parent Field Mapping**:
 
 - **Epics**: Parent field is **empty** (top-level items)
-- **Stories**: Parent field contains **Epic's Issue ID**
-- **Sub-tasks**: Parent field contains **Story's Issue ID**
+- **Stories**: Parent field contains **Epic's Issue Key** (e.g., "TDA-1")
+- **Sub-tasks**: Parent field contains **Story's Issue Key** (e.g., "TDA-8")
+
+### **Assignee Field Format**:
+
+- **Valid Email Addresses Required**: Jira requires proper email format for user assignment
+- **Correct Format**: developer1@company.com, team.alpha@company.com
+- **Invalid Format**: Developer 1, Team Alpha (causes import errors)
 
 ## Example Project Structure (Correct Format)
 
 ```csv
 Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
-Epic,TDA-1,1,User Authentication System,,To Do,High,Backend Team,epic
-Epic,TDA-2,2,Dashboard UI Framework,,To Do,High,Frontend Team,epic
-Story,TDA-3,3,User Registration & Login,1,To Do,Medium,Developer 1,feature
-Story,TDA-4,4,OAuth2 Integration,1,To Do,Medium,Developer 2,feature
-Story,TDA-5,5,Dashboard Layout Components,2,To Do,Medium,Developer 3,feature
-Story,TDA-6,6,Navigation & Routing,2,To Do,Medium,Developer 4,feature
-Sub-task,TDA-7,7,Email Verification Template,3,To Do,Low,Developer 1,task
-Sub-task,TDA-8,8,Password Validation Logic,3,To Do,Low,Developer 1,task
+Epic,TDA-1,1,User Authentication System,,To Do,High,backend.team@company.com,epic
+Epic,TDA-2,2,Dashboard UI Framework,,To Do,High,frontend.team@company.com,epic
+Story,TDA-3,3,User Registration & Login,TDA-1,To Do,Medium,developer1@company.com,feature
+Story,TDA-4,4,OAuth2 Integration,TDA-1,To Do,Medium,developer2@company.com,feature
+Story,TDA-5,5,Dashboard Layout Components,TDA-2,To Do,Medium,developer3@company.com,feature
+Story,TDA-6,6,Navigation & Routing,TDA-2,To Do,Medium,developer4@company.com,feature
+Sub-task,TDA-7,7,Email Verification Template,TDA-3,To Do,Low,developer1@company.com,task
+Sub-task,TDA-8,8,Password Validation Logic,TDA-3,To Do,Low,developer1@company.com,task
 ```
 
 ## Field Descriptions (Updated for Parent-Child Method)
@@ -67,8 +73,15 @@ Sub-task,TDA-8,8,Password Validation Logic,3,To Do,Low,Developer 1,task
 ### Parent Field Rules
 
 - **Epic Parent**: Always empty (top-level hierarchy)
-- **Story Parent**: Contains Epic's Issue ID (e.g., "1" for Epic with ID 1)
-- **Sub-task Parent**: Contains Story's Issue ID (e.g., "3" for Story with ID 3)
+- **Story Parent**: Contains Epic's Issue Key (e.g., "TDA-1" for Epic with key TDA-1)
+- **Sub-task Parent**: Contains Story's Issue Key (e.g., "TDA-3" for Story with key TDA-3)
+
+### Assignee Field Requirements
+
+- **Email Format Required**: All assignees must use valid email addresses
+- **Valid Examples**: developer1@company.com, team.lead@company.com, frontend.team@company.com
+- **Invalid Examples**: Developer 1, Team Lead, Frontend Team (will cause import errors)
+- **Team Assignment**: Use team-based emails for Epic-level assignments
 
 ### Status Field
 
@@ -176,20 +189,20 @@ The Parent-Child CSV method integrates with PRP workflow:
 
 ```csv
 Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
-Epic,ECOM-1,1,Product Catalog System,,To Do,High,Backend Team,epic
-Epic,ECOM-2,2,Checkout & Payment Flow,,To Do,High,Frontend Team,epic
-Story,ECOM-3,3,Product Search & Filtering,1,To Do,Medium,Developer 1,feature
-Story,ECOM-4,4,Shopping Cart Management,2,To Do,Medium,Developer 2,feature
+Epic,ECOM-1,1,Product Catalog System,,To Do,High,backend.team@company.com,epic
+Epic,ECOM-2,2,Checkout & Payment Flow,,To Do,High,frontend.team@company.com,epic
+Story,ECOM-3,3,Product Search & Filtering,ECOM-1,To Do,Medium,developer1@company.com,feature
+Story,ECOM-4,4,Shopping Cart Management,ECOM-2,To Do,Medium,developer2@company.com,feature
 ```
 
 **Mobile App**:
 
 ```csv
 Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
-Epic,MOBILE-1,1,User Onboarding Experience,,To Do,High,Mobile Team,epic
-Epic,MOBILE-2,2,Core Feature Implementation,,To Do,High,Mobile Team,epic
-Story,MOBILE-3,3,Registration & Profile Setup,1,To Do,Medium,iOS Developer,feature
-Story,MOBILE-4,4,Main Navigation & Tab Bar,2,To Do,Medium,Android Developer,feature
+Epic,MOBILE-1,1,User Onboarding Experience,,To Do,High,mobile.team@company.com,epic
+Epic,MOBILE-2,2,Core Feature Implementation,,To Do,High,mobile.team@company.com,epic
+Story,MOBILE-3,3,Registration & Profile Setup,MOBILE-1,To Do,Medium,ios.developer@company.com,feature
+Story,MOBILE-4,4,Main Navigation & Tab Bar,MOBILE-2,To Do,Medium,android.developer@company.com,feature
 ```
 
 ## Best Practices for Parent-Child CSV

@@ -160,26 +160,55 @@ After import, you should see **automatic Epic → Story hierarchy**:
 #### **Problem: Parent Field Not Available During Mapping**
 
 **Solution**:
-
 1. Enable sub-tasks: **Settings → System → Work items → Sub-Tasks**
 2. Add **Linked Issues** field to all screens in project
 3. Restart import process with classic import experience
 
+#### **Problem: Invalid Email Address Errors (User Creation)**
+
+**Error Example**: `Cannot create user availableteam: User availableteam has an invalid e-mail address [ateam@]`
+
+**Cause**: Jira requires valid email addresses for user assignment, not display names
+
+**Solution - Updated CSV with Valid Email Format**:
+```csv
+Original (Invalid)     → Fixed (Valid Email)
+Team Alpha            → team.alpha@company.com
+Developer 1           → developer1@company.com
+Available Team        → available.team@company.com
+```
+
+✅ **Fixed in CSV**: All assignees now use proper email format (developer1@company.com, team.alpha@company.com, etc.)
+
+#### **Problem: Parent Field "Work Item" Format Errors**
+
+**Error Example**: `Cannot add value [ Work item ] to CustomField [TD-1] in Parent Link`
+
+**Cause**: Parent field containing Epic Issue IDs instead of Epic Issue Keys
+
+**Solution - Corrected Parent Field Format**:
+```csv
+Original (Causes Error)    → Fixed (Correct Format)
+Parent: 1                 → Parent: TDA-1
+Parent: 2                 → Parent: TDA-2
+Parent: 3                 → Parent: TDA-3
+```
+
+✅ **Fixed in CSV**: All Parent fields now reference Epic Issue Keys (TDA-1, TDA-2) instead of numeric IDs
+
 #### **Problem: Hierarchy Not Created After Import**
 
 **Solution**:
-
 1. Verify **Issue ID** and **Parent** columns were mapped correctly
-2. Check that Epic IDs (1-7) appear in Parent column for Stories
+2. Check that Epic Keys (TDA-1, TDA-2) appear in Parent column for Stories
 3. Ensure CSV follows hierarchy order: Epics first, then Stories
 
 #### **Problem: Issues Import But No Relationships**
 
 **Solution**:
-
 1. Confirm using **classic import experience** (not new importer)
 2. Verify **Parent** field mapping (not Epic Link - deprecated)
-3. Check Issue ID uniqueness and proper parent references
+3. Check Issue Key format consistency (TDA-1, TDA-2, etc.)
 
 #### **Problem: Some Issues Missing from Import**
 
