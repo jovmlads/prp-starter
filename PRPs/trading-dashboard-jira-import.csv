@@ -1,48 +1,48 @@
-Issue Type,Summary,Description,Priority,Assignee,Labels
-Epic,Authentication & Security Foundation,Secure user authentication system with industry-standard login/logout functionality,High,Team Alpha,epic
-Story,User Registration & Login System,Email/password registration with validation and secure login with JWT token generation,Medium,Developer 1,feature
-Story,Session Management & Token Handling,JWT token refresh mechanism and secure session management,Medium,Developer 2,feature
-Story,Password Recovery & Account Management,Password reset flow with email verification and account management,Medium,Developer 1,feature
-Story,Protected Routes & Authorization,React Router protected route implementation with authorization,Medium,Developer 2,feature
-Story,Supabase RLS Policies & Data Security,Row Level Security policy configuration and data protection,High,Developer 2,feature
-Epic,UI Foundation & Component Library,Establish design system and reusable UI components using shadcn/ui,High,Team Beta,epic
-Story,shadcn/ui Setup & Configuration,Complete shadcn/ui installation with custom Trading Dashboard theme,Medium,Developer 3,feature
-Story,Dashboard Layout Components,Main dashboard layout with header sidebar and responsive navigation,Medium,Developer 4,feature
-Story,Data Table Components,Reusable data table with sorting filtering and pagination,Medium,Developer 3,feature
-Story,Chart & Visualization Components,shadcn/ui chart components setup with responsive design and interactive controls,Medium,Developer 4,feature
-Story,Form & Input Components,Trading-specific form inputs with validation and error messaging,Medium,Developer 3,feature
-Story,Widget & Card Components,Dashboard widget containers and statistics display cards,Medium,Developer 4,feature
-Epic,Trading Dashboard & Position Management,Core trading dashboard displaying active trades watchlists and real-time position monitoring,High,Team Alpha,epic
-Story,Active Trades Display & Management,Real-time active trades table with live P&L and trade management,High,Developer 1,feature
-Story,Watchlist Management System,Add/remove instruments to watchlist with real-time price updates,High,Developer 2,feature
-Story,Risk & Reward Calculations,Automatic risk:reward ratio calculations and portfolio risk management,High,Developer 1,feature
-Story,Closed Trades Summary,Daily closed trades summary with performance metrics,Medium,Developer 2,feature
-Story,Trade Import & Export,CSV import for existing trades and data export functionality,Medium,Developer 1,feature
-Story,Position Monitoring Dashboard,Real-time portfolio value display and risk exposure monitoring,High,Developer 2,feature
-Epic,Market Data Integration & Trading Signals,Integration with free market data APIs and trading signal generation,High,Team Beta,epic
-Story,Free API Integration Setup,Alpha Vantage and Polygon.io API integration with rate limiting,High,Developer 3,feature
-Story,Real-time Price Data Service,WebSocket connections for live price updates with caching,High,Developer 4,feature
-Story,Trading Signal Generation,NQ1! EMA 10/20 crossover signal with trend analysis,Medium,Developer 3,feature
-Story,Market Status Integration,Real-time market open/close status with timezone support,Medium,Developer 4,feature
-Story,Data Caching & Performance,Multi-level caching strategy with TTL management,Medium,Developer 3,feature
-Story,Error Handling & Fallbacks,API failure detection with automatic failover mechanisms,Medium,Developer 4,feature
-Epic,Top Gainers & Market Analytics,Display market analytics including top gainers for different time periods and market cap categories,Medium,Team Gamma,epic
-Story,Top Gainers Data Collection,Small mid and large cap top gainers identification with percentage calculations,Medium,Developer 5,feature
-Story,Time Period Analysis,30 60 and 120-day top gainers analysis with period comparison,Medium,Developer 5,feature
-Story,Industry Group Classification,Automatic industry group assignment with sector performance analysis,Medium,Developer 5,feature
-Story,Gainers Display Interface,Interactive top gainers table with filtering and ranking,Medium,Developer 5,feature
-Story,Market Analytics Dashboard,Market sentiment indicators with sector rotation analysis,Medium,Developer 5,feature
-Epic,Advanced Trading Statistics & Analytics,Comprehensive trading performance analysis with statistical visualizations and metrics,Medium,Available Team,epic
-Story,Equity Curve Visualization,Interactive equity curve chart using shadcn/ui charts with zoom/pan and drawdown analysis,Medium,Developer 6,feature
-Story,Return Distribution Analysis,Bell curve visualization of returns using shadcn/ui charts with statistical metrics,Medium,Developer 7,feature
-Story,Comprehensive Trading Statistics,Win rate calculation average risk:reward ratio and performance metrics,Medium,Developer 6,feature
-Story,Historical Trades Analysis,Complete historical trades table with advanced filtering,Medium,Developer 7,feature
-Story,Performance Attribution & Metrics,Sharpe ratio risk-adjusted metrics and drawdown analysis,Medium,Developer 6,feature
-Story,Reporting & Export Features,PDF report generation and Excel export with formatted data,Low,Developer 7,feature
-Epic,Real-time Data Synchronization & Performance Optimization,Optimize real-time data flow implement caching strategies and ensure performance across all features,Medium,Integration Team,epic
-Story,WebSocket Connection Management,Persistent WebSocket connections with automatic reconnection,High,Developer 8,feature
-Story,Real-time Data Broadcasting,Live price update distribution to all components,High,Developer 8,feature
-Story,Intelligent Caching Strategy,Multi-level cache implementation with invalidation strategies,Medium,Developer 8,feature
-Story,Performance Monitoring & Optimization,Real-time performance metrics collection and optimization,Medium,Developer 8,feature
-Story,Error Handling & Recovery,Graceful degradation for failed services with recovery processes,Medium,Developer 8,feature
-Story,Data Synchronization Coordination,Cross-component data consistency with conflict resolution,Medium,Developer 8,feature
+Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
+Epic,TDA-1,1,Authentication & Security Foundation,,To Do,High,Team Alpha,epic
+Epic,TDA-2,2,UI Foundation & Component Library,,To Do,High,Team Beta,epic
+Epic,TDA-3,3,Trading Dashboard & Position Management,,To Do,High,Team Alpha,epic
+Epic,TDA-4,4,Market Data Integration & Trading Signals,,To Do,High,Team Beta,epic
+Epic,TDA-5,5,Top Gainers & Market Analytics,,To Do,Medium,Team Gamma,epic
+Epic,TDA-6,6,Advanced Trading Statistics & Analytics,,To Do,Medium,Available Team,epic
+Epic,TDA-7,7,Real-time Data Synchronization & Performance Optimization,,To Do,Medium,Integration Team,epic
+Story,TDA-8,8,User Registration & Login System,1,To Do,Medium,Developer 1,feature
+Story,TDA-9,9,Session Management & Token Handling,1,To Do,Medium,Developer 2,feature
+Story,TDA-10,10,Password Recovery & Account Management,1,To Do,Medium,Developer 1,feature
+Story,TDA-11,11,Protected Routes & Authorization,1,To Do,Medium,Developer 2,feature
+Story,TDA-12,12,Supabase RLS Policies & Data Security,1,To Do,High,Developer 2,feature
+Story,TDA-13,13,shadcn/ui Setup & Configuration,2,To Do,Medium,Developer 3,feature
+Story,TDA-14,14,Dashboard Layout Components,2,To Do,Medium,Developer 4,feature
+Story,TDA-15,15,Data Table Components,2,To Do,Medium,Developer 3,feature
+Story,TDA-16,16,Chart & Visualization Components,2,To Do,Medium,Developer 4,feature
+Story,TDA-17,17,Form & Input Components,2,To Do,Medium,Developer 3,feature
+Story,TDA-18,18,Widget & Card Components,2,To Do,Medium,Developer 4,feature
+Story,TDA-19,19,Active Trades Display & Management,3,To Do,High,Developer 1,feature
+Story,TDA-20,20,Watchlist Management System,3,To Do,High,Developer 2,feature
+Story,TDA-21,21,Risk & Reward Calculations,3,To Do,High,Developer 1,feature
+Story,TDA-22,22,Closed Trades Summary,3,To Do,Medium,Developer 2,feature
+Story,TDA-23,23,Trade Import & Export,3,To Do,Medium,Developer 1,feature
+Story,TDA-24,24,Position Monitoring Dashboard,3,To Do,High,Developer 2,feature
+Story,TDA-25,25,Free API Integration Setup,4,To Do,High,Developer 3,feature
+Story,TDA-26,26,Real-time Price Data Service,4,To Do,High,Developer 4,feature
+Story,TDA-27,27,Trading Signal Generation,4,To Do,Medium,Developer 3,feature
+Story,TDA-28,28,Market Status Integration,4,To Do,Medium,Developer 4,feature
+Story,TDA-29,29,Data Caching & Performance,4,To Do,Medium,Developer 3,feature
+Story,TDA-30,30,Error Handling & Fallbacks,4,To Do,Medium,Developer 4,feature
+Story,TDA-31,31,Top Gainers Data Collection,5,To Do,Medium,Developer 5,feature
+Story,TDA-32,32,Time Period Analysis,5,To Do,Medium,Developer 5,feature
+Story,TDA-33,33,Industry Group Classification,5,To Do,Medium,Developer 5,feature
+Story,TDA-34,34,Gainers Display Interface,5,To Do,Medium,Developer 5,feature
+Story,TDA-35,35,Market Analytics Dashboard,5,To Do,Medium,Developer 5,feature
+Story,TDA-36,36,Equity Curve Visualization,6,To Do,Medium,Developer 6,feature
+Story,TDA-37,37,Return Distribution Analysis,6,To Do,Medium,Developer 7,feature
+Story,TDA-38,38,Comprehensive Trading Statistics,6,To Do,Medium,Developer 6,feature
+Story,TDA-39,39,Historical Trades Analysis,6,To Do,Medium,Developer 7,feature
+Story,TDA-40,40,Performance Attribution & Metrics,6,To Do,Medium,Developer 6,feature
+Story,TDA-41,41,Reporting & Export Features,6,To Do,Low,Developer 7,feature
+Story,TDA-42,42,WebSocket Connection Management,7,To Do,High,Developer 8,feature
+Story,TDA-43,43,Real-time Data Broadcasting,7,To Do,High,Developer 8,feature
+Story,TDA-44,44,Intelligent Caching Strategy,7,To Do,Medium,Developer 8,feature
+Story,TDA-45,45,Performance Monitoring & Optimization,7,To Do,Medium,Developer 8,feature
+Story,TDA-46,46,Error Handling & Recovery,7,To Do,Medium,Developer 8,feature
+Story,TDA-47,47,Data Synchronization Coordination,7,To Do,Medium,Developer 8,feature

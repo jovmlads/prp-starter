@@ -527,11 +527,13 @@ npm run integration-test-suite
 Generate a separate master reference file containing:
 
 **Complete Epic List:**
+
 - [Epic ID1]: [Epic Name 1]
 - [Epic ID2]: [Epic Name 2]
 - [Epic ID3]: [Epic Name 3]
 
 **Complete Feature List by Epic:**
+
 - **Epic [ID1]: [Epic Name 1]**
   - [ID1].1: [Feature Name 1]
   - [ID1].2: [Feature Name 2]
@@ -542,27 +544,44 @@ Generate a separate master reference file containing:
 
 ### Create Jira Import File: `PRPs/[project-name]-jira-import.csv`
 
-Generate a Jira-ready CSV file for instant project setup:
+Generate a Jira-ready CSV file following **official Atlassian parent-child mapping guidelines**:
 
 ```csv
-Issue Type,Summary,Description,Epic Link,Priority,Story Points,Components,Assignee,Labels
-Epic,[Epic Name 1],[Epic Description],,High,,[Component],[Team Lead],epic
-Story,[Feature Name 1],[Feature Description],[Epic Name 1],Medium,5,[Component],[Developer],feature
-Task,[Task Name 1],[Task Description],[Epic Name 1],Low,2,[Component],[Developer],task
+Issue Type,Issue Key,Issue ID,Summary,Parent,Status,Priority,Assignee,Labels
+Epic,PRJ-1,1,[Epic Name 1],,To Do,High,[Team Lead],epic
+Epic,PRJ-2,2,[Epic Name 2],,To Do,High,[Team Lead],epic
+Story,PRJ-3,3,[Feature Name 1],1,To Do,Medium,[Developer],feature
+Story,PRJ-4,4,[Feature Name 2],1,To Do,Medium,[Developer],feature
+Story,PRJ-5,5,[Feature Name 3],2,To Do,Medium,[Developer],feature
+Sub-task,PRJ-6,6,[Task Name 1],3,To Do,Low,[Developer],task
 ```
 
-**CSV Generation Rules:**
-- **Epics**: High priority, assigned to Team Leads, no story points
-- **Features (Stories)**: Medium priority, 3-8 story points based on complexity
-- **Tasks**: Low priority, 1-3 story points, technical implementation work
-- **Components**: Map to architecture areas (Frontend, Backend, Database, Infrastructure)
-- **Assignees**: Use team structure from Epic assignments
-- **Descriptions**: Include key implementation details and acceptance criteria
+**CSV Generation Rules (Official Atlassian Format):**
 
-**Story Point Guidelines:**
-- 1-2 points: Simple configuration, minor changes
-- 3-5 points: Standard features, moderate complexity
-- 8-13 points: Complex features, major functionality
+✅ **Required Fields**: Issue Type, Issue Key, Issue ID, Summary, Parent, Status  
+✅ **Hierarchy Order**: Epics first (IDs 1-N), Stories next (IDs N+1-M), Sub-tasks last  
+✅ **Parent Mapping**: Stories reference Epic IDs, Sub-tasks reference Story IDs  
+✅ **Issue Keys**: Sequential project keys (PRJ-1, PRJ-2, will be reassigned on import)  
+✅ **Status**: All items start "To Do" for consistent initial state
+
+**Parent Field Rules:**
+
+- **Epics**: Empty Parent field (top-level hierarchy)
+- **Stories**: Parent = Epic's Issue ID (creates Epic → Story relationship)
+- **Sub-tasks**: Parent = Story's Issue ID (creates Story → Sub-task relationship)
+
+**Priority & Assignment Guidelines:**
+
+- **Epics**: High priority, assigned to Team Leads or Product Owners
+- **Stories**: Medium priority, assigned to individual Developers
+- **Sub-tasks**: Low priority, assigned to same Developer as parent Story
+
+**Critical Benefits:**
+
+- **Automatic hierarchy creation** during Jira import (no manual linking)
+- **Epic progress tracking** based on Story completion
+- **Board population** with proper Epic lanes and Story organization
+- **Sprint planning** with Epic-based Story grouping
 
 ## Next Steps
 
